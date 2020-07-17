@@ -1,0 +1,1882 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" th:content="${@config.getKey('portal.index.keywords')}">
+	<meta name="description" th:content="${@config.getKey('portal.index.description')}">
+	<title th:text="${@config.getKey('portal.index.title')}"></title>
+	<meta name="baidu-site-verification" content="dAEtGwEyN9" />
+	<link rel="stylesheet" th:href="@{/portal/union/css/style.css}"/>
+
+	<script th:src="@{/portal/union/js/jquery-1.8.3.js}"></script>
+	<script type="text/javascript" th:src="@{/portal/union/js/My97DatePicker/WdatePicker.js}"></script>
+	<script th:src="@{/portal/union/js/uploadPreview.js}"></script>
+	<script th:src="@{/portal/union/js/uploadimg.js}"></script>
+	<script th:src="@{/portal/union/js/enterpriseMemb.js}"></script>
+
+	<script th:src="@{/portal/pnews/plugin/layer/layer.js}"></script>
+	<script th:src="@{/portal/union/js/csrf.js}"></script>
+	<!--<script th:src="@{/portal/union/js/jquery.min.js}"></script>-->
+	<script th:src="@{/ajax/libs/blockUI/jquery.blockUI.js}"></script>
+	<script th:src="@{/ajax/libs/validate/jquery.validate.min.js}"></script>
+	<script th:src="@{/ajax/libs/validate/messages_zh.min.js}"></script>
+	<script th:src="@{/ajax/libs/validate/jquery.validate.extend.js}"></script>
+</head>
+<body>
+	<div class="headGroup white fixed" id="headGroup">
+		<div th:replace="portal/theme/union/header"></div>
+	</div>
+	<div class="baseGroup mb20 mt20" id="indexGroup">
+		<div class="main-con">
+			<div class="path">
+				<em>当前位置：</em>
+				<a href="/">网站首页</a>&gt;
+				<a href="" target="_blank">智慧工会</a>&gt;
+				<a href="" target="_blank">企业注册</a>
+			</div>
+			<div class="viewbox">
+				<p class="part_t">
+					<img th:src="@{/portal/union/images/qyzc.png}"/>
+					<span>企业注册</span>
+				</p>
+				<div class="part_c">
+					<input type="hidden" id="enterpriseId" name="enterpriseId" th:value="${session.tbenterpriseuser?.enterpriseId}">
+					<ul class="part_ul">
+						<li class="step1 step1s selects"><span>基本信息填写</span></li>
+						<li class="step2"><span>第一次会员(代表)大会</span></li>
+						<li class="step3"><span>第一次会员(代表)大会选举结果报告</span></li>
+						<li class="step4"><span>刻制工会公章</span></li>
+						<li class="step5"><span>办理工会法人资格证</span></li>
+					</ul>
+					<div class="formInfo select">
+						<form id="user_form1" class="user_form" method="post" action="#">
+							<div class="legend">
+								<p>工会账号</p>
+								<div class="infoenter">
+									<ul>
+										<li>
+											<label for="enterpriseAccount">用户名<em>*</em></label>
+											<input id="enterpriseAccount" th:value="${session.tbenterpriseuser?.enterpriseAccount}" name="enterpriseAccount" type="text" placeholder="请输入用户名">
+										</li>
+										<li>
+											<label for="enterprisePassword">密码<em>*</em></label>
+											<input id="enterprisePassword" th:value="${session.tbenterpriseuser?.enterprisePassword}" name="enterprisePassword" type="password" placeholder="请输入密码">
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div class="legend">
+								<p>工会管理员信息</p>
+								<div class="infoenter">
+									<ul>
+										<li>
+											<label for="adminName">姓名<em>*</em></label>
+											<input id="adminName" th:value="${session.tbenterpriseuser?.adminName}" name="adminName" type="text" placeholder="请输入姓名">
+										</li>
+										<li>
+											<label for="adminSex">性别<em>*</em></label>
+                                            <input type="hidden" id="sex" th:value="${session.tbenterpriseuser?.adminSex}"/>
+											<div class="form-item">
+												<select id="adminSex" name="adminSex" class="form-control">
+													<option value="">请选择</option>
+													<option value="1">男</option>
+													<option value="2">女</option>
+												</select>
+											</div>
+										</li>
+									</ul>
+									<ul>
+										<li>
+											<label for="adminMobile">手机号码<em>*</em></label>
+											<input id="adminMobile" th:value="${session.tbenterpriseuser?.adminMobile}" name="adminMobile" type="text" placeholder="请输入手机号码">
+										</li>
+										<li>
+											<label for="yzm">验证码<em>*</em></label>
+											<input id="yzm" type="text" name="yzm" class="input_yzm" placeholder="请输入验证码">
+											<button type="button" class="hqyzm" onclick="getPhoneNum()">获取验证码</button>
+										</li>
+									</ul>
+									<ul>
+										<li>
+											<label for="adminIdCardNo">身份证号码<em>*</em></label>
+											<input id="adminIdCardNo" th:value="${session.tbenterpriseuser?.adminIdCardNo}" name="adminIdCardNo" type="text" placeholder="请输入身份证号码">
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div class="legend">
+								<p>企业信息</p>
+								<div class="infoenter">
+									<ul>
+										<li>
+											<label for="enterpriseName">企业名称<em>*</em></label>
+											<input id="enterpriseName" th:value="${session.tbenterpriseuser?.enterpriseName}" name="enterpriseName" type="text" placeholder="请输入企业名称">
+										</li>
+										<li>
+											<label for="enterpriseCreditCode">社会统一信用代码<em>*</em></label>
+											<input id="enterpriseCreditCode" th:value="${session.tbenterpriseuser?.enterpriseCreditCode}" name="enterpriseCreditCode" type="text" placeholder="请输入社会统一信用代码">
+										</li>
+									</ul>
+									<ul>
+										<li>
+											<label for="enterpriseEmployeeNum">职工人数<em>*</em></label>
+											<input id="enterpriseEmployeeNum" th:value="${session.tbenterpriseuser?.enterpriseEmployeeNum}" name="enterpriseEmployeeNum" type="text" placeholder="请输入职工人数">
+										</li>
+										<li>
+											<label for="enterpriseWomenEmployee">女职工人数<em>*</em></label>
+											<input id="enterpriseWomenEmployee" th:value="${session.tbenterpriseuser?.enterpriseWomenEmployee}" name="enterpriseWomenEmployee" type="text" placeholder="请输入女职工人数">
+										</li>
+									</ul>
+									<ul>
+										<li>
+											<label for="enterpriseLegalPerson">法人姓名<em>*</em></label>
+											<input id="enterpriseLegalPerson" th:value="${session.tbenterpriseuser?.enterpriseLegalPerson}" name="enterpriseLegalPerson" type="text" placeholder="请输入法人姓名">
+										</li>
+										<li>
+											<label for="legalPersonIdCard">身份证号码<em>*</em></label>
+											<input id="legalPersonIdCard" th:value="${session.tbenterpriseuser?.legalPersonIdCard}" name="legalPersonIdCard" type="text" placeholder="请输入身份证号码">
+										</li>
+									</ul>
+									<ul>
+										<li>
+											<label for="enterpriseNature">单位性质<em>*</em></label>
+											<input id="enterpriseNature" th:value="${session.tbenterpriseuser?.enterpriseNature}" name="enterpriseNature" type="text" placeholder="请输入单位性质">
+										</li>
+										<li>
+											<label for="enterpriseManageItem">经营项目<em>*</em></label>
+											<input id="enterpriseManageItem" th:value="${session.tbenterpriseuser?.enterpriseManageItem}" name="enterpriseManageItem" type="text" placeholder="请输入经营项目">
+										</li>
+									</ul>
+									<ul>
+										<li>
+											<label for="enterprisePayTaxesDistrict">纳税属地<em>*</em></label>
+											<div class="form-item">
+												<input type="hidden" id="nssd" th:value="${session.tbenterpriseuser?.enterprisePayTaxesDistrict}"/>
+												<select id="enterprisePayTaxesDistrict" name="enterprisePayTaxesDistrict" class="form-control">
+
+												</select>
+											</div>
+										</li>
+										<li>
+											<label for="enterprisePark">所属园区<em>*</em></label>
+											<div class="form-item">
+												<input type="hidden" id="ssyq" th:value="${session.tbenterpriseuser?.enterprisePark}"/>
+												<select id="enterprisePark" name="enterprisePark" class="form-control">
+
+												</select>
+											</div>
+
+										</li>
+									</ul>
+									<ul>
+										<li>
+											<label for="enterpriseRegisterPlace">注册地<em>*</em></label>
+											<input id="enterpriseRegisterPlace" th:value="${session.tbenterpriseuser?.enterpriseRegisterPlace}" name="enterpriseRegisterPlace" type="text" placeholder="请输入企业注册地">
+										</li>
+										<li>
+											<label for="enterpriseOfIndustry">所属行业<em>*</em></label>
+											<div class="form-item">
+												<select id="enterpriseOfIndustry" name="enterpriseOfIndustry" class="form-control">
+
+												</select>
+											</div>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div class="legend">
+								<p>工会筹备组信息</p>
+								<div class="infoenter">
+									<ul>
+										<li>
+											<label for="preparatoryGroupUser">筹备组组长姓名<em>*</em></label>
+											<input th:value="${session.tbenterpriseuser?.preparatoryGroupUser}" id="preparatoryGroupUser" name="preparatoryGroupUser" type="text" placeholder="请输入筹备组组长姓名">
+											<span class="tipinfo">*企业行政负责人、法人、合伙人及其近亲属、人力资源部门负责人、外籍员工不得作为本企业筹备组组长候选人。</span>
+										</li>
+										<li>
+											<label for="preparatoryGroupUserIdCard" >身份证号码<em>*</em></label>
+											<input id="preparatoryGroupUserIdCard" th:value="${session.tbenterpriseuser?.preparatoryGroupUserIdCard}" name="preparatoryGroupUserIdCard" type="text" placeholder="请输入身份证号码">
+										</li>
+									</ul>
+									<ul>
+										<li>
+											<label for="unionContacts">工会联系人<em>*</em></label>
+											<input id="unionContacts" th:value="${session.tbenterpriseuser?.unionContacts}" name="unionContacts" type="text" placeholder="请输入工会联系人">
+										</li>
+										<li>
+											<label for="contactWay">联系方式<em>*</em></label>
+											<input id="contactWay" th:value="${session.tbenterpriseuser?.contactWay}" name="contactWay" type="text" placeholder="请输入联系方式">
+										</li>
+									</ul>
+									<ul>
+										<li>
+											<label for="workAddress">办公地址<em>*</em></label>
+											<input id="workAddress" th:value="${session.tbenterpriseuser?.workAddress}" name="workAddress" type="text" placeholder="请输入办公地址">
+										</li>
+										<li>
+											<label for="memberNum">会员人数<em>*</em></label>
+											<input id="memberNum" th:value="${session.tbenterpriseuser?.memberNum}" name="memberNum" type="text" placeholder="请输入会员人数">
+										</li>
+									</ul>
+								</div>
+							</div>
+
+						</form>
+						<div class="infoenter user_form">
+							<ul>
+								<li style="width: 100%;">
+									<label>工会会员登记表<em>*</em></label>
+									<input type="hidden" name="memberRegister" th:value="${session.tbenterpriseuser?.memberRegister}" id="memberRegister_uploadtest">
+									<form id="uploadtest" enctype="multipart/form-data" method="post" action="#">
+										<input type="file" name="file" th:value="${session.tbenterpriseuser?.memberRegister}" class="fileinput" accept=".xls,.xlsx" onchange="change(this,'memberRegister_uploadtest')">
+										<div class="filename">
+											<span title="预览" th:text="${session.tbenterpriseuser?.memberRegister}"></span>
+											<img th:src="@{/portal/union/images/delicon.png}" onclick="delfile(this)" title="删除"/>
+										</div>
+										<label class="error">请上传会员登记表</label>
+										<button class="input_upload" type="button">上传登记表</button>
+									</form>
+								</li>
+							</ul>
+							<ul>
+								<li style="width: 100%;">
+									<label>筹备组名单<em>*</em></label>
+									<input type="hidden" th:value="${session.tbenterpriseuser?.preparatoryGroupList}" name="preparatoryGroupList" id="preparatoryGroupList_uploadtest2">
+									<form id="uploadtest2" enctype="multipart/form-data" method="post" action="#">
+										<input type="file"  name="file" class="fileinput" accept=".xls,.xlsx" onchange="change(this,'preparatoryGroupList_uploadtest2')">
+										<div class="filename">
+											<span title="预览" th:text="${session.tbenterpriseuser?.preparatoryGroupList}"></span>
+											<img th:src="@{/portal/union/images/delicon.png}" onclick="delfile(this)" title="删除"/>
+										</div>
+										<label class="error">请上传筹备组名单</label>
+										<button class="input_upload" type="button">上传名单表</button>
+									</form>
+								</li>
+							</ul>
+							<ul>
+								<li style="width: 100%;">
+									<input type="hidden" th:value="${session.tbenterpriseuser?.tradingCertificate}" name="tradingCertificate" id="tradingCertificate_uploadtest3">
+									<label>营业执照<em>*</em></label>
+									<form id="uploadtest3" enctype="multipart/form-data" method="post" action="#">
+										<div class="a_yyzz">
+											<div class="a_yyzzs">
+												<img th:src="${session.tbenterpriseuser?.tradingCertificate}" class="imgs" id="img1"/>
+											</div>
+											<div class="a_yyzzFade"></div>
+											<input type="file" th:value="${session.tbenterpriseuser?.tradingCertificate}" id="up1" name="file"/>
+										</div>
+										<label class="error">请上传营业执照</label>
+										<div class="a_yl" onclick="imgPreview(this)">预览</div>
+									</form>
+								</li>
+								<div class="a_tip">格式要求：jpeg或jpg，小于5M；建议使用火狐、谷歌、IE9以上浏览器</div>
+							</ul>
+							<ul>
+								<li style="width: 100%;" class="a_form">
+									<input type="hidden" th:value="${session.tbenterpriseuser?.legalPersonIdCardFile}" name="frCertificate" id="frCertificate_uploadtest4">
+									<label>法人身份证<em>*</em></label>
+									<form id="uploadtest4" enctype="multipart/form-data" method="post" action="#">
+										<div class="a_yyzz">
+											<div class="a_yyzzs">
+												<img th:src="${session.tbenterpriseuser?.legalPersonIdCardFile}" class="imgs" id="img2"/>
+											</div>
+											<div class="a_yyzzFade"></div>
+											<input type="file" id="up2" th:value="${session.tbenterpriseuser?.legalPersonIdCardFile}" name="file"/>
+										</div>
+										<label class="error">请上传法人身份证</label>
+										<div class="a_yl" onclick="imgPreview(this)">预览</div>
+									</form>
+								</li>
+								<div class="a_tip">格式要求：jpeg或jpg，小于5M；正反面请于同一张图上传</div>
+							</ul>
+						</div>
+
+						<div class="oprbtn">
+							<!--<button type="button" class="prestep" onclick="submitHandler()">保存</button>-->
+							<button type="button" class="nextstep" onclick="nextstep(1)">下一步</button>
+						</div>
+					</div>
+					<div class="formInfo">
+						<form id="user_form2" class="user_form" method="post" action="#">
+							<div class="legend">
+								<div class="infoenter">
+									<ul>
+										<li>
+											<label for="candidateUnionChairman">工会候选主席<em>*</em></label>
+											<input  id="candidateUnionChairman" th:value="${session.tbenterpriseuser?.candidateUnionChairman}" name="candidateUnionChairman" type="text" placeholder="请输入工会候选主席">
+										</li>
+										<li>
+											<label for="meetingTime1">拟开会日期<em>*</em></label>
+											<input id="meetingTime1" name="meetingTime1" th:value="${session.tbenterpriseuser?.meetingTime1}" class="Wdate" onfocus="WdatePicker({firstDayOfWeek:1,dateFmt:'yyyy-MM-dd'})" type="text" placeholder="请选择拟开会日期">
+										</li>
+									</ul>
+								</div>
+								<div class="infoenter">
+									<ul>
+										<li>
+											<label for="meetingNum">第几次大会<em>*</em></label>
+											<input id="meetingNum" name="meetingNum" th:value="${session.tbenterpriseuser?.meetingNum}" type="text" placeholder="请输入第几次大会">
+										</li>
+										<li>
+											<label for="committeeMember1">拟设委员<em>*</em></label>
+											<input id="committeeMember1" th:value="${session.tbenterpriseuser?.committeeMember1}" name="committeeMember1" type="number" placeholder="请输入拟设委员">
+										</li>
+									</ul>
+								</div>
+								<div class="infoenter">
+									<ul>
+										<li>
+											<label for="candidate1">候选人建议人选<em>*</em></label>
+											<input id="candidate1" name="candidate1" th:value="${session.tbenterpriseuser?.candidate1}" type="number" placeholder="请输入候选人建议人选">
+										</li>
+										<li>
+											<label for="difference">差额人数<em>*</em></label>
+											<input id="difference" th:value="${session.tbenterpriseuser?.difference}" name="difference" type="number" placeholder="请输入差额人数">
+										</li>
+									</ul>
+								</div>
+								<div class="infoenter">
+									<ul>
+										<li>
+											<label for="unionDeputyChairman">副主席<em>*</em></label>
+											<input id="unionDeputyChairman" th:value="${session.tbenterpriseuser?.unionDeputyChairman}" name="unionDeputyChairman" type="number" placeholder="请输入副主席">
+										</li>
+										<li>
+											<label for="expenditure">拟设经审委员<em>*</em></label>
+											<input id="expenditure" name="expenditure" th:value="${session.tbenterpriseuser?.expenditure}" type="number" placeholder="请输入拟设经审委员">
+										</li>
+									</ul>
+								</div>
+								<div class="infoenter">
+									<ul>
+										<li>
+											<label for="expenditureNum" style="padding-right:0px;width:225px; ">经费审查委员候选人建议人选<em>*</em></label>
+											<input id="expenditureNum" th:value="${session.tbenterpriseuser?.expenditureNum}" name="expenditureNum" type="number" placeholder="请输入经费审查委员候选人建议人选">
+										</li>
+										<li>
+											<label for="womenCommittee">拟设女职工委员<em>*</em></label>
+											<input id="womenCommittee" th:value="${session.tbenterpriseuser?.womenCommittee}" name="womenCommittee" type="number" placeholder="请输入拟设女职工委员">
+										</li>
+									</ul>
+								</div>
+								<div class="infoenter">
+									<ul>
+										<li>
+											<label for="womenCommitteeNum">女职工委员候选人建议人选<em>*</em></label>
+											<input id="womenCommitteeNum" th:value="${session.tbenterpriseuser?.womenCommitteeNum}" name="womenCommitteeNum" type="number" placeholder="请输入女职工委员候选人建议人选">
+										</li>
+										<li>
+											<label for="unionCommittees">工会委员候选人<em>*</em></label>
+											<input id="unionCommittees" th:value="${session.tbenterpriseuser?.unionCommittees}" name="unionCommittees" type="text" placeholder="请输入工会委员候选人">
+										</li>
+									</ul>
+								</div>
+								<div class="infoenter">
+									<ul>
+										<li>
+											<label for="expenditureCommittees">经费审查委员会委员候选人<em>*</em></label>
+											<input id="expenditureCommittees" th:value="${session.tbenterpriseuser?.expenditureCommittees}" name="expenditureCommittees" type="text" placeholder="请输入经费审查委员会委员候选人">
+										</li>
+										<li>
+											<label for="womenCommittees">女职工委员会委员候选人<em>*</em></label>
+											<input id="womenCommittees" th:value="${session.tbenterpriseuser?.womenCommittees}" name="womenCommittees" type="text" placeholder="请输入女职工委员会委员候选人">
+										</li>
+									</ul>
+								</div>
+							</div>
+						</form>
+						<div class="infoenter user_form">
+							<ul>
+								<li style="width: 100%;">
+									<label>开会小视频<em>*</em></label>
+									<input type="hidden" th:value="${session.tbenterpriseuser?.videoMeeting}" name="videoMeeting" id="videoMeeting_uploadtest5">
+									<form id="uploadtest5" enctype="multipart/form-data" method="post" action="#">
+										<input type="file" th:value="${session.tbenterpriseuser?.videoMeeting}" name="file" class="fileinput" multiple onchange="Upload(this,'videoMeeting_uploadtest5')" />
+										<button class="input_upload" onclick="uploadbg(this)">上传视频</button>
+										<span class="filetip">格式要求：高清分辨率>=600X480</span>
+										<label class="error">请上传开会小视频</label>
+										<div class="video_content" id="video_content"></div>
+									</form>
+								</li>
+							</ul>
+							<ul>
+								<li style="width: 100%;">
+									<label>开会照片<em>*</em></label>
+									<input type="hidden" th:value="${session.tbenterpriseuser?.photoMeeting}" name="photoMeeting" id="photoMeeting_upBox">
+									<button class="input_upload" onclick="uploadbg(this)">上传图片</button>
+									<span class="filetip">格式要求：jpeg或jpg，小于5M</span>
+									<form id="upBox" enctype="multipart/form-data" method="post" action="#" style="width: 800px">
+										<div id="inputBox" class="fileinput" style="left: 0px">
+											<input th:value="${session.tbenterpriseuser?.photoMeeting}" type="file" name="file" title="请选择图片" id="file" multiple accept="image/png,image/jpg,image/gif,image/JPEG" />
+										</div>
+										<label class="error">请上传开会照片</label>
+										<div id="imgBox" style="margin-left: 0px;width: 100%"></div>
+									</form>
+								</li>
+							</ul>
+						</div>
+						<div class="oprbtn">
+							<button type="button" class="prestep" onclick="prestep(1)">上一步</button>
+							<button type="button" class="nextstep" onclick="nextstep(2)">下一步</button>
+						</div>
+					</div>
+					<div class="formInfo">
+						<form id="user_form3" class="user_form" method="post" action="#">
+							<div class="legend">
+								<div class="infoenter">
+									<ul>
+										<li>
+											<label for="unionChairman">工会主席<em>*</em></label>
+											<input th:value="${session.tbenterpriseuser?.unionChairman}" id="unionChairman" name="unionChairman" type="text" placeholder="请输入工会主席">
+										</li>
+										<li>
+											<label for="expenditureDirector">经审委员会主任<em>*</em></label>
+											<input id="expenditureDirector" th:value="${session.tbenterpriseuser?.expenditureDirector}" name="expenditureDirector" type="text" placeholder="请输入经审委员会主任">
+										</li>
+									</ul>
+									<ul>
+										<li>
+											<label for="womenDirector">女工委员会主任<em>*</em></label>
+											<input id="womenDirector" th:value="${session.tbenterpriseuser?.womenDirector}" name="womenDirector" type="text" placeholder="请输入女工委员会主任">
+										</li>
+										<li>
+											<label for="meetingTime2">大会召开日期<em>*</em></label>
+											<input id="meetingTime2" th:value="${session.tbenterpriseuser?.meetingTime2}" name="meetingTime2" class="Wdate" onfocus="WdatePicker({firstDayOfWeek:1,dateFmt:'yyyy-MM-dd'})" type="text" placeholder="请选择大会召开日期">
+										</li>
+									</ul>
+									<ul>
+										<li>
+											<label for="meetingSite">大会召开地点<em>*</em></label>
+											<input id="meetingSite" th:value="${session.tbenterpriseuser?.meetingSite}" name="meetingSite" type="text" placeholder="请输入大会召开地点">
+										</li>
+										<li>
+											<label for="ydNum">应到代表人数<em>*</em></label>
+											<input id="ydNum" th:value="${session.tbenterpriseuser?.ydNum}" name="ydNum" type="number" placeholder="请输入应到代表">
+										</li>
+									</ul>
+									<ul>
+										<li>
+											<label for="sdNum">实到代表人数<em>*</em></label>
+											<input id="sdNum" th:value="${session.tbenterpriseuser?.sdNum}" name="sdNum" type="number" placeholder="请输入实到代表">
+										</li>
+										<li>
+											<label for="committees">委员会委员<em>*</em></label>
+											<input id="committees" th:value="${session.tbenterpriseuser?.committees}" name="committees" type="text" placeholder="请输入委员会委员">
+										</li>
+									</ul>
+									<ul>
+										<li>
+											<label for="realExpenditureCommittees">经费审查委员会委员<em>*</em></label>
+											<input id="realExpenditureCommittees" th:value="${session.tbenterpriseuser?.realExpenditureCommittees}" name="realExpenditureCommittees" type="number" placeholder="请输入经费审查委员会委员">
+										</li>
+<!--										<li>
+											<label for="nzgwywy">女职工委员会委员<em>*</em></label>
+											<input id="nzgwywy" name="nzgwywy" type="text" placeholder="请输入女职工委员会委员">
+										</li>-->
+									</ul>
+								</div>
+							</div>
+						</form>
+						<div class="infoenter user_form">
+							<ul>
+								<li style="width: 100%;">
+									<label>选举结果报告<em>*</em></label>
+									<input type="hidden" th:value="${session.tbenterpriseuser?.electionResultsReport}" name="scbg" id="scbg_uploadtest6">
+									<form id="uploadtest6" enctype="multipart/form-data" method="post" action="#">
+										<button class="input_upload" onclick="uploadbg(this)">上传报告</button>
+										<input type="file" th:value="${session.tbenterpriseuser?.electionResultsReport}" name="file" class="fileinput" accept=".doc,.docx,.pdf" onchange="change(this,'scbg_uploadtest6')">
+										<div class="filename">
+											<span title="预览" th:text="${session.tbenterpriseuser?.electionResultsReport}"></span>
+											<img th:src="@{/portal/union/images/delicon.png}" onclick="delfile(this)" title="删除"/>
+										</div>
+										<label class="error">请上传选举结果报告</label>
+										<span class="filetip">格式要求：word或pdf，小于5M</span>
+									</form>
+								</li>
+							</ul>
+							<ul>
+								<li style="width: 100%;">
+									<label>工会委员会委员构成一览表<em>*</em></label>
+									<input type="hidden" th:value="${session.tbenterpriseuser?.membershipTradeCommittees}" name="wyylb" id="wyylb_uploadtest7">
+									<form id="uploadtest7" enctype="multipart/form-data" method="post" action="#">
+										<button class="input_upload" onclick="uploadbg(this)">上传一览表</button>
+										<input type="file" name="file" th:value="${session.tbenterpriseuser?.membershipTradeCommittees}" class="fileinput" accept=".xls,.xlsx" onchange="change(this,'wyylb_uploadtest7')">
+										<div class="filename">
+											<span title="预览" th:text="${session.tbenterpriseuser?.membershipTradeCommittees}"></span>
+											<img th:src="@{/portal/union/images/delicon.png}" onclick="delfile(this)" title="删除"/>
+										</div>
+										<label class="error">请上传工会委员会委员构成一览表</label>
+										<span class="filetip">格式要求：Excel</span>
+									</form>
+								</li>
+							</ul>
+							<ul>
+								<li style="width: 100%;">
+									<label>工会主席承诺书<em>*</em></label>
+									<input type="hidden" th:value="${session.tbenterpriseuser?.letterCommitmentPresident}" name="ghzxcns" id="ghzxcns_uploadtest8">
+									<form id="uploadtest8" enctype="multipart/form-data" method="post" action="#">
+										<button class="input_upload" onclick="uploadbg(this)">上传承诺书</button>
+										<input type="file" name="file" th:value="${session.tbenterpriseuser?.letterCommitmentPresident}" class="fileinput" accept=".doc,.docx,.pdf" onchange="change(this,'ghzxcns_uploadtest8')">
+										<div class="filename">
+											<span title="预览" th:text="${session.tbenterpriseuser?.letterCommitmentPresident}"></span>
+											<img th:src="@{/portal/union/images/delicon.png}" onclick="delfile(this)" title="删除"/>
+										</div>
+										<label class="error">请上传工会主席承诺书</label>
+										<span class="filetip">格式要求：word或pdf，小于5M</span>
+									</form>
+								</li>
+							</ul>
+							<ul>
+								<li style="width: 100%;">
+									<label>所得票数<em>*</em></label>
+									<input type="hidden" th:value="${session.tbenterpriseuser?.votesObtained}" name="scbgs" id="scbgs_uploadtest9">
+									<form id="uploadtest9" enctype="multipart/form-data" method="post" action="#">
+										<button class="input_upload" onclick="uploadbg(this)">上传表格</button>
+										<input type="file" name="file" th:value="${session.tbenterpriseuser?.votesObtained}" class="fileinput" accept=".xls,.xlsx" onchange="change(this,'scbgs_uploadtest9')">
+										<div class="filename">
+											<span title="预览" th:text="${session.tbenterpriseuser?.votesObtained}"></span>
+											<img th:src="@{/portal/union/images/delicon.png}" onclick="delfile(this)" title="删除"/>
+										</div>
+										<label class="error">请上传所得票数</label>
+										<span class="filetip">格式要求：Excel</span>
+									</form>
+								</li>
+							</ul>
+							<ul>
+								<li style="width: 100%;">
+									<label>基层工会登记表<em>*</em></label>
+									<input type="hidden" th:value="${session.tbenterpriseuser?.registrationGrassTrade}" name="jcghdjb" id="jcghdjb_uploadtest10">
+									<form id="uploadtest10" enctype="multipart/form-data" method="post" action="#">
+										<button class="input_upload" onclick="uploadbg(this)">上传登记表</button>
+										<input type="file" name="file" th:value="${session.tbenterpriseuser?.registrationGrassTrade}" class="fileinput" accept=".xls,.xlsx" onchange="change(this,'jcghdjb_uploadtest10')">
+										<div class="filename">
+											<span title="预览" th:text="${session.tbenterpriseuser?.registrationGrassTrade}"></span>
+											<img th:src="@{/portal/union/images/delicon.png}" onclick="delfile(this)" title="删除"/>
+										</div>
+										<label class="error">请上传基层工会登记表</label>
+										<span class="filetip">格式要求：Excel</span>
+									</form>
+								</li>
+							</ul>
+							<ul>
+								<li style="width: 100%;">
+									<label>女职工委员会汇总表<em>*</em></label>
+									<input type="hidden" th:value="${session.tbenterpriseuser?.summaryTableWomenCommittees}" name="nzghzb" id="nzghzb_uploadtest11">
+									<form id="uploadtest11" enctype="multipart/form-data" method="post" action="#">
+										<button class="input_upload" onclick="uploadbg(this)">上传汇总表</button>
+										<input type="file" th:value="${session.tbenterpriseuser?.summaryTableWomenCommittees}" name="file" class="fileinput" accept=".xls,.xlsx" onchange="change(this,'nzghzb_uploadtest11')">
+										<div class="filename">
+											<span title="预览" th:text="${session.tbenterpriseuser?.summaryTableWomenCommittees}"></span>
+											<img th:src="@{/portal/union/images/delicon.png}" onclick="delfile(this)" title="删除"/>
+										</div>
+										<label class="error">请上传女职工委员会汇总表</label>
+										<span class="filetip">格式要求：Excel</span>
+									</form>
+								</li>
+							</ul>
+						</div>
+						<div class="oprbtn">
+							<button type="button" class="prestep" onclick="prestep(2)">上一步</button>
+							<button type="button" class="nextstep" onclick="nextstep(3)">下一步</button>
+						</div>
+					</div>
+					<div class="formInfo">
+						<form id="user_form4" class="user_form" method="post" action="#">
+							<div class="legend">
+								<div class="infoenter">
+									<ul>
+										<li>
+											<label for="operatorContacts">经办人联系方式<em>*</em></label>
+											<input id="operatorContacts" th:value="${session.tbenterpriseuser?.operatorContacts}" type="text" name="operatorContacts" placeholder="请输入联系方式">
+										</li>
+									</ul>
+
+								</div>
+							</div>
+						</form>
+						<div class="infoenter user_form">
+							<ul>
+								<li style="width: 100%;" class="a_form">
+									<label>工会主席身份证<em>*</em></label>
+									<input type="hidden" th:value="${session.tbenterpriseuser?.unionPresidentIdcard}" name="ghzxsfz" id="ghzxsfz_uploadtest12">
+									<form id="uploadtest12" enctype="multipart/form-data" method="post" action="#">
+										<div class="a_yyzz">
+											<div class="a_yyzzs">
+												<img th:src="${session.tbenterpriseuser?.unionPresidentIdcard}" class="imgs" id="img3"/>
+											</div>
+											<div class="a_yyzzFade"></div>
+											<input type="file" th:value="${session.tbenterpriseuser?.unionPresidentIdcard}" id="up3" name="file"/>
+										</div>
+										<label class="error">请上传工会主席身份证</label>
+										<div class="a_yl" onclick="imgPreview(this)">预览</div>
+									</form>
+								</li>
+								<div class="a_tip">格式要求：jpeg或jpg，小于5M；正反面请于同一张图上传</div>
+							</ul>
+							<ul>
+								<li style="width: 100%;" class="a_form">
+									<label>公司法人身份证<em>*</em></label>
+									<input type="hidden" th:value="${session.tbenterpriseuser?.corporateIdentityCard}" name="sfrsfz" id="sfrsfz_uploadtest13">
+									<form id="uploadtest13" enctype="multipart/form-data" method="post" action="#">
+										<div class="a_yyzz">
+											<div class="a_yyzzs">
+												<img th:src="${session.tbenterpriseuser?.corporateIdentityCard}" class="imgs" id="img4"/>
+											</div>
+											<div class="a_yyzzFade"></div>
+											<input type="file" th:value="${session.tbenterpriseuser?.corporateIdentityCard}" id="up4" name="file"/>
+										</div>
+										<label class="error">请上传公司法人身份证</label>
+										<div class="a_yl" onclick="imgPreview(this)">预览</div>
+									</form>
+								</li>
+								<div class="a_tip">格式要求：jpeg或jpg，小于5M；正反面请于同一张图上传</div>
+							</ul>
+							<ul>
+								<li style="width: 100%;" class="a_form">
+									<label>经办人身份证<em>*</em></label>
+									<input type="hidden" th:value="${session.tbenterpriseuser?.identityCardAgent}" name="jbrsfz" id="jbrsfz_uploadtest14">
+									<form id="uploadtest14" enctype="multipart/form-data" method="post" action="#">
+										<div class="a_yyzz">
+											<div class="a_yyzzs">
+												<img th:src="${session.tbenterpriseuser?.identityCardAgent}" class="imgs" id="img5"/>
+											</div>
+											<div class="a_yyzzFade"></div>
+											<input type="file" th:value="${session.tbenterpriseuser?.identityCardAgent}" id="up5" name="file"/>
+										</div>
+										<label class="error">请上传经办人身份证</label>
+										<div class="a_yl" onclick="imgPreview(this)">预览</div>
+									</form>
+								</li>
+								<div class="a_tip">格式要求：jpeg或jpg，小于5M；正反面请于同一张图上传</div>
+							</ul>
+							<ul>
+								<li style="width: 100%;" class="a_form">
+									<label>营业执照原件电子版<em>*</em></label>
+									<input type="hidden" th:value="${session.tbenterpriseuser?.electronicVersion}" name="yyzzdzb" id="yyzzdzb_uploadtest15">
+									<form id="uploadtest15" enctype="multipart/form-data" method="post" action="#">
+										<div class="a_yyzz">
+											<div class="a_yyzzs">
+												<img th:src="${session.tbenterpriseuser?.electronicVersion}" class="imgs" id="img6"/>
+											</div>
+											<div class="a_yyzzFade"></div>
+											<input type="file" th:value="${session.tbenterpriseuser?.electronicVersion}" id="up6" name="file"/>
+										</div>
+										<label class="error">请上传营业执照原件电子版</label>
+										<div class="a_yl" onclick="imgPreview(this)">预览</div>
+									</form>
+								</li>
+								<div class="a_tip">格式要求：jpeg或jpg，小于5M；建议使用火狐、谷歌、IE9以上浏览器</div>
+							</ul>
+						</div>
+						<div class="oprbtn">
+							<button type="button" class="prestep" onclick="prestep(3)">上一步</button>
+							<button type="button" class="nextstep" onclick="nextstep(4)">下一步</button>
+						</div>
+					</div>
+					<div class="formInfo">
+						<form id="user_form5" class="user_form" method="post" action="#">
+							<div class="legend">
+								<div class="infoenter">
+
+								</div>
+							</div>
+						</form>
+						<div class="infoenter user_form">
+							<ul>
+								<li style="width: 100%;">
+									<label>法人资格登记表<em>*</em></label>
+									<input type="hidden" th:value="${session.tbenterpriseuser?.registrationLegalPerson}" name="frzgdjb" id="frzgdjb_uploadtest16">
+									<form id="uploadtest16" enctype="multipart/form-data" method="post" action="#">
+										<button class="input_upload" onclick="uploadbg(this)">上传登记表</button>
+										<input type="file" th:value="${session.tbenterpriseuser?.registrationLegalPerson}" name="file" class="fileinput" accept=".xls,.xlsx" onchange="change(this,'frzgdjb_uploadtest16')">
+										<div class="filename">
+											<span title="预览" th:text="${session.tbenterpriseuser?.registrationLegalPerson}"></span>
+											<img th:src="@{/portal/union/images/delicon.png}" onclick="delfile(this)" title="删除"/>
+										</div>
+										<label class="error">请上传法人资格登记表</label>
+									</form>
+								</li>
+							</ul>
+							<ul>
+								<li style="width: 100%;">
+									<label>申领/变更注意事项<em>*</em></label>
+									<input type="hidden" th:value="${session.tbenterpriseuser?.pointsNote}" name="bgzysx" id="bgzysx_uploadtest17">
+									<form id="uploadtest17" enctype="multipart/form-data" method="post" action="#">
+										<button class="input_upload" onclick="uploadbg(this)">上传注意事项</button>
+										<input type="file" name="file" th:value="${session.tbenterpriseuser?.pointsNote}" class="fileinput" accept=".doc,.docx" onchange="change(this,'bgzysx_uploadtest17')">
+										<div class="filename">
+											<span title="预览" th:text="${session.tbenterpriseuser?.pointsNote}"></span>
+											<img th:src="@{/portal/union/images/delicon.png}" onclick="delfile(this)" title="删除"/>
+										</div>
+										<label class="error">请上传申领/变更注意事项</label>
+									</form>
+								</li>
+							</ul>
+						</div>
+						<div class="oprbtn">
+							<button type="button" class="prestep" onclick="prestep(4)">上一步</button>
+							<button type="button" class="nextstep" onclick="nextstep(5)">提交</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer class="bgf mt40">
+		<div th:replace="portal/theme/union/footer"></div>
+	</footer>
+	<script>
+        $(document).ready(function () {
+            jQuery.validator.addMethod("isIdCardNo", function (value, element) {
+                return this.optional(element) || isIdCardNo(value);
+            }, "请正确输入身份证号码");
+            jQuery.validator.addMethod("isRightOrNot", function (value, element) {
+                return this.optional(element) || isRightOrNot(value);
+            }, "请正确输入验证码");
+            jQuery.validator.addMethod("enterpriseAccountUnique", function (value, element) {
+                return enterpriseAccountUnique(value);
+            }, "用户名存在请重新输入");
+/*            jQuery.validator.addMethod("checkCardIdUnik", function (value, element) {
+                return checkCardIdUnik(value);
+            }, "你的身份证号码已经被注册使用");*/
+            jQuery.validator.addMethod("passWord", function (value, element) {
+                return this.optional(element) || /(?=.*\d)(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]).{6,20}/.test(value);
+            }, "请输入6-20位密码（包含大小写字母、符号和数字）");
+            jQuery.validator.addMethod("isPhone", function(value, element) {
+                return this.optional(element)
+                    || /^1[34589]\d{1}\d{4}\d{4}( x\d{1,6})?$/.test(value);
+            }, "手机号码格式不正确");
+            jQuery.validator.addMethod("Notequalto", function(value, element) {
+                return this.optional(element)
+                    || Notequalto();
+            }, "筹备组组长与法人不能是同一人");
+            jQuery.validator.addMethod("Notequalto2", function(value, element) {
+                return this.optional(element)
+                    || Notequalto2();
+            }, "工会候选主席与法人不能是同一人");
+
+            var NS=searchLable("tax_jurisdiction");
+			$("#enterprisePayTaxesDistrict").append(NS);
+
+            var YQ=searchLable("belongs_park");
+            $("#enterprisePark").append(YQ);
+
+            var HY=searchLable("Industry");
+            $("#enterpriseOfIndustry").append(HY);
+
+
+        });
+        //筹备组组长与法人不能是同一人校验
+        function Notequalto(){
+            var faren=$.common.trim($("#legalPersonIdCard").val());
+            var cbzzc=$.common.trim($("#preparatoryGroupUserIdCard").val());
+            if(faren==cbzzc){
+				return false;
+			}else{
+				return true;
+			}
+		}
+        //增加账户唯一性校验
+        function enterpriseAccountUnique(vv){
+            var flg=true;
+            $.ajax({
+                type: "POST",
+                url: "/portal/tbenterpriseuser/checkLoginNameUnique",
+                dataType: "json",
+                data: {
+                    "loginName": function() {
+                        return $.common.trim(vv);
+                    }
+                },
+                async:false,
+                success: function (result) {
+                    flg = result;
+                }
+            });
+            return flg;
+        }
+        //增加身份证验证
+        //val,id
+        function isIdCardNo(num) {
+            //var num=$("#"+id).val();
+            var factorArr = new Array(7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2, 1);
+            var parityBit = new Array("1", "0", "X", "9", "8", "7", "6", "5", "4", "3", "2");
+            var varArray = new Array();
+            var intValue;
+            var lngProduct = 0;
+            var intCheckDigit;
+            var intStrLen = num.length;
+            var idNumber = num;
+            // initialize
+            if ((intStrLen != 15) && (intStrLen != 18)) {
+                return false;
+            }
+            // check and set value
+            for (i = 0; i < intStrLen; i++) {
+                varArray[i] = idNumber.charAt(i);
+                if ((varArray[i] < '0' || varArray[i] > '9') && (i != 17)) {
+                    return false;
+                } else if (i < 17) {
+                    varArray[i] = varArray[i] * factorArr[i];
+                }
+            }
+
+            if (intStrLen == 18) {
+                //check date
+                var date8 = idNumber.substring(6, 14);
+                if (isDate8(date8) == false) {
+                    return false;
+                }
+                // calculate the sum of the products
+                for (i = 0; i < 17; i++) {
+                    lngProduct = lngProduct + varArray[i];
+                }
+                // calculate the check digit
+                intCheckDigit = parityBit[lngProduct % 11];
+                // check last digit
+                if (varArray[17] != intCheckDigit) {
+                    return false;
+                }
+            }
+            else {
+                var date6 = idNumber.substring(6, 12);
+                if (isDate6(date6) == false) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        /**
+         * 手机验证码生成
+         * */
+        function createCode(){
+            code = "";
+            var codeLength = 6;//验证码的长度
+            var random = new Array(0,1,2,3,4,5,6,7,8,9,'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R',
+                'S','T','U','V','W','X','Y','Z');//随机数
+            for(var i = 0; i < codeLength; i++) {//循环操作
+                var index = Math.floor(Math.random()*36);//取得随机数的索引（0~35）
+                code += random[index];//根据索引取得随机数加到code上
+            }
+            return code;//把code值赋给验证码
+        }
+        /**
+         * 调用手机短信接口
+         * */
+        function getPhoneNum(){
+            var phone=$("#sysuserMobile").val();
+            if(phone==""|| phone==null){
+				layer.msg("请输入手机号");
+                return;
+            }
+            var code=createCode();
+            var arr={"name":"phone","value":phone};
+            var arr1={"name":"prefix","value":""};
+            var arr2={"name":"content","value":code};//将要发送的验证码
+            var jsonarray=[];
+            jsonarray.push(arr);
+            jsonarray.push(arr1);
+            jsonarray.push(arr2);
+            $.operate.saveModal("/third/api/sendSms", jsonarray,function(res){
+                layer.msg(res.data);
+            });
+        }
+        /**
+         * 手机验证码校验
+         * @param num
+         */
+        function isRightOrNot(num){
+            var flg=true;
+            //var num=$("#yzm").val();
+            var phone=$("#adminMobile").val();
+            if(phone=="" || phone==null){
+                layer.msg("请输入电话号码");
+                return ;
+            }
+            $.ajax({
+                type: "POST",
+                url: "/portal/platsystem/checkPhoneNum",
+                dataType: "json",
+                data: {
+                    yzm: num,
+                    phone:phone
+                },
+                async:false,
+                success: function (result) {
+                    if (result.code == web_status.SUCCESS) {
+                        flg= true;
+                    } else if (result.code == web_status.WARNING) {
+                        flg= false;
+                    }  else {
+                        flg= false;
+                    }
+                }
+            });
+            return flg;
+        }
+        function isDate6(sDate) {
+            if (!/^[0-9]{6}$/.test(sDate)) {
+                return false;
+            }
+            var year, month, day;
+            year = sDate.substring(0, 4);
+            month = sDate.substring(4, 6);
+            if (year < 1700 || year > 2500) return false
+            if (month < 1 || month > 12) return false
+            return true
+        }
+
+        function isDate8(sDate) {
+            if (!/^[0-9]{8}$/.test(sDate)) {
+                return false;
+            }
+            var year, month, day;
+            year = sDate.substring(0, 4);
+            month = sDate.substring(4, 6);
+            day = sDate.substring(6, 8);
+            var iaMonthDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+            if (year < 1700 || year > 2500) return false
+            if (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0)) iaMonthDays[1] = 29;
+            if (month < 1 || month > 12) return false
+            if (day < 1 || day > iaMonthDays[month - 1]) return false
+            return true
+        }
+        /** 消息状态码 */
+        web_status = {
+            SUCCESS: 0,
+            FAIL: 500,
+            WARNING: 301
+        };
+
+        /** 弹窗状态码 */
+        modal_status = {
+            SUCCESS: "success",
+            FAIL: "error",
+            WARNING: "warning"
+        };
+
+        Date.prototype.Format = function (fmt) { //author: meizz
+            var o = {
+                "M+": this.getMonth() + 1, //月份
+                "d+": this.getDate(), //日
+                "H+": this.getHours(), //小时
+                "m+": this.getMinutes(), //分
+                "s+": this.getSeconds(), //秒
+                "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+                "S": this.getMilliseconds() //毫秒
+            };
+            if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+            for (var k in o)
+                if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            return fmt;
+        }
+		//当前时间
+        var time = new Date().Format("yyyy-MM-dd HH:mm:ss");
+        var token = getCookie("X-XSRF-TOKEN");
+        function getCookie(cname) {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i].trim();
+                if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+            }
+            return "";
+        }
+        ///ruoyi/login.js  登录的js
+		//form表单ajax上传文件
+        function  doupload(id) {
+            var dd=null;
+            //var formData = new FormData($( "#"+id )[0]);
+            var form = document.getElementById(id);
+            // 用表单来初始化
+            var formData = new FormData(form);
+            $("#"+id).find(".error").hide();
+            $.ajax({
+                url: "/system/oss/upload",
+                type: 'POST',
+                data: formData,
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    dd=data;
+                },
+                error: function (data) {
+                    layer.msg(data);
+                }
+            });
+            return dd;
+        }
+        /**
+		 *查询这是注册的第几步
+		 * */
+		function checkInterResponseBody() {
+		    var dt=null;
+		    var fid=$("#enterpriseId").val();
+            var config = {
+                headers: {
+                    'X-XSRF-TOKEN': token
+                },
+                url: "/portal/tbenterpriseuser/searchReturnInfo",
+                type: "post",
+                dataType: "json",
+                data: {
+                    id:fid
+				},
+				async:false,
+                success: function(result) {
+                    if (result.code == web_status.SUCCESS) {
+                        layer.msg(result.msg);
+                        dt=result.data;
+                    } else if (result.code == web_status.WARNING) {
+                        layer.msg(result.msg);
+                    } else {
+                        layer.msg(result.msg);
+                    }
+                }
+            };
+            $.ajax(config);
+			return dt;
+		}
+
+		$("#user_form1").validate({
+			onkeyup: false,
+			rules:{
+				enterpriseAccount:{
+					required: true,
+					maxlength: 20,
+                    enterpriseAccountUnique: "required"
+				},
+				enterprisePassword:{
+					required: true,
+					minlength: 5,
+					maxlength: 20,
+					passWord:'required'
+				},
+				adminName:{
+					required: true,
+					maxlength: 64
+				},
+				adminSex:{
+					required: true,
+					maxlength: 4
+				},
+				adminIdCardNo:{
+					required: true,
+					isIdCardNo : "required"
+				},
+				adminMobile:{
+					required: true,
+					isPhone:true,
+/*					remote: {
+						url:  "/platsystem/user/checkPhoneUnique",
+						type: "post",
+						dataType: "json",
+						data: {
+							"phonenumber": function () {
+								return $.common.trim($("#sysuserMobile").val());
+							}
+						},
+						dataFilter: function (data, type) {
+							return $.validate.unique(data);
+						}
+					}*/
+				},
+				// yzm:{
+				// 	required:true,
+                 //    isRightOrNot:"required"
+				// },
+				enterpriseName:{ //企业名称
+					required: true,
+					maxlength: 255
+				},
+				enterpriseCreditCode:{ //统一性用代码
+					required: true,
+					maxlength: 64
+				},
+				enterpriseEmployeeNum:{
+					required: true,
+					min: 0
+				},
+				enterpriseWomenEmployee:{
+					required: true,
+					min: 0
+				},
+				enterpriseLegalPerson:{
+					required: true
+				},
+				legalPersonIdCard:{
+					required: true,
+					isIdCardNo : "required",
+                    Notequalto : "required"
+				},
+				enterpriseNature:{
+					required: true
+				},
+				enterpriseManageItem:{
+					required: true
+				},
+				enterprisePayTaxesDistrict:{
+					required: true
+				},
+				enterprisePark:{
+					required: true
+				},
+				enterpriseRegisterPlace:{
+					required: true
+				},
+				enterpriseOfIndustry:{
+					required: true
+				},
+				preparatoryGroupUser:{
+					required: true
+				},
+				preparatoryGroupUserIdCard:{
+					required: true,
+					isIdCardNo : "required",
+                    Notequalto : "required"
+				},
+				unionContacts:{
+					required: true
+				},
+				contactWay:{
+					required: true,
+					isPhone:true
+				},
+				workAddress:{
+					required: true
+				},
+				memberNum:{
+					required: true,
+					min: 0
+				}
+			},
+			messages: {
+				"enterpriseAccount": {
+					required: "请输入登录账户",
+					remote: "账户已经存在"
+				},
+				"enterprisePassword": {
+					required: "请输入密码",
+					maxlength: "密码长度不能超过20"
+				},
+				"adminName": {
+					required: "请输入姓名",
+					maxlength: "姓名长度不能超过64"
+				},
+				"adminSex": {
+					required: "请选择性别",
+					maxlength: "姓别长度不能超过4"
+				},
+				"adminIdCardNo": {
+					required: "请输入身份证号"
+				},
+				"adminMobile": {
+					required: "请输入手机号码",
+					remote: "手机号码已经存在"
+				},
+				// "yzm":{
+				// 	required:"请输入验证码"
+				// },
+				"enterpriseName": {
+					required: "请输入企业名称",
+					maxlength: "最大长度不能超过255"
+				},
+				"enterpriseCreditCode":{
+					required: "请输入信用代码",
+					maxlength: "最大长度不能超过64"
+				},
+				"enterpriseEmployeeNum":{
+					required: "请输入职工人数",
+					min: "最小值为0"
+				},
+				"enterpriseWomenEmployee":{
+					required: "请输入女职工人数",
+					min: "最小值为0"
+				},
+				"enterpriseLegalPerson":{
+					required: "请输入法人姓名"
+				},
+				"legalPersonIdCard":{
+					required: "请输入身份证号"
+				},
+				"enterpriseNature":{
+					required: "请输入单位性质"
+				},
+				"enterpriseManageItem":{
+					required: "请输入经营项目"
+				},
+				"enterprisePayTaxesDistrict":{
+					required: "请选择纳税属地"
+				},
+				"enterprisePark":{
+					required: "请选择所属园区"
+				},
+				"enterpriseRegisterPlace":{
+					required: "请输入企业注册地"
+				},
+				"enterpriseOfIndustry":{
+					required: "请选择所属行业"
+				},
+				"preparatoryGroupUser":{
+					required: "请输入筹备组组长姓名"
+				},
+				"preparatoryGroupUserIdCard":{
+					required: "请输入身份证号"
+				},
+				"unionContacts":{
+					required: "请输入工会联系人"
+				},
+				"contactWay":{
+					required: "请输入手机号码"
+				},
+				"workAddress":{
+					required: "请输入办公地址"
+				},
+				"memberNum":{
+					required: "请输入会员人数",
+					min: "最小值为0"
+				}
+			},
+			focusCleanup: true
+		});
+        /**
+         * 基础信息
+         * @type {{}}
+         */
+        function submitHandler(){
+            var t1=$("#memberRegister_uploadtest").val();
+            var t2=$("#preparatoryGroupList_uploadtest2").val();
+            var t3=$("#tradingCertificate_uploadtest3").val();
+            var t4=$("#frCertificate_uploadtest4").val();
+            var tt1=t1==null?"":$.parseJSON(t1);//转json对象
+            var tt2=t2==null?"":$.parseJSON(t2);//转json对象
+            var tt3=t3==null?"":$.parseJSON(t3);//转json对象
+            var tt4=t4==null?"":$.parseJSON(t4);//转json对象
+            var ttt1={};
+            var memberRegister="";
+			if(tt1!="" && tt1!=null){
+                ttt1.dbfilepath=tt1.path;
+                ttt1.originalfilename=tt1.fileName;
+                ttt1.ATTACHMENT_ID="1";
+                memberRegister=tt1.url;
+			}
+            var ttt2={};
+			var preparatoryGroupList="";
+            if(tt2!="" && tt2!=null){
+                ttt2.dbfilepath=tt2.path;
+                ttt2.originalfilename=tt2.fileName;
+                ttt2.ATTACHMENT_ID="2";
+                preparatoryGroupList=tt2.url;
+            }
+            var ttt3={};
+            var tradingCertificate="";
+			if(tt3!=""  && tt3!=null){
+
+                ttt3.dbfilepath=tt3.path;
+                ttt3.originalfilename=tt3.fileName;
+                ttt3.ATTACHMENT_ID="3";
+                tradingCertificate=tt3.url;
+			}
+            var ttt4={};
+			var legalPersonIdCardFile="";
+			if(tt4!="" && tt4!=null){
+                ttt4.dbfilepath=tt4.path;
+                ttt4.originalfilename=tt4.fileName;
+                ttt4.ATTACHMENT_ID="4";
+                legalPersonIdCardFile=tt4.url;
+			}
+            var array=new Array();
+            array.push(ttt1,ttt2,ttt3,ttt4);
+
+            //当前时间
+            var time = new Date().Format("yyyy-MM-dd HH:mm:ss");
+            var data = $("#user_form1").serializeArray();
+            data.push({"name": "createTime", "value": time});
+			data.push({"name": "file", "value": JSON.stringify(array)});
+			data.push({"name": "memberRegister", "value": memberRegister});
+            data.push({"name": "preparatoryGroupList", "value": preparatoryGroupList});
+            data.push({"name": "tradingCertificate", "value": tradingCertificate});
+            data.push({"name": "legalPersonIdCardFile", "value": legalPersonIdCardFile});
+			if($("#memberRegister_uploadtest").val()==""){
+				$("#uploadtest").find(".error").show();
+			}
+			if($("#preparatoryGroupList_uploadtest2").val()==""){
+				$("#uploadtest2").find(".error").show();
+			}
+			if($("#tradingCertificate_uploadtest3").val()==""){
+				$("#uploadtest3").find(".error").show();
+			}
+			if($("#frCertificate_uploadtest4").val()==""){
+				$("#uploadtest4").find(".error").show();
+			}
+			if ($.validate.form('user_form1')) {
+				var config = {
+					headers: {
+						'X-XSRF-TOKEN': token
+					},
+					url: "/portal/tbenterpriseuser/addBaseInfor",
+					type: "post",
+					dataType: "json",
+					data: data,
+					success: function(result) {
+						if (result.code == web_status.SUCCESS) {
+							/*$.modal.msgSuccess(result.msg);
+                            $.modal.close();*/
+							$.modal.closeLoading();
+							layer.msg(result.msg);
+						} else if (result.code == web_status.WARNING) {
+							layer.msg(result.msg);
+						} else {
+							layer.msg(result.msg);
+						}
+					}
+				};
+				$.ajax(config)
+			}
+        }
+        //候选工会主席与法人不能是同一人校验
+        function Notequalto2(){
+            var faren=$.common.trim($("#legalPersonIdCard").val());
+           	var ghhxfr=$.common.trim($("#candidateUnionChairman").val());
+            if(faren==ghhxfr){
+                return false;
+            }else{
+                return true;
+            }
+        }
+		$("#user_form2").validate({
+			onkeyup: false,
+			rules:{
+				candidateUnionChairman:{
+					required: true,
+                    Notequalto2:"required"
+				},
+				meetingTime1:{
+					required: true
+				},
+				meetingNum:{
+					required: true
+				},
+				committeeMember1:{
+					required: true,
+					min: 0
+				},
+				candidate1:{
+					required: true,
+					min: 0
+				},
+				difference:{
+					required: true,
+					min: 0
+				},
+				unionDeputyChairman:{
+					required: true,
+					min: 0
+				},
+				expenditureNum:{
+					required: true,
+					min: 0
+				},
+				womenCommittee:{
+					required: true,
+					min: 0
+				},
+				womenCommitteeNum:{
+					required: true,
+					min: 0
+				},
+				unionCommittees:{
+					required: true
+				},
+				expenditureCommittees:{
+					required: true
+				},
+				womenCommittees:{
+					required: true
+				}
+			},
+			messages: {
+				"candidateUnionChairman":{
+					required: "请输入工会候选主席"
+				},
+				"meetingTime1":{
+					required: "请选择拟开会日期"
+				},
+				"meetingNum":{
+					required: "请输入第几次大会"
+				},
+				"committeeMember1":{
+					required: "请输入拟设委员",
+					min: "最小值为0"
+				},
+				"candidate1":{
+					required: "请输入候选人建议人选",
+					min: "最小值为0"
+				},
+				"difference":{
+					required: "请输入差额人数",
+					min: "最小值为0"
+				},
+				"unionDeputyChairman":{
+					required: "请输入副主席",
+					min: "最小值为0"
+				},
+				"expenditureNum":{
+					required: "请输入经费审查委员候选人建议人选",
+					min: "最小值为0"
+				},
+				"womenCommittee":{
+					required: "请输入拟设女职工委员",
+					min: "最小值为0"
+				},
+				"womenCommitteeNum":{
+					required: "请输入女职工委员候选人建议人选",
+					min: "最小值为0"
+				},
+				"unionCommittees":{
+					required: "请输入工会委员候选人"
+				},
+				"expenditureCommittees":{
+					required: "请输入经费审查委员会委员候选人"
+				},
+				"womenCommittees":{
+					required: "请输入女职工委员会委员候选人"
+				}
+			},
+			focusCleanup: true
+		});
+        //第一次会员代表大会
+        function submitHandler2(nodeKeys,jbpmExeId){
+            var t1=$("#videoMeeting_uploadtest5").val();
+            var t2=$("#photoMeeting_upBox").val();
+
+            var tt1=t1==null?"":$.parseJSON(t1);//转json对象
+            var tt2=t2==null?"":$.parseJSON(t2);//转json对象
+
+            var ttt1={};
+            var videoMeeting="";
+            if(tt1!="" && tt1!=null){
+                ttt1.dbfilepath=tt1.path;
+                ttt1.originalfilename=tt1.fileName;
+                ttt1.ATTACHMENT_ID="5";
+                videoMeeting=tt1.url;
+            }
+            var ttt2={};
+            var photoMeeting="";
+            if(tt2!="" && tt2!=null){
+                ttt2.dbfilepath=tt2.path;
+                ttt2.originalfilename=tt2.fileName;
+                ttt2.ATTACHMENT_ID="6";
+                photoMeeting=tt2.url;
+            }
+
+            var array=new Array();
+            array.push(ttt1,ttt2);
+
+            var enterpriseId=$("#enterpriseId").val();
+            var data = $("#user_form2").serializeArray();
+            data.push({"name": "nodeKeys", "value": nodeKeys});
+            data.push({"name": "jbpmExeId", "value": jbpmExeId});
+            data.push({"name": "enterpriseId", "value": enterpriseId});
+            data.push({"name": "videoMeeting", "value": videoMeeting});
+            data.push({"name": "photoMeeting", "value": photoMeeting});
+            data.push({"name": "file", "value": JSON.stringify(array)});
+			if($("#videoMeeting_uploadtest5").val()==""){
+				$("#uploadtest5").find(".error").show();
+			}
+			if($("#photoMeeting_upBox").val()==""){
+				$("#upBox").find(".error").show();
+			}
+			if ($.validate.form('user_form2')) {
+				var config = {
+					headers: {
+						'X-XSRF-TOKEN': token
+					},
+					url: "/portal/tbenterpriseuser/updateGHZX",
+					type: "post",
+					dataType: "json",
+					data: data,
+					/*                beforeSend: function () {
+                                        $.modal.loading("正在处理中，请稍后...");
+                                    },*/
+					success: function(result) {
+						if (result.code == web_status.SUCCESS) {
+							layer.msg(result.msg);
+						} else if (result.code == web_status.WARNING) {
+							layer.msg(result.msg);
+						} else {
+							layer.msg(result.msg);
+						}
+					}
+				};
+				$.ajax(config)
+			}
+        }
+		$("#user_form3").validate({
+			onkeyup: false,
+			rules:{
+				unionChairman:{
+					required: true
+				},
+				expenditureDirector:{
+					required: true
+				},
+				womenDirector:{
+					required: true
+				},
+				meetingTime2:{
+					required: true
+				},
+				meetingSite:{
+					required: true
+				},
+				ydNum:{
+					required: true,
+					min: 0
+				},
+				sdNum:{
+					required: true,
+					min: 0
+				},
+				committees:{
+					required: true
+				},
+				realExpenditureCommittees:{
+					required: true,
+					min: 0
+				}
+			},
+			messages: {
+				"unionChairman":{
+					required: "请输入工会主席"
+				},
+				"expenditureDirector":{
+					required: "请输入经审委员会主任"
+				},
+				"womenDirector":{
+					required: "请输入女工委员会主任"
+				},
+				"meetingTime2":{
+					required: "请选择大会召开日期"
+				},
+				"meetingSite":{
+					required: "请输入大会召开地点"
+				},
+				"ydNum":{
+					required: "请输入应到代表",
+					min: "最小值为0"
+				},
+				"sdNum":{
+					required: "请输入实到代表",
+					min: "最小值为0"
+				},
+				"committees":{
+					required: "请输入委员会委员"
+				},
+				"realExpenditureCommittees":{
+					required: "请输入经费审查委员会委员",
+					min: "最小值为0"
+				}
+			},
+			focusCleanup: true
+		});
+        //大会选举结果报告 第三步
+        function submitHandler3(nodeKeys,jbpmExeId){
+            var t1=$("#scbg_uploadtest6").val();
+            var t2=$("#wyylb_uploadtest7").val();
+            var t3=$("#ghzxcns_uploadtest8").val();
+            var t4=$("#scbgs_uploadtest9").val();
+            var t5=$("#jcghdjb_uploadtest10").val();
+            var t6=$("#nzghzb_uploadtest11").val();
+            var tt1=t1==null?"":$.parseJSON(t1);//转json对象
+            var tt2=t2==null?"":$.parseJSON(t2);//转json对象
+            var tt3=t3==null?"":$.parseJSON(t3);//转json对象
+            var tt4=t4==null?"":$.parseJSON(t4);//转json对象
+            var tt5=t5==null?"":$.parseJSON(t5);//转json对象
+            var tt6=t6==null?"":$.parseJSON(t6);//转json对象
+            var ttt1={};
+            var electionResultsReport="";
+            if(tt1!="" && tt1!=null){
+                ttt1.dbfilepath=tt1.path;
+                ttt1.originalfilename=tt1.fileName;
+                ttt1.ATTACHMENT_ID="7";
+                electionResultsReport=tt1.url;
+            }
+            var ttt2={};
+            var membershipTradeCommittees="";
+            if(tt2!="" && tt2!=null){
+                ttt2.dbfilepath=tt2.path;
+                ttt2.originalfilename=tt2.fileName;
+                ttt2.ATTACHMENT_ID="8";
+                membershipTradeCommittees=tt2.url;
+            }
+            var ttt3={};
+            var letterCommitmentPresident="";
+            if(tt3!=""  && tt3!=null){
+
+                ttt3.dbfilepath=tt3.path;
+                ttt3.originalfilename=tt3.fileName;
+                ttt3.ATTACHMENT_ID="9";
+                letterCommitmentPresident=tt3.url;
+            }
+            var ttt4={};
+            var votesObtained="";
+            if(tt4!="" && tt4!=null){
+                ttt4.dbfilepath=tt4.path;
+                ttt4.originalfilename=tt4.fileName;
+                ttt4.ATTACHMENT_ID="10";
+                votesObtained=tt4.url;
+            }
+            var ttt5={};
+            var registrationGrassTrade="";
+            if(tt5!="" && tt5!=null){
+                ttt5.dbfilepath=tt5.path;
+                ttt5.originalfilename=tt5.fileName;
+                ttt5.ATTACHMENT_ID="11";
+                registrationGrassTrade=tt5.url;
+            }
+            var ttt6={};
+            var summaryTableWomenCommittees="";
+            if(tt6!="" && tt6!=null){
+                ttt6.dbfilepath=tt6.path;
+                ttt6.originalfilename=tt6.fileName;
+                ttt6.ATTACHMENT_ID="12";
+                summaryTableWomenCommittees=tt6.url;
+            }
+            var array=new Array();
+            array.push(ttt1,ttt2,ttt3,ttt4,ttt5,ttt6);
+
+
+            var enterpriseId=$("#enterpriseId").val();
+            var data = $("#user_form3").serializeArray();
+            data.push({"name": "nodeKeys", "value": nodeKeys});
+            data.push({"name": "jbpmExeId", "value": jbpmExeId});
+            data.push({"name": "enterpriseId", "value": enterpriseId});
+            data.push({"name": "file", "value": array});
+            data.push({"name": "electionResultsReport", "value": electionResultsReport});
+            data.push({"name": "membershipTradeCommittees", "value": membershipTradeCommittees});
+            data.push({"name": "letterCommitmentPresident", "value": letterCommitmentPresident});
+            data.push({"name": "votesObtained", "value": votesObtained});
+            data.push({"name": "registrationGrassTrade", "value": registrationGrassTrade});
+            data.push({"name": "summaryTableWomenCommittees", "value": summaryTableWomenCommittees});
+			if($("#scbg_uploadtest6").val()==""){
+				$("#uploadtest6").find(".error").show();
+			}
+			if($("#wyylb_uploadtest7").val()==""){
+				$("#uploadtest7").find(".error").show();
+			}
+			if($("#ghzxcns_uploadtest8").val()==""){
+				$("#uploadtest8").find(".error").show();
+			}
+			if($("#scbgs_uploadtest9").val()==""){
+				$("#uploadtest9").find(".error").show();
+			}
+			if($("#jcghdjb_uploadtest10").val()==""){
+				$("#uploadtest10").find(".error").show();
+			}
+			if($("#nzghzb_uploadtest11").val()==""){
+				$("#uploadtest11").find(".error").show();
+			}
+            if ($.validate.form('user_form3')) {
+				var config = {
+					headers: {
+						'X-XSRF-TOKEN': token
+					},
+					url: "/portal/tbenterpriseuser/updateXJDHBG",
+					type: "post",
+					dataType: "json",
+					data: data,
+					success: function(result) {
+						if (result.code == web_status.SUCCESS) {
+							layer.msg(result.msg);
+						} else if (result.code == web_status.WARNING) {
+							layer.msg(result.msg);
+						} else {
+							layer.msg(result.msg);
+						}
+					}
+				};
+				$.ajax(config)
+			}
+
+		}
+		$("#user_form4").validate({
+			onkeyup: false,
+			rules:{
+				operator:{
+					required: true
+				}
+			},
+			messages: {
+				"operator":{
+					required: "请输入联系方式"
+				}
+			},
+			focusCleanup: true
+		});
+		//刻制工会公章 第四步
+        function submitHandler4(nodeKeys,jbpmExeId){
+            var t1=$("#ghzxsfz_uploadtest12").val();
+            var t2=$("#sfrsfz_uploadtest13").val();
+            var t3=$("#jbrsfz_uploadtest14").val();
+            var t4=$("#yyzzdzb_uploadtest15").val();
+            var tt1=t1==null?"":$.parseJSON(t1);//转json对象
+            var tt2=t2==null?"":$.parseJSON(t2);//转json对象
+            var tt3=t3==null?"":$.parseJSON(t3);//转json对象
+            var tt4=t4==null?"":$.parseJSON(t4);//转json对象
+            var ttt1={};
+            var unionPresidentIdcard="";
+            if(tt1!="" && tt1!=null){
+                ttt1.dbfilepath=tt1.path;
+                ttt1.originalfilename=tt1.fileName;
+                ttt1.ATTACHMENT_ID="13";
+                unionPresidentIdcard=tt1.url;
+            }
+            var ttt2={};
+            var corporateIdentityCard="";
+            if(tt2!="" && tt2!=null){
+                ttt2.dbfilepath=tt2.path;
+                ttt2.originalfilename=tt2.fileName;
+                ttt2.ATTACHMENT_ID="2";
+                corporateIdentityCard=tt2.url;
+            }
+            var ttt3={};
+            var identityCardAgent="";
+            if(tt3!=""  && tt3!=null){
+
+                ttt3.dbfilepath=tt3.path;
+                ttt3.originalfilename=tt3.fileName;
+                ttt3.ATTACHMENT_ID="15";
+                identityCardAgent=tt3.url;
+            }
+            var ttt4={};
+            var electronicVersion="";
+            if(tt4!="" && tt4!=null){
+                ttt4.dbfilepath=tt4.path;
+                ttt4.originalfilename=tt4.fileName;
+                ttt4.ATTACHMENT_ID="16";
+                electronicVersion=tt4.url;
+            }
+            var array=new Array();
+            array.push(ttt1,ttt2,ttt3,ttt4);
+            var enterpriseId=$("#enterpriseId").val();
+            var data = $("#user_form4").serializeArray();
+            data.push({"name": "nodeKeys", "value": nodeKeys});
+            data.push({"name": "jbpmExeId", "value": jbpmExeId});
+            data.push({"name": "enterpriseId", "value": enterpriseId});
+
+            data.push({"name": "file", "value": JSON.stringify(array)});
+            data.push({"name": "unionPresidentIdcard", "value": unionPresidentIdcard});
+            data.push({"name": "corporateIdentityCard", "value": corporateIdentityCard});
+            data.push({"name": "identityCardAgent", "value": identityCardAgent});
+            data.push({"name": "electronicVersion", "value": electronicVersion});
+			if($("#ghzxsfz_uploadtest12").val()==""){
+				$("#uploadtest12").find(".error").show();
+			}
+			if($("#sfrsfz_uploadtest13").val()==""){
+				$("#uploadtest13").find(".error").show();
+			}
+			if($("#jbrsfz_uploadtest14").val()==""){
+				$("#uploadtest14").find(".error").show();
+			}
+			if($("#yyzzdzb_uploadtest15").val()==""){
+				$("#uploadtest15").find(".error").show();
+			}
+			if ($.validate.form('user_form4')) {
+				var config = {
+					headers: {
+						'X-XSRF-TOKEN': token
+					},
+					url: "/portal/tbenterpriseuser/updateKZGHGZ",
+					type: "post",
+					dataType: "json",
+					data: data,
+					success: function(result) {
+						if (result.code == web_status.SUCCESS) {
+							layer.msg(result.msg);
+						} else if (result.code == web_status.WARNING) {
+							layer.msg(result.msg);
+						} else {
+							layer.msg(result.msg);
+						}
+					}
+				};
+				$.ajax(config)
+			}
+
+        }
+        //办理工会法人资格证 第五步
+        function submitHandler5(nodeKeys,jbpmExeId){
+            var enterpriseId=$("#enterpriseId").val();
+            var registrationlegal=$("#frzgdjb_uploadtest16").val();
+			var pointnote=$("#bgzysx_uploadtest17").val();
+			if($("#frzgdjb_uploadtest16").val()==""){
+				$("#uploadtest16").find(".error").show();
+			}
+			if($("#bgzysx_uploadtest17").val()==""){
+				$("#uploadtest17").find(".error").show();
+				return false;
+			}
+			var config = {
+                headers: {
+                    'X-XSRF-TOKEN': token
+                },
+                url: "/portal/tbenterpriseuser/updateFRZGZ",
+                type: "post",
+                dataType: "json",
+                data: {
+                    id:enterpriseId,
+                    registrationlegal1:registrationlegal,
+                    pointnote1:pointnote,
+                    nodeKeys:nodeKeys,
+                    jbpmExeId:jbpmExeId
+				},
+                success: function(result) {
+                    if (result.code == web_status.SUCCESS) {
+                        layer.msg(result.msg);
+                    } else if (result.code == web_status.WARNING) {
+                        layer.msg(result.msg);
+                    } else {
+                        layer.msg(result.msg);
+                    }
+                }
+            };
+            $.ajax(config)
+        }
+
+        /**
+		 * 下拉选
+         */
+        function searchLable(ty){
+            var str="";
+            var config = {
+                url: "/portal/tbenterpriseuser/searchLabelByType",
+                type: "post",
+                dataType: "json",
+                data: {
+                    dicttype:ty
+                },
+                async:false,
+                success: function(result) {
+                    for(var i=0;i<result.length;i++){
+                        var a1=result[i];
+                        if(ty=="belongs_park"){
+                            str+="<option value=\'"+a1.dictLabel+"\'>"+a1.dictLabel+"</option>";
+                        }else{
+                            str+="<option value=\'"+a1.dictValue+"\'>"+a1.dictLabel+"</option>";
+                        }
+
+                    }
+				}
+            };
+            $.ajax(config);
+            return str;
+		}
+	</script>
+</body>
+</html>

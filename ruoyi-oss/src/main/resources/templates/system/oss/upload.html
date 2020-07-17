@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head>
+    <title>文件上传</title>
+    <script type="text/javascript" src="../static/ajax/libs/jQuery/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="../static/ajax/libs/form/jquery.form.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <form id="upload" method="post" action="/system/oss/upload" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="fileupload">单文件上传</label>
+                    <input type="file" name="file" class="form-control" id="fileupload">
+                </div>
+                <button type="submit" class="btn btn-primary" id="J_file_ok">upload</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    $(function () {
+        /**
+         * 上传按钮点击
+         */
+        $('#J_file_ok').click(function () {
+            /**
+             * 文件上传表单处理
+             */
+            $('#upload').ajaxForm({
+                beforeSend: function () {
+                    // 表单提交前做表单验证
+                },
+                success: function (result) {
+                    alert(JSON.stringify(result));
+                },
+                dataType: 'json'
+            }).submit();
+        });
+
+    });
+
+</script>
+</html>

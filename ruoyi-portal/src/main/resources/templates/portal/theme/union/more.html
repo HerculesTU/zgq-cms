@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords"
+	th:content="${@config.getKey('portal.index.keywords')}">
+<meta name="description"
+	th:content="${@config.getKey('portal.index.description')}">
+<title th:text="${@config.getKey('portal.index.title')}"></title>
+<meta name="baidu-site-verification" content="dAEtGwEyN9" />
+<link rel="stylesheet" th:href="@{/portal/union/css/style.css}" />
+
+<script th:src="@{/portal/union/js/jquery-1.8.3.js}"></script>
+<script th:src="@{/portal/pnews/plugin/layer/layer.js}"></script>
+<script th:src="@{/portal/union/js/perReginstration.js}"></script>
+<script th:src="@{/portal/union/js/csrf.js}"></script>
+<script th:src="@{/ajax/libs/validate/jquery.validate.min.js}"></script>
+<script th:src="@{/ajax/libs/blockUI/jquery.blockUI.js}"></script>
+</head>
+<body>
+	<div class="headGroup white fixed" id="headGroup">
+		<div th:replace="portal/theme/union/header"></div>
+	</div>
+	<div class="baseGroup mb20 mt20" id="indexGroup">
+		<div class="main-con">
+			<div class="marT25 clearfix">
+				<div class="w820">
+					<div class="box_bor">
+						<div class="ch-titles">
+							<img th:src="@{/portal/union/images/home.png}" /> 当前位置：<a
+								th:href="@{/portal/index}">网站首页</a> > <a
+								th:href="@{/portal/fileDowns}">新闻查看</a>
+						</div>
+						<div class="padS20">
+							<ul class="list" th:if="${not #lists.isEmpty(resourceList)}">
+								<li th:each="item,temp:${resourceList}">
+									<i></i>
+									<a th:href="@{${'/portal/article/'+item.id}}"  th:text="${#strings.abbreviate(item.title,120)}" target="_blank"></a>
+									<span class="pubDate">[[${#dates.format(item.createTime,'yyyy-MM-dd')}]]</span>
+								</li>
+							</ul>
+							<div class="clearfix"></div>
+							<div id="pageGroup" class="pages" th:if="${totalPages>1}">
+								<a th:href="@{'/portal/article1/list?type='+${type}+'&pageSize=10'}"
+								   class="first">首页</a> <a th:if="${not hasPrevious}"
+														   href="javascript:;" class="prepage nopage">上一页</a> <a
+									th:if="${hasPrevious}"
+									th:href="@{'/portal/article1/list?type='+${type}+'&pageNum='+${prePage}+'&pageSize=10'}"
+									class="prev">上一页</a> <a th:each="item:${navNums}"
+															th:href="@{'/portal/article1/list?type='+${type}+'&pageNum='+${item}+'&pageSize=10'}"
+															class="normal" th:text="${item}"
+															th:classappend="${item+'' ==currentPage+'' ? 'current':''}"></a>
+								<a th:if="${hasNext}"
+								   th:href="@{'/portal/article1/list?type='+${type}+'&pageNum='+${nextPage}+'&pageSize=10'}"
+								   class="next">下一页</a> <a th:if="${not hasNext}"
+														   href="javascript:;" class="next">下一页</a> <a
+									th:href="@{'/portal/article1/list?type='+${type}+'&pageNum='+${totalPages}+'&pageSize=10'}"
+									class="last">尾页</a>
+								<span class="pageinfo">共<strong>[[${totalPages}]]</strong>页<strong>[[${total}]]</strong>条记录</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="w360">
+					<div class="sidebar_tem">
+						<div class="gh-title">
+							<span>工会要闻</span> 
+						</div>
+						<ul class="list">
+						<li
+							th:each="item,temp:${@cms.topList(5)}">
+							<i></i>
+						<a class="read-more" th:href="@{${'/portal/article/'+item.id}}"
+							target="_blank"><span th:text="${#strings.abbreviate(item.title,120)}"></span>
+							</a></li>
+
+					    </ul>
+						
+					</div>
+					<div class="sidebar_tem">
+						<div class="gh-title">
+							<span>热点关注</span> 
+						</div>
+						<ul class="list">
+						<li
+							th:each="item,temp:${@cms.hotList(5)}">
+							<i></i>
+						<a class="read-more" th:href="@{${'/portal/article/'+item.id}}"
+							target="_blank"><span th:text="${#strings.abbreviate(item.title,120)}"></span>
+							</a></li>
+
+					    </ul>
+					</div>
+					<div class="sidebar_tem">
+						<div class="gh-title">
+							<span>工会动态</span> 
+						</div>
+						<ul class="list">
+						<li
+							th:each="item,temp:${@cms.focusList(5)}">
+							<i></i>
+						<a class="read-more" th:href="@{${'/portal/article/'+item.id}}"
+							target="_blank"><span th:text="${#strings.abbreviate(item.title,120)}"></span>
+							</a></li>
+
+					    </ul>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer class="bgf mt40">
+		<div th:replace="portal/theme/union/footer"></div>
+	</footer>
+
+</body>
+</html>

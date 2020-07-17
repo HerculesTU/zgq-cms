@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('修改友情链接')" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-friendLink-edit" th:object="${friendLink}">
+            <input name="id" th:field="*{id}" type="hidden">
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">友链名称：</label>
+                <div class="col-sm-8">
+                    <input name="name" th:field="*{name}" class="form-control" required type="text">
+                </div>
+            </div>
+             <div class="form-group">
+                   
+                        <label class="col-sm-3 control-label">友链类型：</label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                <input id="treeId" name="friendLinkType" type="hidden"/>
+                                <input class="form-control" type="text" onclick="selectCategoryTree()" id="treeName" readonly="true">
+                                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                            </div>
+                        </div>
+                   
+                </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">链接：</label>
+                <div class="col-sm-8">
+                    <input name="link" th:field="*{link}" class="form-control" required type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">logo：</label>
+                <div class="col-sm-8">
+                    <input name="logo"  th:field="*{logo}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">站点描述：</label>
+                <div class="col-sm-8">
+                    <textarea name="description" required  class="form-control">[[${friendLink.description}]]</textarea>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">状态：</label>
+                <div class="col-sm-8">
+                    <div class="radio-box" th:each="dict : ${@dict.getType('audit_state')}">
+                        <input type="radio" th:id="${'auditState_' + dict.dictCode}" name="auditState" th:value="${dict.dictValue}" th:field="*{auditState}">
+                        <label th:for="${'auditState_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script type="text/javascript">
+        var prefix = ctx + "cms/friendLink";
+        $("#form-friendLink-edit").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/edit", $('#form-friendLink-edit').serialize());
+            }
+        }
+        /*栏目分类-新增-选择父部门树*/
+        function selectCategoryTree() {
+            var options = {
+                title: '友链类型选择',
+                width: "380",
+                url: ctx + "cms/category2/selectCategoryTree/" + $("#treeId").val(),
+                callBack: doSubmit
+            };
+            $.modal.openOptions(options);
+        }
+
+        function doSubmit(index, layero){
+            var body = layer.getChildFrame('body', index);
+               $("#treeId").val(body.find('#treeId').val());
+               $("#treeName").val(body.find('#treeName').val());
+               layer.close(index);
+        }
+    </script>
+</body>
+</html>

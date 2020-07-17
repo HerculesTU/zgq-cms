@@ -1,0 +1,58 @@
+<link rel="stylesheet" th:href="@{/ajax/libs/select2s/select2.css}" />
+<link rel="stylesheet" th:href="@{/portal/union/css/style.css}"/>
+<div class="footer">
+    <div class="f-con">
+        <div class="f-ksdh">
+            <h1 style="margin-top: 0px;">快速导航</h1>
+            <div class="f-list">
+                <ul>
+                    <li>
+                        <a th:href="@{/portal/index}">网站首页</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/portal/situation}">工会概况</a>
+                    </li>
+                    <li>
+                        <a href="">通知公告</a>
+                    </li>
+                    <li>
+                        <a th:href="@{#zhgh}">智慧工会</a>
+                    </li>
+                    <li>
+                        <a th:href="@{#ghdsj}">工会大数据</a>
+                    </li>
+                </ul>
+            </div>
+            <h1>友情链接</h1>
+            <div class="yqlj">
+                <div th:each="category:${@cms.selectNavCategories1()}" class="div-select">
+                    <select class="form-control">
+                        <option th:text="${category.categoryName}"></option>
+                        <div th:each="item:${@cms.getFriendLinks1(category.categoryId)}">
+                            <option th:text="${item.name}" th:value="${item.link}"></option>
+                        </div>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="bah">山西转型综合改革示范区总工会 <span>版权所有</span><span>Copyright</span>  <span>2012-2018</span>  <span>www.sxzg.org</span>     All Rights Reserved  <span>备案号</span>   262984901</div>
+    </div>
+</div>
+<script th:src="@{/ajax/libs/select2s/select2.js}"></script>
+<script>
+    $(function(){
+        $(".yqlj select").change(function(){
+            var val = $(this).val();
+            if(val!=""){
+                window.open(val,"_blank");
+            }
+        });
+        $('.div-select .form-control').each(function(){
+            $(this).select2({
+                placeholder: "",
+                allowClear: true
+            });
+        });
+
+    });
+</script>

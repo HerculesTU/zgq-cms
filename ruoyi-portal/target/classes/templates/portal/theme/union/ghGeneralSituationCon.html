@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" th:content="${@config.getKey('portal.index.keywords')}">
+	<meta name="description" th:content="${@config.getKey('portal.index.description')}">
+	<title th:text="${@config.getKey('portal.index.title')}"></title>
+	<meta name="baidu-site-verification" content="dAEtGwEyN9" />
+	<link rel="stylesheet" th:href="@{/portal/union/css/style.css}"/>
+
+	<script th:src="@{/portal/union/js/jquery-1.8.3.js}"></script>
+</head>
+<body>
+<div class="headGroup white fixed" id="headGroup">
+	<div th:replace="portal/theme/union/header"></div>
+</div>
+<div class="baseGroup mb20 mt20" id="indexGroup">
+	<div class="main-con">
+		<div class="ch-title">
+			<img th:src="@{/portal/union/images/home.png}"/>
+			当前位置：
+			<a th:href="@{/portal/index}">网站首页</a> > <a th:href="@{/portal/situation}">工会概况</a> > <a>工会简介</a>
+		</div>
+		<div class="per-cons" style="min-height: 588px">
+			<h1 class="ghgk-detail">办公室</h1>
+			<p class="ghgk-detail-con">负责自治区总工会部署工作的协调、督查和服务工作；负责综合反映全区工会工作和职工队伍的重要情况与动态；承担自治区总工会会议和重大活动的组织协调；负责重要文件和领导讲话的起草；负责机关文秘、机要、档案、保密、统计、信息化建设、“互联网+工会”统筹协调等工作；负责组织职工队伍、工会理论政策以及与职工利益密切相关的重要经济和社会政策问题的调查研究。</p>
+		</div>
+	</div>
+</div>
+
+<footer class="bgf mt40">
+	<div th:replace="portal/theme/union/footer"></div>
+</footer>
+<script>
+	$(function(){
+		$(".ghgk-left ul li").click(function(){
+			$(".ghgk-left ul li").removeClass("select");
+			$(this).addClass("select");
+			var index = $(this).index();
+			$(".ghgk-con").removeClass("active");
+			$($(".ghgk-con")[index]).addClass("active");
+		});
+	});
+</script>
+</body>
+</html>

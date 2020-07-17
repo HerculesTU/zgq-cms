@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" th:content="${@config.getKey('portal.index.keywords')}">
+	<meta name="description" th:content="${@config.getKey('portal.index.description')}">
+	<title th:text="${@config.getKey('portal.index.title')}"></title>
+	<meta name="baidu-site-verification" content="dAEtGwEyN9" />
+	<link rel="stylesheet" th:href="@{/portal/union/css/style.css}"/>
+
+	<script th:src="@{/portal/union/js/jquery-1.8.3.js}"></script>
+	<script th:src="@{/portal/union/js/ghGeneralSituation.js}"></script>
+</head>
+<body>
+<div class="headGroup white fixed" id="headGroup">
+	<div th:replace="portal/theme/union/header"></div>
+</div>
+<div class="baseGroup mb20 mt20" id="indexGroup">
+	<div class="main-con">
+		<div class="ch-title">
+			<img th:src="@{/portal/union/images/home.png}"/>
+			当前位置：
+			<a th:href="@{/portal/index}">网站首页</a> > <a th:href="@{/portal/situation}">工会概况</a> > <a>工会简介</a>
+		</div>
+		<div class="per-cons">
+			<div class="ghgk-left">
+				<span>工会概况</span>
+				<ul>
+					<li class="select">
+						<a href="#">工会简介</a>
+					</li>
+					<!--<li>
+						<a href="#">领导班子</a>
+					</li>
+					<li>
+						<a href="#">机构设置</a>
+					</li>-->
+					<li>
+						<a href="#">机构设置</a>
+					</li>
+				</ul>
+			</div>
+			<div class="ghgk-right">
+				<div class="ghgk-con active">
+					<div class="gh-title">
+						<span>工会简介</span>
+					</div>
+					<p class="ghjj" style="margin-top: 20px">山西转型综合改革示范区总工会隶属中共山西转型综合改革示范区工委、山西转型综合改革示范区管委会和太原市总工会领导，是山西综改示范区各园区工会和基层企事业单位工会的领导机关，成立于2018年4月20日，同时挂牌太原高新区总工会、太原经济区总工会。</p>
+					<p class="ghjj">山西转型综改示范区总工会现下辖唐槐园区（经济开发区）、学府园区（高新开发区）、阳曲园区、潇河园区、科技创新城、综合保税区6个功能区工会。目前，示范区共有基层建会单位1024个，会员12万人。</p>
+					<p class="ghjj">山西转型综改示范区总工会的职责和任务是：适应示范区开发开放的需要，围绕中心，服务大局，依法推动企业普遍建立工会组织和普遍开展工资集体协商工作。代表和维护职工的合法权益，发挥工会大学校作用，组织职工开展劳动竞赛、合理化建议、技术革新与技术协作，提高职工素质，深入开展丰富多彩的文化体育活动，团结动员新区广大职工为区域经济发展和社会进步做出积极贡献。</p>
+				</div>
+				<!--<div class="ghgk-con">
+					<div class="gh-title">
+						<span>领导班子</span>
+					</div>
+					<ul class="leader">
+						<li>
+							<img th:src="@{/portal/union/images/photo.jpg}">
+							<p class="lname">张丽芳</p>
+							<p>总工会兼职副主席</p>
+						</li>
+						<li>
+							<img th:src="@{/portal/union/images/photo.jpg}">
+							<p class="lname">张丽芳</p>
+							<p>总工会兼职副主席</p>
+						</li>
+						<li>
+							<img th:src="@{/portal/union/images/photo.jpg}">
+							<p class="lname">张丽芳</p>
+							<p>总工会兼职副主席</p>
+						</li>
+					</ul>
+				</div>-->
+				<!--<div class="ghgk-con">
+					<div class="gh-title">
+						<span>工会部门</span>
+					</div>
+					<ul class="fourBox">
+						<li><a th:href="@{/portal/situationCon}" title="办公室" target="_blank">办公室</a></li>
+						<li><a href="" target="_blank" title="组织部">组织部</a></li>
+						<li><a href="" target="_blank" title="宣传部">宣传部</a></li>
+						<li><a href="" target="_blank" title="基层工作部">基层工作部</a></li>
+						<li><a href="" target="_blank" title="法律工作部">法律工作部</a></li>
+						<li><a href="" target="_blank" title="保障工作部">保障工作部</a></li>
+						<li><a href="" target="_blank" title="经济部">经济部</a></li>
+						<li><a href="" target="_blank" title="女职工部">女职工部</a></li>
+						<li><a href="" target="_blank" title="财务部">财务部</a></li>
+						<li><a href="" target="_blank" title="经费审查委员会办公室">经费审查委员会办公室</a></li>
+						<li><a href="" target="_blank" title="机关党委">机关党委</a></li>
+						<li><a href="" target="_blank" title="离退休人员工作处">离退休人员工作处</a></li>
+						<div style="clear:both;"></div>
+					</ul>
+				</div>-->
+				<div class="ghgk-con">
+					<div class="gh-title">
+						<span>机构设置</span>
+					</div>
+					<table>
+						<tr>
+							<th width="50px">序号</th>
+							<th width="150px">工作项目</th>
+							<th>项目内容</th>
+							<th width="150px">责任人</th>
+						</tr>
+						<tr>
+							<td rowspan="7">1</td>
+							<td rowspan="7">组织建设<br/>工作</td>
+							<td>做好疫情期间基层工会防控工作</td>
+							<td rowspan="7">郭雅欣</td>
+						</tr>
+						<tr>
+							<td>扩大工会覆盖面</td>
+						</tr>
+						<tr>
+							<td>健全完善基层组织数据库</td>
+						</tr>
+						<tr>
+							<td>召开一届三次全委（扩大）会议</td>
+						</tr>
+						<tr>
+							<td>干部培训</td>
+						</tr>
+						<tr>
+							<td>建设智慧工会服务平台</td>
+						</tr>
+						<tr>
+							<td>模范职工之家建设</td>
+						</tr>
+						<tr>
+							<td rowspan="5">2</td>
+							<td rowspan="5">经济技术<br/>工作</td>
+							<td>深入开展“五小”竞赛活动</td>
+							<td rowspan="5">史省保</td>
+						</tr>
+						<tr>
+							<td>开展创新工作室创建活动</td>
+						</tr>
+						<tr>
+							<td>加强对劳动竞赛的领导</td>
+						</tr>
+						<tr>
+							<td>发扬劳模、工匠精神</td>
+						</tr>
+						<tr>
+							<td>支持企业复工复产</td>
+						</tr>
+						<tr>
+							<td rowspan="3">3</td>
+							<td rowspan="3">民主管理<br/>和法律援助<br/>工作</td>
+							<td>健全职代会制度</td>
+							<td rowspan="3">胡晓钰</td>
+						</tr>
+						<tr>
+							<td>提升集体协商质量</td>
+						</tr>
+						<tr>
+							<td>劳动争议调解和法律援助</td>
+						</tr>
+						<tr>
+							<td rowspan="7">4</td>
+							<td rowspan="7">权益保障<br/>工作</td>
+							<td>规范困难职工档案</td>
+							<td rowspan="7">胡晓钰</td>
+						</tr>
+						<tr>
+							<td>开展“送清凉”活动</td>
+						</tr>
+						<tr>
+							<td>开展 “金秋助学”活动</td>
+						</tr>
+						<tr>
+							<td>开展 “两节”送温暖活动</td>
+						</tr>
+						<tr>
+							<td>职工体检</td>
+						</tr>
+						<tr>
+							<td>搞好职工医疗互助工程</td>
+						</tr>
+						<tr>
+							<td>代开工会经费收据</td>
+						</tr>
+						<tr>
+							<td rowspan="8">5</td>
+							<td rowspan="8">宣教文体<br/>工作</td>
+							<td>加强工会宣传</td>
+							<td rowspan="8">焦龙</td>
+						</tr>
+						<tr>
+							<td>培养选树典型</td>
+						</tr>
+						<tr>
+							<td>精神文明建设</td>
+						</tr>
+						<tr>
+							<td>职工书屋建设</td>
+						</tr>
+						<tr>
+							<td>组织全区第二届职工运动会</td>
+						</tr>
+						<tr>
+							<td>建设智慧工会服务平台，做优服务职工品牌</td>
+						</tr>
+						<tr>
+							<td>深化“中国梦、劳动美”主题活动</td>
+						</tr>
+						<tr>
+							<td>庆祝全总成立95周年</td>
+						</tr>
+						<tr>
+							<td>6</td>
+							<td>劳动保护<br/>工作</td>
+							<td>开展“群众保安全”活动</td>
+							<td>史省保</td>
+						</tr>
+						<tr>
+							<td rowspan="2">7</td>
+							<td rowspan="2">女职工工作</td>
+							<td>发挥女职工组织作用</td>
+							<td rowspan="2">赵小静、刘秀娟</td>
+						</tr>
+						<tr>
+							<td>加强职业道德教育</td>
+						</tr>
+						<tr>
+							<td>8</td>
+							<td>财务经审<br/>工作</td>
+							<td>加强资产管理贯彻《工会会计制度》发挥经审委作用</td>
+							<td>段雨村、史省保</td>
+						</tr>
+						<tr>
+							<td rowspan="5">9</td>
+							<td rowspan="5">改革创新<br/>和办公室工作</td>
+							<td>建章立制，规范化运作</td>
+							<td rowspan="5">史省保</td>
+						</tr>
+						<tr>
+							<td>突出重点，均衡发展</td>
+						</tr>
+						<tr>
+							<td>学习提高，严格考核</td>
+						</tr>
+						<tr>
+							<td>改变作风，调查研究</td>
+						</tr>
+						<tr>
+							<td>提高办事效率，严格规范管理</td>
+						</tr>
+						<tr>
+							<td>10</td>
+							<td>援疆工作</td>
+							<td>工会系统援疆</td>
+							<td>史省保、焦龙</td>
+						</tr>
+						<tr>
+							<td rowspan="4">11</td>
+							<td rowspan="4">自身建设<br/>廉政和作风建设</td>
+							<td>树立全局观念、大局意识</td>
+							<td rowspan="4">全体</td>
+						</tr>
+						<tr>
+							<td>创建文明单位</td>
+						</tr>
+						<tr>
+							<td>强化执行力，做到政令畅通，落实得力思想、作风、纪律管理</td>
+						</tr>
+						<tr>
+							<td>思想、作风、纪律管理</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<footer class="bgf mt40">
+	<div th:replace="portal/theme/union/footer"></div>
+</footer>
+
+</body>
+</html>

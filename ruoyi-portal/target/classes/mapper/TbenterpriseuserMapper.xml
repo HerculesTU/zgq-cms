@@ -1,0 +1,981 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.portal.mapper.TbenterpriseuserMapper">
+  <resultMap id="BaseResultMap" type="com.ruoyi.portal.domain.Tbenterpriseuser">
+    <id column="ENTERPRISE_ID" jdbcType="VARCHAR" property="enterpriseId" />
+    <result column="ENTERPRISE_ACCOUNT" jdbcType="VARCHAR" property="enterpriseAccount" />
+    <result column="ENTERPRISE_PASSWORD" jdbcType="VARCHAR" property="enterprisePassword" />
+    <result column="ADMIN_NAME" jdbcType="VARCHAR" property="adminName" />
+    <result column="ADMIN_SEX" jdbcType="VARCHAR" property="adminSex" />
+    <result column="ADMIN_MOBILE" jdbcType="VARCHAR" property="adminMobile" />
+    <result column="ADMIN_ID_CARD_NO" jdbcType="VARCHAR" property="adminIdCardNo" />
+    <result column="ENTERPRISE_NAME" jdbcType="VARCHAR" property="enterpriseName" />
+    <result column="ENTERPRISE_CREDIT_CODE" jdbcType="VARCHAR" property="enterpriseCreditCode" />
+    <result column="ENTERPRISE_EMPLOYEE_NUM" jdbcType="INTEGER" property="enterpriseEmployeeNum" />
+    <result column="ENTERPRISE_WOMEN_EMPLOYEE" jdbcType="INTEGER" property="enterpriseWomenEmployee" />
+    <result column="ENTERPRISE_LEGAL_PERSON" jdbcType="VARCHAR" property="enterpriseLegalPerson" />
+    <result column="LEGAL_PERSON_ID_CARD" jdbcType="VARCHAR" property="legalPersonIdCard" />
+    <result column="ENTERPRISE_NATURE" jdbcType="VARCHAR" property="enterpriseNature" />
+    <result column="ENTERPRISE_MANAGE_ITEM" jdbcType="VARCHAR" property="enterpriseManageItem" />
+    <result column="ENTERPRISE_PAY_TAXES_DISTRICT" jdbcType="VARCHAR" property="enterprisePayTaxesDistrict" />
+    <result column="ENTERPRISE_PARK" jdbcType="VARCHAR" property="enterprisePark" />
+    <result column="ENTERPRISE_REGISTER_PLACE" jdbcType="VARCHAR" property="enterpriseRegisterPlace" />
+    <result column="ENTERPRISE_OF_INDUSTRY" jdbcType="VARCHAR" property="enterpriseOfIndustry" />
+    <result column="PREPARATORY_GROUP_USER" jdbcType="VARCHAR" property="preparatoryGroupUser" />
+    <result column="PREPARATORY_GROUP_USER_ID_CARD" jdbcType="VARCHAR" property="preparatoryGroupUserIdCard" />
+    <result column="UNION_CONTACTS" jdbcType="VARCHAR" property="unionContacts" />
+    <result column="CONTACT_WAY" jdbcType="VARCHAR" property="contactWay" />
+    <result column="WORK_ADDRESS" jdbcType="VARCHAR" property="workAddress" />
+    <result column="MEMBER_NUM" jdbcType="INTEGER" property="memberNum" />
+    <result column="MEMBER_REGISTER" jdbcType="VARCHAR" property="memberRegister" />
+    <result column="PREPARATORY_GROUP_LIST" jdbcType="VARCHAR" property="preparatoryGroupList" />
+    <result column="TRADING_CERTIFICATE" jdbcType="VARCHAR" property="tradingCertificate" />
+    <result column="LEGAL_PERSON_ID_CARD_FILE" jdbcType="VARCHAR" property="legalPersonIdCardFile" />
+    <result column="MEETING_TIME1" jdbcType="VARCHAR" property="meetingTime1" />
+    <result column="MEETING_NUM" jdbcType="INTEGER" property="meetingNum" />
+    <result column="COMMITTEE_MEMBER1" jdbcType="INTEGER" property="committeeMember1" />
+    <result column="CANDIDATE1" jdbcType="INTEGER" property="candidate1" />
+    <result column="DIFFERENCE" jdbcType="INTEGER" property="difference" />
+    <result column="UNION_DEPUTY_CHAIRMAN" jdbcType="INTEGER" property="unionDeputyChairman" />
+    <result column="EXPENDITURE_NUM" jdbcType="INTEGER" property="expenditureNum" />
+    <result column="WOMEN_COMMITTEE" jdbcType="INTEGER" property="womenCommittee" />
+    <result column="WOMEN_COMMITTEE_NUM" jdbcType="INTEGER" property="womenCommitteeNum" />
+    <result column="UNION_COMMITTEES" jdbcType="VARCHAR" property="unionCommittees" />
+    <result column="EXPENDITURE_COMMITTEES" jdbcType="VARCHAR" property="expenditureCommittees" />
+    <result column="WOMEN_COMMITTEES" jdbcType="VARCHAR" property="womenCommittees" />
+    <result column="CANDIDATE_UNION_CHAIRMAN" jdbcType="VARCHAR" property="candidateUnionChairman" />
+    <result column="MEETING_TIME2" jdbcType="VARCHAR" property="meetingTime2" />
+    <result column="MEETING_SITE" jdbcType="VARCHAR" property="meetingSite" />
+    <result column="YD_NUM" jdbcType="INTEGER" property="ydNum" />
+    <result column="SD_NUM" jdbcType="INTEGER" property="sdNum" />
+    <result column="COMMITTEES" jdbcType="VARCHAR" property="committees" />
+    <result column="UNION_CHAIRMAN" jdbcType="VARCHAR" property="unionChairman" />
+    <result column="REAL_EXPENDITURE_COMMITTEES" jdbcType="VARCHAR" property="realExpenditureCommittees" />
+    <result column="EXPENDITURE_DIRECTOR" jdbcType="VARCHAR" property="expenditureDirector" />
+    <result column="WOMEN_DIRECTOR" jdbcType="VARCHAR" property="womenDirector" />
+    <result column="OPERATOR" jdbcType="VARCHAR" property="operator" />
+    <result column="OPERATOR_CONTACTS" jdbcType="VARCHAR" property="operatorContacts" />
+    <result column="ENTERPRISE_STATUS" jdbcType="VARCHAR" property="enterpriseStatus" />
+    <result column="CREATE_TIME" jdbcType="VARCHAR" property="createTime" />
+    <result column="JOIN_UNION_TIME" jdbcType="VARCHAR" property="joinUnionTime" />
+    <result column="VIDEO_MEETING" jdbcType="VARCHAR" property="videoMeeting" />
+    <result column="PHOTO_MEETING" jdbcType="VARCHAR" property="photoMeeting" />
+    <result column="ELECTION_RESULTS_REPORT" jdbcType="VARCHAR" property="electionResultsReport" />
+    <result column="MEMBERSHIP_TRADE_COMMITTEES" jdbcType="VARCHAR" property="membershipTradeCommittees" />
+    <result column="LETTER_COMMITMENT_PRESIDENT" jdbcType="VARCHAR" property="letterCommitmentPresident" />
+    <result column="VOTES_OBTAINED" jdbcType="VARCHAR" property="votesObtained" />
+    <result column="REGISTRATION_GRASS_TRADE" jdbcType="VARCHAR" property="registrationGrassTrade" />
+    <result column="SUMMARY_TABLE_WOMEN_COMMITTEES" jdbcType="VARCHAR" property="summaryTableWomenCommittees" />
+    <result column="UNION_PRESIDENT_IDCARD" jdbcType="VARCHAR" property="unionPresidentIdcard" />
+    <result column="CORPORATE_IDENTITY_CARD" jdbcType="VARCHAR" property="corporateIdentityCard" />
+    <result column="IDENTITY_CARD_AGENT" jdbcType="VARCHAR" property="identityCardAgent" />
+    <result column="ELECTRONIC_VERSION" jdbcType="VARCHAR" property="electronicVersion" />
+    <result column="REGISTRATION_LEGAL_PERSON" jdbcType="VARCHAR" property="registrationLegalPerson" />
+    <result column="POINTS_NOTE" jdbcType="VARCHAR" property="pointsNote" />
+    <result column="EXPENDITURE" jdbcType="INTEGER" property="expenditure" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ENTERPRISE_ID, ENTERPRISE_ACCOUNT, ENTERPRISE_PASSWORD, ADMIN_NAME, ADMIN_SEX, ADMIN_MOBILE, 
+    ADMIN_ID_CARD_NO, ENTERPRISE_NAME, ENTERPRISE_CREDIT_CODE, ENTERPRISE_EMPLOYEE_NUM, 
+    ENTERPRISE_WOMEN_EMPLOYEE, ENTERPRISE_LEGAL_PERSON, LEGAL_PERSON_ID_CARD, ENTERPRISE_NATURE, 
+    ENTERPRISE_MANAGE_ITEM, ENTERPRISE_PAY_TAXES_DISTRICT, ENTERPRISE_PARK, ENTERPRISE_REGISTER_PLACE, 
+    ENTERPRISE_OF_INDUSTRY, PREPARATORY_GROUP_USER, PREPARATORY_GROUP_USER_ID_CARD, UNION_CONTACTS, 
+    CONTACT_WAY, WORK_ADDRESS, MEMBER_NUM, MEMBER_REGISTER, PREPARATORY_GROUP_LIST, TRADING_CERTIFICATE, 
+    LEGAL_PERSON_ID_CARD_FILE, MEETING_TIME1, MEETING_NUM, COMMITTEE_MEMBER1, CANDIDATE1, 
+    DIFFERENCE, UNION_DEPUTY_CHAIRMAN, EXPENDITURE_NUM, WOMEN_COMMITTEE, WOMEN_COMMITTEE_NUM, 
+    UNION_COMMITTEES, EXPENDITURE_COMMITTEES, WOMEN_COMMITTEES, CANDIDATE_UNION_CHAIRMAN, 
+    MEETING_TIME2, MEETING_SITE, YD_NUM, SD_NUM, COMMITTEES, UNION_CHAIRMAN, REAL_EXPENDITURE_COMMITTEES, 
+    EXPENDITURE_DIRECTOR, WOMEN_DIRECTOR, OPERATOR, OPERATOR_CONTACTS, ENTERPRISE_STATUS, 
+    CREATE_TIME, JOIN_UNION_TIME, VIDEO_MEETING, PHOTO_MEETING, ELECTION_RESULTS_REPORT, 
+    MEMBERSHIP_TRADE_COMMITTEES, LETTER_COMMITMENT_PRESIDENT, VOTES_OBTAINED, REGISTRATION_GRASS_TRADE, 
+    SUMMARY_TABLE_WOMEN_COMMITTEES, UNION_PRESIDENT_IDCARD, CORPORATE_IDENTITY_CARD, 
+    IDENTITY_CARD_AGENT, ELECTRONIC_VERSION, REGISTRATION_LEGAL_PERSON, POINTS_NOTE ,EXPENDITURE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_enterprise_user
+    where ENTERPRISE_ID = #{enterpriseId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tb_enterprise_user
+    where ENTERPRISE_ID = #{enterpriseId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ruoyi.portal.domain.Tbenterpriseuser">
+    insert into tb_enterprise_user (ENTERPRISE_ID, ENTERPRISE_ACCOUNT, 
+      ENTERPRISE_PASSWORD, ADMIN_NAME, ADMIN_SEX, 
+      ADMIN_MOBILE, ADMIN_ID_CARD_NO, ENTERPRISE_NAME, 
+      ENTERPRISE_CREDIT_CODE, ENTERPRISE_EMPLOYEE_NUM, 
+      ENTERPRISE_WOMEN_EMPLOYEE, ENTERPRISE_LEGAL_PERSON, 
+      LEGAL_PERSON_ID_CARD, ENTERPRISE_NATURE, ENTERPRISE_MANAGE_ITEM, 
+      ENTERPRISE_PAY_TAXES_DISTRICT, ENTERPRISE_PARK, 
+      ENTERPRISE_REGISTER_PLACE, ENTERPRISE_OF_INDUSTRY, 
+      PREPARATORY_GROUP_USER, PREPARATORY_GROUP_USER_ID_CARD, 
+      UNION_CONTACTS, CONTACT_WAY, WORK_ADDRESS, 
+      MEMBER_NUM, MEMBER_REGISTER, PREPARATORY_GROUP_LIST, 
+      TRADING_CERTIFICATE, LEGAL_PERSON_ID_CARD_FILE, 
+      MEETING_TIME1, MEETING_NUM, COMMITTEE_MEMBER1, 
+      CANDIDATE1, DIFFERENCE, UNION_DEPUTY_CHAIRMAN, 
+      EXPENDITURE_NUM, WOMEN_COMMITTEE, WOMEN_COMMITTEE_NUM, 
+      UNION_COMMITTEES, EXPENDITURE_COMMITTEES, 
+      WOMEN_COMMITTEES, CANDIDATE_UNION_CHAIRMAN, 
+      MEETING_TIME2, MEETING_SITE, YD_NUM, 
+      SD_NUM, COMMITTEES, UNION_CHAIRMAN, 
+      REAL_EXPENDITURE_COMMITTEES, EXPENDITURE_DIRECTOR, 
+      WOMEN_DIRECTOR, OPERATOR, OPERATOR_CONTACTS, 
+      ENTERPRISE_STATUS, CREATE_TIME, JOIN_UNION_TIME, 
+      VIDEO_MEETING, PHOTO_MEETING, ELECTION_RESULTS_REPORT, 
+      MEMBERSHIP_TRADE_COMMITTEES, LETTER_COMMITMENT_PRESIDENT, 
+      VOTES_OBTAINED, REGISTRATION_GRASS_TRADE, 
+      SUMMARY_TABLE_WOMEN_COMMITTEES, UNION_PRESIDENT_IDCARD, 
+      CORPORATE_IDENTITY_CARD, IDENTITY_CARD_AGENT, 
+      ELECTRONIC_VERSION, REGISTRATION_LEGAL_PERSON, 
+      POINTS_NOTE,
+      EXPENDITURE)
+    values (#{enterpriseId,jdbcType=VARCHAR}, #{enterpriseAccount,jdbcType=VARCHAR}, 
+      #{enterprisePassword,jdbcType=VARCHAR}, #{adminName,jdbcType=VARCHAR}, #{adminSex,jdbcType=VARCHAR}, 
+      #{adminMobile,jdbcType=VARCHAR}, #{adminIdCardNo,jdbcType=VARCHAR}, #{enterpriseName,jdbcType=VARCHAR}, 
+      #{enterpriseCreditCode,jdbcType=VARCHAR}, #{enterpriseEmployeeNum,jdbcType=INTEGER}, 
+      #{enterpriseWomenEmployee,jdbcType=INTEGER}, #{enterpriseLegalPerson,jdbcType=VARCHAR}, 
+      #{legalPersonIdCard,jdbcType=VARCHAR}, #{enterpriseNature,jdbcType=VARCHAR}, #{enterpriseManageItem,jdbcType=VARCHAR}, 
+      #{enterprisePayTaxesDistrict,jdbcType=VARCHAR}, #{enterprisePark,jdbcType=VARCHAR}, 
+      #{enterpriseRegisterPlace,jdbcType=VARCHAR}, #{enterpriseOfIndustry,jdbcType=VARCHAR}, 
+      #{preparatoryGroupUser,jdbcType=VARCHAR}, #{preparatoryGroupUserIdCard,jdbcType=VARCHAR}, 
+      #{unionContacts,jdbcType=VARCHAR}, #{contactWay,jdbcType=VARCHAR}, #{workAddress,jdbcType=VARCHAR}, 
+      #{memberNum,jdbcType=INTEGER}, #{memberRegister,jdbcType=VARCHAR}, #{preparatoryGroupList,jdbcType=VARCHAR}, 
+      #{tradingCertificate,jdbcType=VARCHAR}, #{legalPersonIdCardFile,jdbcType=VARCHAR}, 
+      #{meetingTime1,jdbcType=VARCHAR}, #{meetingNum,jdbcType=INTEGER}, #{committeeMember1,jdbcType=INTEGER}, 
+      #{candidate1,jdbcType=INTEGER}, #{difference,jdbcType=INTEGER}, #{unionDeputyChairman,jdbcType=INTEGER}, 
+      #{expenditureNum,jdbcType=INTEGER}, #{womenCommittee,jdbcType=INTEGER}, #{womenCommitteeNum,jdbcType=INTEGER}, 
+      #{unionCommittees,jdbcType=VARCHAR}, #{expenditureCommittees,jdbcType=VARCHAR}, 
+      #{womenCommittees,jdbcType=VARCHAR}, #{candidateUnionChairman,jdbcType=VARCHAR}, 
+      #{meetingTime2,jdbcType=VARCHAR}, #{meetingSite,jdbcType=VARCHAR}, #{ydNum,jdbcType=INTEGER}, 
+      #{sdNum,jdbcType=INTEGER}, #{committees,jdbcType=VARCHAR}, #{unionChairman,jdbcType=VARCHAR}, 
+      #{realExpenditureCommittees,jdbcType=VARCHAR}, #{expenditureDirector,jdbcType=VARCHAR}, 
+      #{womenDirector,jdbcType=VARCHAR}, #{operator,jdbcType=VARCHAR}, #{operatorContacts,jdbcType=VARCHAR}, 
+      #{enterpriseStatus,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, #{joinUnionTime,jdbcType=VARCHAR}, 
+      #{videoMeeting,jdbcType=VARCHAR}, #{photoMeeting,jdbcType=VARCHAR}, #{electionResultsReport,jdbcType=VARCHAR}, 
+      #{membershipTradeCommittees,jdbcType=VARCHAR}, #{letterCommitmentPresident,jdbcType=VARCHAR}, 
+      #{votesObtained,jdbcType=VARCHAR}, #{registrationGrassTrade,jdbcType=VARCHAR}, 
+      #{summaryTableWomenCommittees,jdbcType=VARCHAR}, #{unionPresidentIdcard,jdbcType=VARCHAR}, 
+      #{corporateIdentityCard,jdbcType=VARCHAR}, #{identityCardAgent,jdbcType=VARCHAR}, 
+      #{electronicVersion,jdbcType=VARCHAR}, #{registrationLegalPerson,jdbcType=VARCHAR}, 
+      #{pointsNote,jdbcType=VARCHAR},#{expenditure,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ruoyi.portal.domain.Tbenterpriseuser">
+    insert into tb_enterprise_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="enterpriseId != null">
+        ENTERPRISE_ID,
+      </if>
+      <if test="enterpriseAccount != null">
+        ENTERPRISE_ACCOUNT,
+      </if>
+      <if test="enterprisePassword != null">
+        ENTERPRISE_PASSWORD,
+      </if>
+      <if test="adminName != null">
+        ADMIN_NAME,
+      </if>
+      <if test="adminSex != null">
+        ADMIN_SEX,
+      </if>
+      <if test="adminMobile != null">
+        ADMIN_MOBILE,
+      </if>
+      <if test="adminIdCardNo != null">
+        ADMIN_ID_CARD_NO,
+      </if>
+      <if test="enterpriseName != null">
+        ENTERPRISE_NAME,
+      </if>
+      <if test="enterpriseCreditCode != null">
+        ENTERPRISE_CREDIT_CODE,
+      </if>
+      <if test="enterpriseEmployeeNum != null">
+        ENTERPRISE_EMPLOYEE_NUM,
+      </if>
+      <if test="enterpriseWomenEmployee != null">
+        ENTERPRISE_WOMEN_EMPLOYEE,
+      </if>
+      <if test="enterpriseLegalPerson != null">
+        ENTERPRISE_LEGAL_PERSON,
+      </if>
+      <if test="legalPersonIdCard != null">
+        LEGAL_PERSON_ID_CARD,
+      </if>
+      <if test="enterpriseNature != null">
+        ENTERPRISE_NATURE,
+      </if>
+      <if test="enterpriseManageItem != null">
+        ENTERPRISE_MANAGE_ITEM,
+      </if>
+      <if test="enterprisePayTaxesDistrict != null">
+        ENTERPRISE_PAY_TAXES_DISTRICT,
+      </if>
+      <if test="enterprisePark != null">
+        ENTERPRISE_PARK,
+      </if>
+      <if test="enterpriseRegisterPlace != null">
+        ENTERPRISE_REGISTER_PLACE,
+      </if>
+      <if test="enterpriseOfIndustry != null">
+        ENTERPRISE_OF_INDUSTRY,
+      </if>
+      <if test="preparatoryGroupUser != null">
+        PREPARATORY_GROUP_USER,
+      </if>
+      <if test="preparatoryGroupUserIdCard != null">
+        PREPARATORY_GROUP_USER_ID_CARD,
+      </if>
+      <if test="unionContacts != null">
+        UNION_CONTACTS,
+      </if>
+      <if test="contactWay != null">
+        CONTACT_WAY,
+      </if>
+      <if test="workAddress != null">
+        WORK_ADDRESS,
+      </if>
+      <if test="memberNum != null">
+        MEMBER_NUM,
+      </if>
+      <if test="memberRegister != null">
+        MEMBER_REGISTER,
+      </if>
+      <if test="preparatoryGroupList != null">
+        PREPARATORY_GROUP_LIST,
+      </if>
+      <if test="tradingCertificate != null">
+        TRADING_CERTIFICATE,
+      </if>
+      <if test="legalPersonIdCardFile != null">
+        LEGAL_PERSON_ID_CARD_FILE,
+      </if>
+      <if test="meetingTime1 != null">
+        MEETING_TIME1,
+      </if>
+      <if test="meetingNum != null">
+        MEETING_NUM,
+      </if>
+      <if test="committeeMember1 != null">
+        COMMITTEE_MEMBER1,
+      </if>
+      <if test="candidate1 != null">
+        CANDIDATE1,
+      </if>
+      <if test="difference != null">
+        DIFFERENCE,
+      </if>
+      <if test="unionDeputyChairman != null">
+        UNION_DEPUTY_CHAIRMAN,
+      </if>
+      <if test="expenditureNum != null">
+        EXPENDITURE_NUM,
+      </if>
+      <if test="womenCommittee != null">
+        WOMEN_COMMITTEE,
+      </if>
+      <if test="womenCommitteeNum != null">
+        WOMEN_COMMITTEE_NUM,
+      </if>
+      <if test="unionCommittees != null">
+        UNION_COMMITTEES,
+      </if>
+      <if test="expenditureCommittees != null">
+        EXPENDITURE_COMMITTEES,
+      </if>
+      <if test="womenCommittees != null">
+        WOMEN_COMMITTEES,
+      </if>
+      <if test="candidateUnionChairman != null">
+        CANDIDATE_UNION_CHAIRMAN,
+      </if>
+      <if test="meetingTime2 != null">
+        MEETING_TIME2,
+      </if>
+      <if test="meetingSite != null">
+        MEETING_SITE,
+      </if>
+      <if test="ydNum != null">
+        YD_NUM,
+      </if>
+      <if test="sdNum != null">
+        SD_NUM,
+      </if>
+      <if test="committees != null">
+        COMMITTEES,
+      </if>
+      <if test="unionChairman != null">
+        UNION_CHAIRMAN,
+      </if>
+      <if test="realExpenditureCommittees != null">
+        REAL_EXPENDITURE_COMMITTEES,
+      </if>
+      <if test="expenditureDirector != null">
+        EXPENDITURE_DIRECTOR,
+      </if>
+      <if test="womenDirector != null">
+        WOMEN_DIRECTOR,
+      </if>
+      <if test="operator != null">
+        OPERATOR,
+      </if>
+      <if test="operatorContacts != null">
+        OPERATOR_CONTACTS,
+      </if>
+      <if test="enterpriseStatus != null">
+        ENTERPRISE_STATUS,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="joinUnionTime != null">
+        JOIN_UNION_TIME,
+      </if>
+      <if test="videoMeeting != null">
+        VIDEO_MEETING,
+      </if>
+      <if test="photoMeeting != null">
+        PHOTO_MEETING,
+      </if>
+      <if test="electionResultsReport != null">
+        ELECTION_RESULTS_REPORT,
+      </if>
+      <if test="membershipTradeCommittees != null">
+        MEMBERSHIP_TRADE_COMMITTEES,
+      </if>
+      <if test="letterCommitmentPresident != null">
+        LETTER_COMMITMENT_PRESIDENT,
+      </if>
+      <if test="votesObtained != null">
+        VOTES_OBTAINED,
+      </if>
+      <if test="registrationGrassTrade != null">
+        REGISTRATION_GRASS_TRADE,
+      </if>
+      <if test="summaryTableWomenCommittees != null">
+        SUMMARY_TABLE_WOMEN_COMMITTEES,
+      </if>
+      <if test="unionPresidentIdcard != null">
+        UNION_PRESIDENT_IDCARD,
+      </if>
+      <if test="corporateIdentityCard != null">
+        CORPORATE_IDENTITY_CARD,
+      </if>
+      <if test="identityCardAgent != null">
+        IDENTITY_CARD_AGENT,
+      </if>
+      <if test="electronicVersion != null">
+        ELECTRONIC_VERSION,
+      </if>
+      <if test="registrationLegalPerson != null">
+        REGISTRATION_LEGAL_PERSON,
+      </if>
+      <if test="pointsNote != null">
+        POINTS_NOTE,
+      </if>
+      <if test="expenditure != null">
+        EXPENDITURE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="enterpriseId != null">
+        #{enterpriseId,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseAccount != null">
+        #{enterpriseAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="enterprisePassword != null">
+        #{enterprisePassword,jdbcType=VARCHAR},
+      </if>
+      <if test="adminName != null">
+        #{adminName,jdbcType=VARCHAR},
+      </if>
+      <if test="adminSex != null">
+        #{adminSex,jdbcType=VARCHAR},
+      </if>
+      <if test="adminMobile != null">
+        #{adminMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="adminIdCardNo != null">
+        #{adminIdCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseName != null">
+        #{enterpriseName,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseCreditCode != null">
+        #{enterpriseCreditCode,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseEmployeeNum != null">
+        #{enterpriseEmployeeNum,jdbcType=INTEGER},
+      </if>
+      <if test="enterpriseWomenEmployee != null">
+        #{enterpriseWomenEmployee,jdbcType=INTEGER},
+      </if>
+      <if test="enterpriseLegalPerson != null">
+        #{enterpriseLegalPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="legalPersonIdCard != null">
+        #{legalPersonIdCard,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseNature != null">
+        #{enterpriseNature,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseManageItem != null">
+        #{enterpriseManageItem,jdbcType=VARCHAR},
+      </if>
+      <if test="enterprisePayTaxesDistrict != null">
+        #{enterprisePayTaxesDistrict,jdbcType=VARCHAR},
+      </if>
+      <if test="enterprisePark != null">
+        #{enterprisePark,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseRegisterPlace != null">
+        #{enterpriseRegisterPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseOfIndustry != null">
+        #{enterpriseOfIndustry,jdbcType=VARCHAR},
+      </if>
+      <if test="preparatoryGroupUser != null">
+        #{preparatoryGroupUser,jdbcType=VARCHAR},
+      </if>
+      <if test="preparatoryGroupUserIdCard != null">
+        #{preparatoryGroupUserIdCard,jdbcType=VARCHAR},
+      </if>
+      <if test="unionContacts != null">
+        #{unionContacts,jdbcType=VARCHAR},
+      </if>
+      <if test="contactWay != null">
+        #{contactWay,jdbcType=VARCHAR},
+      </if>
+      <if test="workAddress != null">
+        #{workAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="memberNum != null">
+        #{memberNum,jdbcType=INTEGER},
+      </if>
+      <if test="memberRegister != null">
+        #{memberRegister,jdbcType=VARCHAR},
+      </if>
+      <if test="preparatoryGroupList != null">
+        #{preparatoryGroupList,jdbcType=VARCHAR},
+      </if>
+      <if test="tradingCertificate != null">
+        #{tradingCertificate,jdbcType=VARCHAR},
+      </if>
+      <if test="legalPersonIdCardFile != null">
+        #{legalPersonIdCardFile,jdbcType=VARCHAR},
+      </if>
+      <if test="meetingTime1 != null">
+        #{meetingTime1,jdbcType=VARCHAR},
+      </if>
+      <if test="meetingNum != null">
+        #{meetingNum,jdbcType=INTEGER},
+      </if>
+      <if test="committeeMember1 != null">
+        #{committeeMember1,jdbcType=INTEGER},
+      </if>
+      <if test="candidate1 != null">
+        #{candidate1,jdbcType=INTEGER},
+      </if>
+      <if test="difference != null">
+        #{difference,jdbcType=INTEGER},
+      </if>
+      <if test="unionDeputyChairman != null">
+        #{unionDeputyChairman,jdbcType=INTEGER},
+      </if>
+      <if test="expenditureNum != null">
+        #{expenditureNum,jdbcType=INTEGER},
+      </if>
+      <if test="womenCommittee != null">
+        #{womenCommittee,jdbcType=INTEGER},
+      </if>
+      <if test="womenCommitteeNum != null">
+        #{womenCommitteeNum,jdbcType=INTEGER},
+      </if>
+      <if test="unionCommittees != null">
+        #{unionCommittees,jdbcType=VARCHAR},
+      </if>
+      <if test="expenditureCommittees != null">
+        #{expenditureCommittees,jdbcType=VARCHAR},
+      </if>
+      <if test="womenCommittees != null">
+        #{womenCommittees,jdbcType=VARCHAR},
+      </if>
+      <if test="candidateUnionChairman != null">
+        #{candidateUnionChairman,jdbcType=VARCHAR},
+      </if>
+      <if test="meetingTime2 != null">
+        #{meetingTime2,jdbcType=VARCHAR},
+      </if>
+      <if test="meetingSite != null">
+        #{meetingSite,jdbcType=VARCHAR},
+      </if>
+      <if test="ydNum != null">
+        #{ydNum,jdbcType=INTEGER},
+      </if>
+      <if test="sdNum != null">
+        #{sdNum,jdbcType=INTEGER},
+      </if>
+      <if test="committees != null">
+        #{committees,jdbcType=VARCHAR},
+      </if>
+      <if test="unionChairman != null">
+        #{unionChairman,jdbcType=VARCHAR},
+      </if>
+      <if test="realExpenditureCommittees != null">
+        #{realExpenditureCommittees,jdbcType=VARCHAR},
+      </if>
+      <if test="expenditureDirector != null">
+        #{expenditureDirector,jdbcType=VARCHAR},
+      </if>
+      <if test="womenDirector != null">
+        #{womenDirector,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null">
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorContacts != null">
+        #{operatorContacts,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseStatus != null">
+        #{enterpriseStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="joinUnionTime != null">
+        #{joinUnionTime,jdbcType=VARCHAR},
+      </if>
+      <if test="videoMeeting != null">
+        #{videoMeeting,jdbcType=VARCHAR},
+      </if>
+      <if test="photoMeeting != null">
+        #{photoMeeting,jdbcType=VARCHAR},
+      </if>
+      <if test="electionResultsReport != null">
+        #{electionResultsReport,jdbcType=VARCHAR},
+      </if>
+      <if test="membershipTradeCommittees != null">
+        #{membershipTradeCommittees,jdbcType=VARCHAR},
+      </if>
+      <if test="letterCommitmentPresident != null">
+        #{letterCommitmentPresident,jdbcType=VARCHAR},
+      </if>
+      <if test="votesObtained != null">
+        #{votesObtained,jdbcType=VARCHAR},
+      </if>
+      <if test="registrationGrassTrade != null">
+        #{registrationGrassTrade,jdbcType=VARCHAR},
+      </if>
+      <if test="summaryTableWomenCommittees != null">
+        #{summaryTableWomenCommittees,jdbcType=VARCHAR},
+      </if>
+      <if test="unionPresidentIdcard != null">
+        #{unionPresidentIdcard,jdbcType=VARCHAR},
+      </if>
+      <if test="corporateIdentityCard != null">
+        #{corporateIdentityCard,jdbcType=VARCHAR},
+      </if>
+      <if test="identityCardAgent != null">
+        #{identityCardAgent,jdbcType=VARCHAR},
+      </if>
+      <if test="electronicVersion != null">
+        #{electronicVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="registrationLegalPerson != null">
+        #{registrationLegalPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="pointsNote != null">
+        #{pointsNote,jdbcType=VARCHAR},
+      </if>
+      <if test="expenditure != null">
+        #{expenditure,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ruoyi.portal.domain.Tbenterpriseuser">
+    update tb_enterprise_user
+    <set>
+      <if test="enterpriseAccount != null">
+        ENTERPRISE_ACCOUNT = #{enterpriseAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="enterprisePassword != null">
+        ENTERPRISE_PASSWORD = #{enterprisePassword,jdbcType=VARCHAR},
+      </if>
+      <if test="adminName != null">
+        ADMIN_NAME = #{adminName,jdbcType=VARCHAR},
+      </if>
+      <if test="adminSex != null">
+        ADMIN_SEX = #{adminSex,jdbcType=VARCHAR},
+      </if>
+      <if test="adminMobile != null">
+        ADMIN_MOBILE = #{adminMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="adminIdCardNo != null">
+        ADMIN_ID_CARD_NO = #{adminIdCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseName != null">
+        ENTERPRISE_NAME = #{enterpriseName,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseCreditCode != null">
+        ENTERPRISE_CREDIT_CODE = #{enterpriseCreditCode,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseEmployeeNum != null">
+        ENTERPRISE_EMPLOYEE_NUM = #{enterpriseEmployeeNum,jdbcType=INTEGER},
+      </if>
+      <if test="enterpriseWomenEmployee != null">
+        ENTERPRISE_WOMEN_EMPLOYEE = #{enterpriseWomenEmployee,jdbcType=INTEGER},
+      </if>
+      <if test="enterpriseLegalPerson != null">
+        ENTERPRISE_LEGAL_PERSON = #{enterpriseLegalPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="legalPersonIdCard != null">
+        LEGAL_PERSON_ID_CARD = #{legalPersonIdCard,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseNature != null">
+        ENTERPRISE_NATURE = #{enterpriseNature,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseManageItem != null">
+        ENTERPRISE_MANAGE_ITEM = #{enterpriseManageItem,jdbcType=VARCHAR},
+      </if>
+      <if test="enterprisePayTaxesDistrict != null">
+        ENTERPRISE_PAY_TAXES_DISTRICT = #{enterprisePayTaxesDistrict,jdbcType=VARCHAR},
+      </if>
+      <if test="enterprisePark != null">
+        ENTERPRISE_PARK = #{enterprisePark,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseRegisterPlace != null">
+        ENTERPRISE_REGISTER_PLACE = #{enterpriseRegisterPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseOfIndustry != null">
+        ENTERPRISE_OF_INDUSTRY = #{enterpriseOfIndustry,jdbcType=VARCHAR},
+      </if>
+      <if test="preparatoryGroupUser != null">
+        PREPARATORY_GROUP_USER = #{preparatoryGroupUser,jdbcType=VARCHAR},
+      </if>
+      <if test="preparatoryGroupUserIdCard != null">
+        PREPARATORY_GROUP_USER_ID_CARD = #{preparatoryGroupUserIdCard,jdbcType=VARCHAR},
+      </if>
+      <if test="unionContacts != null">
+        UNION_CONTACTS = #{unionContacts,jdbcType=VARCHAR},
+      </if>
+      <if test="contactWay != null">
+        CONTACT_WAY = #{contactWay,jdbcType=VARCHAR},
+      </if>
+      <if test="workAddress != null">
+        WORK_ADDRESS = #{workAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="memberNum != null">
+        MEMBER_NUM = #{memberNum,jdbcType=INTEGER},
+      </if>
+      <if test="memberRegister != null">
+        MEMBER_REGISTER = #{memberRegister,jdbcType=VARCHAR},
+      </if>
+      <if test="preparatoryGroupList != null">
+        PREPARATORY_GROUP_LIST = #{preparatoryGroupList,jdbcType=VARCHAR},
+      </if>
+      <if test="tradingCertificate != null">
+        TRADING_CERTIFICATE = #{tradingCertificate,jdbcType=VARCHAR},
+      </if>
+      <if test="legalPersonIdCardFile != null">
+        LEGAL_PERSON_ID_CARD_FILE = #{legalPersonIdCardFile,jdbcType=VARCHAR},
+      </if>
+      <if test="meetingTime1 != null">
+        MEETING_TIME1 = #{meetingTime1,jdbcType=VARCHAR},
+      </if>
+      <if test="meetingNum != null">
+        MEETING_NUM = #{meetingNum,jdbcType=INTEGER},
+      </if>
+      <if test="committeeMember1 != null">
+        COMMITTEE_MEMBER1 = #{committeeMember1,jdbcType=INTEGER},
+      </if>
+      <if test="candidate1 != null">
+        CANDIDATE1 = #{candidate1,jdbcType=INTEGER},
+      </if>
+      <if test="difference != null">
+        DIFFERENCE = #{difference,jdbcType=INTEGER},
+      </if>
+      <if test="unionDeputyChairman != null">
+        UNION_DEPUTY_CHAIRMAN = #{unionDeputyChairman,jdbcType=INTEGER},
+      </if>
+      <if test="expenditureNum != null">
+        EXPENDITURE_NUM = #{expenditureNum,jdbcType=INTEGER},
+      </if>
+      <if test="womenCommittee != null">
+        WOMEN_COMMITTEE = #{womenCommittee,jdbcType=INTEGER},
+      </if>
+      <if test="womenCommitteeNum != null">
+        WOMEN_COMMITTEE_NUM = #{womenCommitteeNum,jdbcType=INTEGER},
+      </if>
+      <if test="unionCommittees != null">
+        UNION_COMMITTEES = #{unionCommittees,jdbcType=VARCHAR},
+      </if>
+      <if test="expenditureCommittees != null">
+        EXPENDITURE_COMMITTEES = #{expenditureCommittees,jdbcType=VARCHAR},
+      </if>
+      <if test="womenCommittees != null">
+        WOMEN_COMMITTEES = #{womenCommittees,jdbcType=VARCHAR},
+      </if>
+      <if test="candidateUnionChairman != null">
+        CANDIDATE_UNION_CHAIRMAN = #{candidateUnionChairman,jdbcType=VARCHAR},
+      </if>
+      <if test="meetingTime2 != null">
+        MEETING_TIME2 = #{meetingTime2,jdbcType=VARCHAR},
+      </if>
+      <if test="meetingSite != null">
+        MEETING_SITE = #{meetingSite,jdbcType=VARCHAR},
+      </if>
+      <if test="ydNum != null">
+        YD_NUM = #{ydNum,jdbcType=INTEGER},
+      </if>
+      <if test="sdNum != null">
+        SD_NUM = #{sdNum,jdbcType=INTEGER},
+      </if>
+      <if test="committees != null">
+        COMMITTEES = #{committees,jdbcType=VARCHAR},
+      </if>
+      <if test="unionChairman != null">
+        UNION_CHAIRMAN = #{unionChairman,jdbcType=VARCHAR},
+      </if>
+      <if test="realExpenditureCommittees != null">
+        REAL_EXPENDITURE_COMMITTEES = #{realExpenditureCommittees,jdbcType=VARCHAR},
+      </if>
+      <if test="expenditureDirector != null">
+        EXPENDITURE_DIRECTOR = #{expenditureDirector,jdbcType=VARCHAR},
+      </if>
+      <if test="womenDirector != null">
+        WOMEN_DIRECTOR = #{womenDirector,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null">
+        OPERATOR = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorContacts != null">
+        OPERATOR_CONTACTS = #{operatorContacts,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseStatus != null">
+        ENTERPRISE_STATUS = #{enterpriseStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="joinUnionTime != null">
+        JOIN_UNION_TIME = #{joinUnionTime,jdbcType=VARCHAR},
+      </if>
+      <if test="videoMeeting != null">
+        VIDEO_MEETING = #{videoMeeting,jdbcType=VARCHAR},
+      </if>
+      <if test="photoMeeting != null">
+        PHOTO_MEETING = #{photoMeeting,jdbcType=VARCHAR},
+      </if>
+      <if test="electionResultsReport != null">
+        ELECTION_RESULTS_REPORT = #{electionResultsReport,jdbcType=VARCHAR},
+      </if>
+      <if test="membershipTradeCommittees != null">
+        MEMBERSHIP_TRADE_COMMITTEES = #{membershipTradeCommittees,jdbcType=VARCHAR},
+      </if>
+      <if test="letterCommitmentPresident != null">
+        LETTER_COMMITMENT_PRESIDENT = #{letterCommitmentPresident,jdbcType=VARCHAR},
+      </if>
+      <if test="votesObtained != null">
+        VOTES_OBTAINED = #{votesObtained,jdbcType=VARCHAR},
+      </if>
+      <if test="registrationGrassTrade != null">
+        REGISTRATION_GRASS_TRADE = #{registrationGrassTrade,jdbcType=VARCHAR},
+      </if>
+      <if test="summaryTableWomenCommittees != null">
+        SUMMARY_TABLE_WOMEN_COMMITTEES = #{summaryTableWomenCommittees,jdbcType=VARCHAR},
+      </if>
+      <if test="unionPresidentIdcard != null">
+        UNION_PRESIDENT_IDCARD = #{unionPresidentIdcard,jdbcType=VARCHAR},
+      </if>
+      <if test="corporateIdentityCard != null">
+        CORPORATE_IDENTITY_CARD = #{corporateIdentityCard,jdbcType=VARCHAR},
+      </if>
+      <if test="identityCardAgent != null">
+        IDENTITY_CARD_AGENT = #{identityCardAgent,jdbcType=VARCHAR},
+      </if>
+      <if test="electronicVersion != null">
+        ELECTRONIC_VERSION = #{electronicVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="registrationLegalPerson != null">
+        REGISTRATION_LEGAL_PERSON = #{registrationLegalPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="pointsNote != null">
+        POINTS_NOTE = #{pointsNote,jdbcType=VARCHAR},
+      </if>
+      <if test="expenditure != null">
+        EXPENDITURE = #{expenditure,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ENTERPRISE_ID = #{enterpriseId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ruoyi.portal.domain.Tbenterpriseuser">
+    update tb_enterprise_user
+    set ENTERPRISE_ACCOUNT = #{enterpriseAccount,jdbcType=VARCHAR},
+      ENTERPRISE_PASSWORD = #{enterprisePassword,jdbcType=VARCHAR},
+      ADMIN_NAME = #{adminName,jdbcType=VARCHAR},
+      ADMIN_SEX = #{adminSex,jdbcType=VARCHAR},
+      ADMIN_MOBILE = #{adminMobile,jdbcType=VARCHAR},
+      ADMIN_ID_CARD_NO = #{adminIdCardNo,jdbcType=VARCHAR},
+      ENTERPRISE_NAME = #{enterpriseName,jdbcType=VARCHAR},
+      ENTERPRISE_CREDIT_CODE = #{enterpriseCreditCode,jdbcType=VARCHAR},
+      ENTERPRISE_EMPLOYEE_NUM = #{enterpriseEmployeeNum,jdbcType=INTEGER},
+      ENTERPRISE_WOMEN_EMPLOYEE = #{enterpriseWomenEmployee,jdbcType=INTEGER},
+      ENTERPRISE_LEGAL_PERSON = #{enterpriseLegalPerson,jdbcType=VARCHAR},
+      LEGAL_PERSON_ID_CARD = #{legalPersonIdCard,jdbcType=VARCHAR},
+      ENTERPRISE_NATURE = #{enterpriseNature,jdbcType=VARCHAR},
+      ENTERPRISE_MANAGE_ITEM = #{enterpriseManageItem,jdbcType=VARCHAR},
+      ENTERPRISE_PAY_TAXES_DISTRICT = #{enterprisePayTaxesDistrict,jdbcType=VARCHAR},
+      ENTERPRISE_PARK = #{enterprisePark,jdbcType=VARCHAR},
+      ENTERPRISE_REGISTER_PLACE = #{enterpriseRegisterPlace,jdbcType=VARCHAR},
+      ENTERPRISE_OF_INDUSTRY = #{enterpriseOfIndustry,jdbcType=VARCHAR},
+      PREPARATORY_GROUP_USER = #{preparatoryGroupUser,jdbcType=VARCHAR},
+      PREPARATORY_GROUP_USER_ID_CARD = #{preparatoryGroupUserIdCard,jdbcType=VARCHAR},
+      UNION_CONTACTS = #{unionContacts,jdbcType=VARCHAR},
+      CONTACT_WAY = #{contactWay,jdbcType=VARCHAR},
+      WORK_ADDRESS = #{workAddress,jdbcType=VARCHAR},
+      MEMBER_NUM = #{memberNum,jdbcType=INTEGER},
+      MEMBER_REGISTER = #{memberRegister,jdbcType=VARCHAR},
+      PREPARATORY_GROUP_LIST = #{preparatoryGroupList,jdbcType=VARCHAR},
+      TRADING_CERTIFICATE = #{tradingCertificate,jdbcType=VARCHAR},
+      LEGAL_PERSON_ID_CARD_FILE = #{legalPersonIdCardFile,jdbcType=VARCHAR},
+      MEETING_TIME1 = #{meetingTime1,jdbcType=VARCHAR},
+      MEETING_NUM = #{meetingNum,jdbcType=INTEGER},
+      COMMITTEE_MEMBER1 = #{committeeMember1,jdbcType=INTEGER},
+      CANDIDATE1 = #{candidate1,jdbcType=INTEGER},
+      DIFFERENCE = #{difference,jdbcType=INTEGER},
+      UNION_DEPUTY_CHAIRMAN = #{unionDeputyChairman,jdbcType=INTEGER},
+      EXPENDITURE_NUM = #{expenditureNum,jdbcType=INTEGER},
+      WOMEN_COMMITTEE = #{womenCommittee,jdbcType=INTEGER},
+      WOMEN_COMMITTEE_NUM = #{womenCommitteeNum,jdbcType=INTEGER},
+      UNION_COMMITTEES = #{unionCommittees,jdbcType=VARCHAR},
+      EXPENDITURE_COMMITTEES = #{expenditureCommittees,jdbcType=VARCHAR},
+      WOMEN_COMMITTEES = #{womenCommittees,jdbcType=VARCHAR},
+      CANDIDATE_UNION_CHAIRMAN = #{candidateUnionChairman,jdbcType=VARCHAR},
+      MEETING_TIME2 = #{meetingTime2,jdbcType=VARCHAR},
+      MEETING_SITE = #{meetingSite,jdbcType=VARCHAR},
+      YD_NUM = #{ydNum,jdbcType=INTEGER},
+      SD_NUM = #{sdNum,jdbcType=INTEGER},
+      COMMITTEES = #{committees,jdbcType=VARCHAR},
+      UNION_CHAIRMAN = #{unionChairman,jdbcType=VARCHAR},
+      REAL_EXPENDITURE_COMMITTEES = #{realExpenditureCommittees,jdbcType=VARCHAR},
+      EXPENDITURE_DIRECTOR = #{expenditureDirector,jdbcType=VARCHAR},
+      WOMEN_DIRECTOR = #{womenDirector,jdbcType=VARCHAR},
+      OPERATOR = #{operator,jdbcType=VARCHAR},
+      OPERATOR_CONTACTS = #{operatorContacts,jdbcType=VARCHAR},
+      ENTERPRISE_STATUS = #{enterpriseStatus,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      JOIN_UNION_TIME = #{joinUnionTime,jdbcType=VARCHAR},
+      VIDEO_MEETING = #{videoMeeting,jdbcType=VARCHAR},
+      PHOTO_MEETING = #{photoMeeting,jdbcType=VARCHAR},
+      ELECTION_RESULTS_REPORT = #{electionResultsReport,jdbcType=VARCHAR},
+      MEMBERSHIP_TRADE_COMMITTEES = #{membershipTradeCommittees,jdbcType=VARCHAR},
+      LETTER_COMMITMENT_PRESIDENT = #{letterCommitmentPresident,jdbcType=VARCHAR},
+      VOTES_OBTAINED = #{votesObtained,jdbcType=VARCHAR},
+      REGISTRATION_GRASS_TRADE = #{registrationGrassTrade,jdbcType=VARCHAR},
+      SUMMARY_TABLE_WOMEN_COMMITTEES = #{summaryTableWomenCommittees,jdbcType=VARCHAR},
+      UNION_PRESIDENT_IDCARD = #{unionPresidentIdcard,jdbcType=VARCHAR},
+      CORPORATE_IDENTITY_CARD = #{corporateIdentityCard,jdbcType=VARCHAR},
+      IDENTITY_CARD_AGENT = #{identityCardAgent,jdbcType=VARCHAR},
+      ELECTRONIC_VERSION = #{electronicVersion,jdbcType=VARCHAR},
+      REGISTRATION_LEGAL_PERSON = #{registrationLegalPerson,jdbcType=VARCHAR},
+      POINTS_NOTE = #{pointsNote,jdbcType=VARCHAR},
+      EXPENDITURE = #{expenditure,jdbcType=INTEGER}
+    where ENTERPRISE_ID = #{enterpriseId,jdbcType=VARCHAR}
+  </update>
+
+  <select id="searchTbuser" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_enterprise_user
+    where ENTERPRISE_ACCOUNT = #{username,jdbcType=VARCHAR} AND ENTERPRISE_PASSWORD =#{password,jdbcType=VARCHAR}
+  </select>
+  <insert id="insert_basicInformation" parameterType="com.ruoyi.portal.domain.BasicInformation">
+    insert into tb_enterprise_user (ENTERPRISE_ID, ENTERPRISE_ACCOUNT,
+      ENTERPRISE_PASSWORD, ADMIN_NAME, ADMIN_SEX,
+      ADMIN_MOBILE, ADMIN_ID_CARD_NO, ENTERPRISE_NAME,
+      ENTERPRISE_CREDIT_CODE, ENTERPRISE_EMPLOYEE_NUM,
+      ENTERPRISE_WOMEN_EMPLOYEE, ENTERPRISE_LEGAL_PERSON,
+      LEGAL_PERSON_ID_CARD, ENTERPRISE_NATURE, ENTERPRISE_MANAGE_ITEM,
+      ENTERPRISE_PAY_TAXES_DISTRICT, ENTERPRISE_PARK,
+      ENTERPRISE_REGISTER_PLACE, ENTERPRISE_OF_INDUSTRY,
+      PREPARATORY_GROUP_USER, PREPARATORY_GROUP_USER_ID_CARD,
+      UNION_CONTACTS, CONTACT_WAY, WORK_ADDRESS,
+      MEMBER_NUM, MEMBER_REGISTER, PREPARATORY_GROUP_LIST,
+      TRADING_CERTIFICATE, LEGAL_PERSON_ID_CARD_FILE,
+      CREATE_TIME)
+    values (#{enterpriseId,jdbcType=VARCHAR}, #{enterpriseAccount,jdbcType=VARCHAR},
+      #{enterprisePassword,jdbcType=VARCHAR}, #{adminName,jdbcType=VARCHAR}, #{adminSex,jdbcType=VARCHAR},
+      #{adminMobile,jdbcType=VARCHAR}, #{adminIdCardNo,jdbcType=VARCHAR}, #{enterpriseName,jdbcType=VARCHAR},
+      #{enterpriseCreditCode,jdbcType=VARCHAR}, #{enterpriseEmployeeNum,jdbcType=INTEGER},
+      #{enterpriseWomenEmployee,jdbcType=INTEGER}, #{enterpriseLegalPerson,jdbcType=VARCHAR},
+      #{legalPersonIdCard,jdbcType=VARCHAR}, #{enterpriseNature,jdbcType=VARCHAR}, #{enterpriseManageItem,jdbcType=VARCHAR},
+      #{enterprisePayTaxesDistrict,jdbcType=VARCHAR}, #{enterprisePark,jdbcType=VARCHAR},
+      #{enterpriseRegisterPlace,jdbcType=VARCHAR}, #{enterpriseOfIndustry,jdbcType=VARCHAR},
+      #{preparatoryGroupUser,jdbcType=VARCHAR}, #{preparatoryGroupUserIdCard,jdbcType=VARCHAR},
+      #{unionContacts,jdbcType=VARCHAR}, #{contactWay,jdbcType=VARCHAR}, #{workAddress,jdbcType=VARCHAR},
+      #{memberNum,jdbcType=INTEGER}, #{memberRegister,jdbcType=VARCHAR}, #{preparatoryGroupList,jdbcType=VARCHAR},
+      #{tradingCertificate,jdbcType=VARCHAR}, #{legalPersonIdCardFile,jdbcType=VARCHAR},
+      #{createTime,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKeyOwer" parameterType="com.ruoyi.portal.domain.FirstGeneralMeeting">
+    update tb_enterprise_user
+    set
+      CANDIDATE_UNION_CHAIRMAN = #{candidateUnionChairman,jdbcType=VARCHAR},
+      MEETING_TIME1 = #{meetingTime1,jdbcType=VARCHAR},
+      MEETING_NUM = #{meetingNum,jdbcType=INTEGER},
+      COMMITTEE_MEMBER1 = #{committeeMember1,jdbcType=INTEGER},
+      CANDIDATE1 = #{candidate1,jdbcType=INTEGER},
+      DIFFERENCE = #{difference,jdbcType=INTEGER},
+      UNION_DEPUTY_CHAIRMAN = #{unionDeputyChairman,jdbcType=INTEGER},
+      EXPENDITURE_NUM = #{expenditureNum,jdbcType=INTEGER},
+      WOMEN_COMMITTEE = #{womenCommittee,jdbcType=INTEGER},
+      WOMEN_COMMITTEE_NUM = #{womenCommitteeNum,jdbcType=INTEGER},
+      UNION_COMMITTEES = #{unionCommittees,jdbcType=VARCHAR},
+      EXPENDITURE_COMMITTEES = #{expenditureCommittees,jdbcType=VARCHAR},
+      WOMEN_COMMITTEES = #{womenCommittees,jdbcType=VARCHAR},
+      VIDEO_MEETING = #{videoMeeting,jdbcType=VARCHAR},
+      PHOTO_MEETING = #{photoMeeting,jdbcType=VARCHAR},
+      EXPENDITURE = #{expenditure,jdbcType=INTEGER}
+    where ENTERPRISE_ID = #{enterpriseId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateXJDHBG" parameterType="com.ruoyi.portal.domain.ElectionResults">
+    update tb_enterprise_user
+    set UNION_CHAIRMAN = #{unionChairman,jdbcType=VARCHAR},
+      EXPENDITURE_DIRECTOR = #{expenditureDirector,jdbcType=VARCHAR},
+      WOMEN_DIRECTOR = #{womenDirector,jdbcType=VARCHAR},
+      MEETING_TIME2 = #{meetingTime2,jdbcType=VARCHAR},
+      MEETING_SITE = #{meetingSite,jdbcType=VARCHAR},
+      YD_NUM = #{ydNum,jdbcType=INTEGER},
+      SD_NUM = #{sdNum,jdbcType=INTEGER},
+      COMMITTEES = #{committees,jdbcType=VARCHAR},
+      REAL_EXPENDITURE_COMMITTEES = #{realExpenditureCommittees,jdbcType=VARCHAR},
+      ELECTION_RESULTS_REPORT = #{electionResultsReport,jdbcType=VARCHAR},
+      MEMBERSHIP_TRADE_COMMITTEES = #{membershipTradeCommittees,jdbcType=VARCHAR},
+      LETTER_COMMITMENT_PRESIDENT = #{letterCommitmentPresident,jdbcType=VARCHAR},
+      VOTES_OBTAINED = #{votesObtained,jdbcType=VARCHAR},
+      REGISTRATION_GRASS_TRADE = #{registrationGrassTrade,jdbcType=VARCHAR},
+      SUMMARY_TABLE_WOMEN_COMMITTEES = #{summaryTableWomenCommittees,jdbcType=VARCHAR}
+    where ENTERPRISE_ID = #{enterpriseId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateKZGHGZ" parameterType="com.ruoyi.portal.domain.EngraveUnionSeal">
+    update tb_enterprise_user
+    set OPERATOR_CONTACTS = #{operatorContacts,jdbcType=VARCHAR},
+      UNION_PRESIDENT_IDCARD = #{unionPresidentIdcard,jdbcType=VARCHAR},
+      CORPORATE_IDENTITY_CARD = #{corporateIdentityCard,jdbcType=VARCHAR},
+      IDENTITY_CARD_AGENT = #{identityCardAgent,jdbcType=VARCHAR},
+      ELECTRONIC_VERSION = #{electronicVersion,jdbcType=VARCHAR}
+    where ENTERPRISE_ID = #{enterpriseId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateFRZGZ" parameterType="com.ruoyi.portal.domain.Tbenterpriseuser">
+    update tb_enterprise_user
+    set REGISTRATION_LEGAL_PERSON = #{registrationLegalPerson,jdbcType=VARCHAR},
+      POINTS_NOTE = #{pointsNote,jdbcType=VARCHAR}
+    where ENTERPRISE_ID = #{enterpriseId,jdbcType=VARCHAR}
+  </update>
+  <select id="checkenterpriseAccountUnique" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select count(*) from tb_enterprise_user where ENTERPRISE_ACCOUNT = #{loginName,jdbcType=VARCHAR}
+  </select>
+</mapper>

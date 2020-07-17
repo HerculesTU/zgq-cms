@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords"
+	th:content="${@config.getKey('portal.index.keywords')}">
+<meta name="description"
+	th:content="${@config.getKey('portal.index.description')}">
+<title th:text="${@config.getKey('portal.index.title')}"></title>
+<meta name="baidu-site-verification" content="dAEtGwEyN9" />
+<link rel="stylesheet" th:href="@{/portal/union/css/style.css}" />
+
+<script th:src="@{/portal/union/js/jquery-1.8.3.js}"></script>
+
+<script th:src="@{/portal/union/js/lrtk.js}"></script>
+<script th:src="@{/portal/union/js/main.js}"></script>
+<script th:src="@{/portal/union/js/echarts.min.js}"></script>
+<script th:src="@{/portal/union/js/pieCharts.js}"></script>
+<script th:src="@{/portal/union/js/index.js}"></script>
+</head>
+<body>
+	<div class="headGroup white fixed" id="headGroup">
+		<div th:replace="portal/theme/union/header"></div>
+	</div>
+	<div class="baseGroup mb20 mt20" id="indexGroup">
+		<div class="main-con">
+			<div class="news">
+				<div class="slider">
+					<div id="playBox">
+						<div class="pre"></div>
+						<div class="next"></div>
+						<div class="smalltitle">
+							<ul>
+								<li class="thistitle"></li>
+								<li></li>
+								<li></li>
+								<li></li>
+								<li></li>
+							</ul>
+						</div>
+						<ul class="oUlplay">
+							<li th:each="item,temp:${@cms.topList(5)}">
+						       <a class="read-more" th:href="@{${'/portal/article/'+item.id}}" target="_blank">
+						       <img th:src="${item.coverImage}" border="0"/>
+								</a>
+								<p>
+									<a th:href="@{${'/portal/article/'+item.id}}" target="_blank" th:text="${item.title}"></a>
+								</p>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="rd-news">
+					<div class="gh-title">
+						<img th:src="@{/portal/union/images/rdxw.png}" /> <span>通知公告</span>
+						<a th:href="@{/portal/more?type=3}" target="_blank">更多>></a>
+					</div>
+					<ul class="new-list" style="height: 360px; overflow: hidden;">
+
+						<li th:each="item,temp:${@cms.recentList(3)}">
+						<a class="
+							read-more" th:href="@{${'/portal/article/'+item.id}}" target="_blank"><span
+							class="span1" th:text="${item.title}"></span> <span class="span2"
+							th:text="${#dates.format(item.createTime,'yyyy-MM-dd')}"></span>
+							</a></li>
+					</ul>
+				</div>
+			</div>
+			<!--<div class="main-title">
+			<p class="p2">
+				<span>新闻中心</span>
+			</p>
+			<p class="p1">News Center</p>
+		</div>-->
+			<div class="xwzx mt15">
+				<div class="xw-left">
+					<div class="gh-title">
+						<img th:src="@{/portal/union/images/ghzt.png}" /> <span>工会专题</span>
+						<a th:href="@{/portal/more?type=2}" target="_blank">更多>></a>
+					</div>
+					<ul>
+						<li
+							th:each="item,temp:${@cms.hotList(5)}">
+						<a class="read-more" th:href="@{${'/portal/article/'+item.id}}"
+							target="_blank"><img th:src="${item.coverImage}" border="0">
+							</a></li>
+
+					</ul>
+				</div>
+				<div class="xw-center">
+					<div class="gh-title">
+						<img th:src="@{/portal/union/images/jcdt.png}" /> <span>工会动态</span>
+						<a th:href="@{/portal/more?type=4}" target="_blank" id="zgh">更多>></a>
+						<a th:href="@{/portal/more?type=3}" target="_blank" style="display: none" id="jcgh">更多>></a>
+					</div>
+					<div class="xw-con">
+						<div class="xw-con-tab">
+							<span class="select" onMouseOver="tabs(this,1)">总工会</span> <span
+								onMouseOver="tabs(this,2)">基层工会</span>
+						</div>
+						<ul class="new-list active" id="newList1">
+							<li th:each="item,temp:${@cms.recentDynamic2(5)}">
+						<a class="
+							read-more" th:href="@{${'/portal/article/'+item.id}}" target="_blank"><span
+							class="span1" th:text="${item.title}"></span> <span class="span2"
+							th:text="${#dates.format(item.createTime,'yyyy-MM-dd')}"></span>
+							</a></li>
+						</ul>
+						<ul class="new-list" id="newList2">
+							<li th:each="item,temp:${@cms.recentDynamic1(5)}">
+						<a class="
+							read-more" th:href="@{${'/portal/article/'+item.id}}" target="_blank"><span
+							class="span1" th:text="${item.title}"></span> <span class="span2"
+							th:text="${#dates.format(item.createTime,'yyyy-MM-dd')}"></span>
+							</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="xw-right">
+					<div class="gh-title">
+						<img th:src="@{/portal/union/images/jctg.png}" /> <span>基层投稿
+							TOP 10</span> <a href="">更多>></a>
+					</div>
+					<div class="jc-img">
+						<img th:src="@{/portal/union/images/jctgs.jpg}" />
+					</div>
+					<ul>
+						<li class="li1"><a href="">
+								<div>
+									<img th:src="@{/portal/union/images/one.png}" />
+								</div> <span class="span1">山西中网工会委员会</span> <span>3篇</span>
+						</a></li>
+						<li class="li2"><a href="">
+								<div>
+									<img th:src="@{/portal/union/images/two.png}" />
+								</div> <span class="span1">临时工会</span> <span>3篇</span>
+						</a></li>
+						<li class="li3">
+							<div>
+								<img th:src="@{/portal/union/images/three.png}" />
+							</div> <a href=""> <span class="span1">临时工会</span> <span>3篇</span>
+						</a>
+						</li>
+						<li class="li4"><a href="">
+								<div>
+									<font>4.</font>
+								</div> <span class="span1">临时工会</span> <span>3篇</span>
+						</a></li>
+					</ul>
+				</div>
+			</div>
+			<a href=""> <img th:src="@{/portal/union/images/imgs.jpg}" />
+			</a>
+			<!--<div class="main-title">
+			<p class="p2">
+				<span>智慧工会</span>
+			</p>
+			<p class="p1">Smart Union</p>
+		</div>-->
+			<div class="zhgh mt15" th:name="zhgh" th:id="zhgh">
+				<div class="gh-title">
+					<img th:src="@{/portal/union/images/zhghicon.png}" /> <span>智慧工会</span>
+				</div>
+				<ul>
+					<li><a th:href="@{/portal/corporate}"> <img
+							th:src="@{/portal/union/images/zhgh1.png}" />
+							<p>企业入会</p>
+					</a></li>
+					<li><a th:href="@{/portal/individual}"> <img
+							th:src="@{/portal/union/images/zhgh2.png}" />
+							<p>个人入会</p>
+					</a></li>
+					<li><a href=""> <img
+							th:src="@{/portal/union/images/zhgh5.png}" />
+							<p>职工维权</p>
+					</a></li>
+					<li><a href=""> <img
+							th:src="@{/portal/union/images/zhgh7.png}" />
+							<p>普惠服务</p>
+					</a></li>
+					<li class="li1"><a href=""> <img
+							th:src="@{/portal/union/images/zhgh3.png}" />
+							<p>基层投稿</p>
+					</a></li>
+					<li class="li1"><a href=""> <img
+							th:src="@{/portal/union/images/zhgh4.png}" />
+							<p>活动报名</p>
+					</a></li>
+					<li class="li1"><a href=""> <img
+							th:src="@{/portal/union/images/zhgh6.png}" />
+							<p>困难救助</p>
+					</a></li>
+					<li class="li1"><a href=""> <img
+							th:src="@{/portal/union/images/zhgh8.png}" />
+							<p>职工书屋</p>
+					</a></li>
+				</ul>
+			</div>
+			<div class="wsfu mt15">
+				<div class="gh-title">
+					<img th:src="@{/portal/union/images/zhghicon.png}" /> <span>网上服务</span>
+				</div>
+				<ul>
+					<li><a href="">
+							<div class="icon sty1"></div>
+							<p>在线咨询</p>
+					</a></li>
+					<li><a href="http://shanxi.12388.gov.cn/" target="_blank">
+							<div class="icon sty2"></div>
+							<p>纪检监察举报</p>
+					</a></li>
+					<li><a href="">
+							<div class="icon sty3"></div>
+							<p>法律援助</p>
+					</a></li>
+					<li><a href="">
+							<div class="icon sty4"></div>
+							<p>困难职工帮扶申请指引</p>
+					</a></li>
+					<li class="li1"><a href="">
+							<div class="icon sty5"></div>
+							<p>职工互助保障参保指引</p>
+					</a></li>
+					<li class="li1"><a href="">
+							<div class="icon sty6"></div>
+							<p>税务代收工会缴费指引</p>
+					</a></li>
+					<li class="li1"><a href="">
+							<div class="icon sty7"></div>
+							<p>企业工会民主选举工作指引</p>
+					</a></li>
+					<li class="li1"><a href="">
+							<div class="icon sty8"></div>
+							<p>工会社团法人登记指引</p>
+					</a></li>
+				</ul>
+			</div>
+			<a href="" class="mt15"> <img
+				th:src="@{/portal/union/images/img2.jpg}" />
+			</a>
+			<div class="sys_box mt15 clearfix">
+				<div class="sys_tem sty1">
+					<a href="">
+						<div class="icon"></div>
+						<p>工会经费收缴管理系统</p>
+					</a>
+				</div>
+				<div class="sys_tem sty2">
+					<a href="http://sx.msyos.com/" target="_blank">
+						<div class="icon"></div>
+						<p>省在职职工互助保障查询系统</p>
+					</a>
+				</div>
+				<div class="sys_tem sty3">
+					<a href="">
+						<div class="icon"></div>
+						<p>工会帮扶工作管理系统</p>
+					</a>
+				</div>
+				<div class="sys_tem sty4">
+					<a href="">
+						<div class="icon"></div>
+						<p>全国工会基层组织建设工作管理系统</p>
+					</a>
+				</div>
+				<div class="sys_tem sty5">
+					<a href="">
+						<div class="icon"></div>
+						<p>非公企业工会主席工作津贴发放系统</p>
+					</a>
+				</div>
+				<div class="sys_tem sty6">
+					<a href="#">
+						<div class="icon"></div>
+						<p>省劳模管理平台</p>
+					</a>
+				</div>
+				<div class="sys_tem sty7">
+					<a th:href="@{/portal/fileDowns}" target="_blank">
+						<div class="icon"></div>
+						<p>文件下载</p>
+					</a>
+				</div>
+				<div class="sys_tem sty8">
+					<a href="">
+						<div class="icon"></div>
+						<p>业务邮箱</p>
+					</a>
+				</div>
+				<div class="sys_tem sty9">
+					<a href="">
+						<div class="icon"></div>
+						<p>保密课堂</p>
+					</a>
+				</div>
+				<div class="sys_tem sty10 nomar">
+					<a href="">
+						<div class="icon"></div>
+						<p>纪检监察举报电话</p>
+					</a>
+				</div>
+			</div>
+			<div class="mt15">
+				<div class="gh-title">
+					<img th:src="@{/portal/union/images/zhghicon.png}" /> <span>工会业务</span>
+					<a href="">更多>></a>
+				</div>
+				<!--tab start-->
+				<div id="ghyw_tab" class="ghyw_tab tab-container">
+					<ul class="etabs clearfix">
+						<li class="tab icon1" data-target="#ghyw_tab1-1"><a href=""
+							class="active">组织建设</a></li>
+						<li class="tab icon2" data-target="#ghyw_tab1-2"><a href=""
+							class="">民主管理</a></li>
+						<li class="tab icon3" data-target="#ghyw_tab1-3"><a href=""
+							class="">经济技术</a></li>
+						<li class="tab icon4" data-target="#ghyw_tab1-4"><a href=""
+							class="">劳动竞赛</a></li>
+						<li class="tab icon5" data-target="#ghyw_tab1-5"><a href=""
+							class="">宣传教育</a></li>
+						<li class="tab icon6" data-target="#ghyw_tab1-6"><a href=""
+							class="">对外交流</a></li>
+						<li class="tab icon7" data-target="#ghyw_tab1-7"><a href="">自身建设</a></li>
+						<li class="tab icon8" data-target="#ghyw_tab1-8"><a href="">劳动争议</a></li>
+						<li class="tab icon9" data-target="#ghyw_tab1-9"><a href="">权益保障</a></li>
+						<li class="tab icon10" data-target="#ghyw_tab1-10"><a href="">劳动保护</a></li>
+						<li class="tab icon11" data-target="#ghyw_tab1-11"><a href="">劳模工作</a></li>
+						<li class="tab icon12" data-target="#ghyw_tab1-12"><a href="">女工天地</a></li>
+						<li class="tab icon13" data-target="#ghyw_tab1-13"><a href="">资产监管</a></li>
+					</ul>
+					<div class="panel-container clearfix">
+						<!-- 组织建设 -->
+						<div id="ghyw_tab1-1" class="tabs clearfix"
+							style="display: block;">
+							<p>1、做好疫情期间基层工会防控工作； 2、扩大工会覆盖面； 3、健全完善基层组织数据库；
+								4、召开一届三次全委（扩大）会议； 5、干部培训； 6、建设智慧工会服务平台； 7、模范职工之家建设。</p>
+						</div>
+						<!-- 民主管理 -->
+						<div id="ghyw_tab1-2" class="tabs clearfix">
+							<p>1、健全职代会制度； 2、提升集体协商质量； 3、劳动争议调解和法律援助。</p>
+						</div>
+						<!-- 经济技术 -->
+						<div id="ghyw_tab1-3" class="tabs clearfix">
+							<p>1、深入开展“五小”竞赛活动； 2、开展创新工作室创建活动； 3、加强对劳动竞赛的领导； 4、发扬劳模、工匠精神；
+								5、支持企业复工复产。</p>
+						</div>
+						<!-- 劳动竞赛 -->
+						<div id="ghyw_tab1-4" class="tabs clearfix">
+							<p></p>
+						</div>
+						<!-- 宣传教育 -->
+						<div id="ghyw_tab1-5" class="tabs clearfix">
+							<p>1、加强工会宣传； 2、培养选树典型； 3、精神文明建设； 4、职工书屋建设； 5、组织全区第二届职工运动会；
+								6、建设智慧工会服务平台，做优服务职工品牌； 7、深化“中国梦、劳动美”主题活动； 8、庆祝全总成立95周年。</p>
+						</div>
+						<!-- 对外交流 -->
+						<div id="ghyw_tab1-6" class="tabs clearfix">
+							<p></p>
+						</div>
+						<!-- 自身建设 -->
+						<div id="ghyw_tab1-7" class="tabs clearfix">
+							<p></p>
+						</div>
+						<!-- 劳动争议 -->
+						<div id="ghyw_tab1-8" class="tabs clearfix">
+							<p></p>
+						</div>
+						<!-- 权益保障 -->
+						<div id="ghyw_tab1-9" class="tabs clearfix">
+							<p>1、规范困难职工档案； 2、开展“送清凉”活动； 3、开展 “金秋助学”活动； 4、开展 “两节”送温暖活动；
+								5、职工体检； 6、搞好职工医疗互助工程； 7、代开工会经费收据。</p>
+						</div>
+						<!-- 劳动保护 -->
+						<div id="ghyw_tab1-10" class="tabs clearfix">
+							<p>开展“群众保安全”活动</p>
+						</div>
+						<!-- 劳模工作 -->
+						<div id="ghyw_tab1-11" class="tabs clearfix">
+							<p></p>
+						</div>
+						<!-- 女工天地 -->
+						<div id="ghyw_tab1-12" class="tabs clearfix">
+							<p>1、发挥女职工组织作用； 2、加强职业道德教育。</p>
+						</div>
+						<!-- 资产监管 -->
+						<div id="ghyw_tab1-13" class="tabs clearfix">
+							<p>1、加强资产管理； 2、贯彻《工会会计制度》； 3、发挥经审委作用。</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--<div class="main-title">
+			<p class="p2">
+				<span>互动交流</span>
+			</p>
+			<p class="p1">Interactive Communication</p>
+		</div>-->
+			<div class="hdjl mt15">
+				<div class="hd-left">
+					<div class="gh-title">
+						<img th:src="@{/portal/union/images/hdly.png}" /> <span>互动交流</span>
+						<a href="">更多>></a>
+					</div>
+					<ul class="new-list">
+						<li><a href=""> <span class="span1">44次发射，一图回顾历次北斗飞天计</span>
+								<span class="span2">2020-6-24</span>
+						</a></li>
+						<li><a href=""> <span class="span1">44次发射，一图回顾历次北斗飞天计</span>
+								<span class="span2">2020-6-24</span>
+						</a></li>
+						<li><a href=""> <span class="span1">44次发射，一图回顾历次北斗飞天计</span>
+								<span class="span2">2020-6-24</span>
+						</a></li>
+						<li><a href=""> <span class="span1">44次发射，一图回顾历次北斗飞天计</span>
+								<span class="span2">2020-6-24</span>
+						</a></li>
+					</ul>
+				</div>
+				<div class="hd-right">
+					<div class="gh-title">
+						<img th:src="@{/portal/union/images/hdly.png}" /> <span>留言板</span>
+						<!--<a href="">更多>></a>-->
+					</div>
+					<div class="lyb">
+						<a th:href="@{/portal/siteMsg}"  target="_blank"> <img
+							th:src="@{/portal/union/images/lybs.jpg}" />
+						</a>
+					</div>
+
+				</div>
+			</div>
+
+			<div class="ghdata" th:name="ghdsj" th:id="ghdsj">
+				<div class="gh-title">
+					<img th:src="@{/portal/union/images/ghdata.png}" /> <span>工会大数据</span>
+				</div>
+				<ul>
+					<li>
+						<div id="pie1"></div>
+						<p>综改区工会</p> <span id="span1">321</span> <img
+						th:src="@{/portal/union/images/pie.png}" />
+					</li>
+					<li>
+						<div id="pie2"></div>
+						<p>现有职工</p> <span id="span2">321</span> <img
+						th:src="@{/portal/union/images/pie.png}" />
+					</li>
+					<li>
+						<div id="pie3"></div>
+						<p>工会会员</p> <span id="span3">321</span> <img
+						th:src="@{/portal/union/images/pie.png}" />
+					</li>
+					<li>
+						<div id="pie4"></div>
+						<p>女性职工</p> <span id="span4">321</span> <img
+						th:src="@{/portal/union/images/pie.png}" />
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<footer class="bgf mt40">
+		<div th:replace="portal/theme/union/footer"></div>
+	</footer>
+
+</body>
+</html>

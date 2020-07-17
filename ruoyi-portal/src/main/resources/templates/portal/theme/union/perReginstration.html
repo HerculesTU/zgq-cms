@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" th:content="${@config.getKey('portal.index.keywords')}">
+	<meta name="description" th:content="${@config.getKey('portal.index.description')}">
+	<title th:text="${@config.getKey('portal.index.title')}"></title>
+	<meta name="baidu-site-verification" content="dAEtGwEyN9" />
+	<link rel="stylesheet" th:href="@{/portal/union/css/style.css}"/>
+
+	<script th:src="@{/portal/union/js/jquery-1.8.3.js}"></script>
+	<script th:src="@{/portal/pnews/plugin/layer/layer.js}"></script>
+	<script th:src="@{/portal/union/js/perReginstration.js}"></script>
+	<script th:src="@{/portal/union/js/csrf.js}"></script>
+	<!--<script th:src="@{/portal/union/js/jquery.min.js}"></script>-->
+	<script th:src="@{/ajax/libs/blockUI/jquery.blockUI.js}"></script>
+	<script th:src="@{/ajax/libs/validate/jquery.validate.min.js}"></script>
+	<script th:src="@{/ajax/libs/validate/messages_zh.min.js}"></script>
+	<script th:src="@{/ajax/libs/validate/jquery.validate.extend.js}"></script>
+
+</head>
+<body>
+<div class="headGroup white fixed" id="headGroup">
+	<div th:replace="portal/theme/union/header"></div>
+</div>
+<div class="baseGroup mb20 mt20" id="indexGroup">
+	<div class="main-con">
+		<div class="ch-title">
+			<img th:src="@{/portal/union/images/home.png}"/>
+			当前位置：
+			<a th:href="@{/portal/index}">网站首页</a> > <a th:href="@{/portal/individual}">智慧工会</a> > <a th:href="@{/portal/individual}">个人注册</a>
+		</div>
+		<div class="per-con">
+			<div class="gh-title">
+				<img th:src="@{/portal/union/images/ghzt.png}">
+				<span>个人注册</span>
+			</div>
+			<form id="grregister" enctype="multipart/form-data" action="" method="post">
+                <input type="hidden" name="sysuserId" id="sysuserId"/>
+                <table>
+					<tr>
+						<td>
+							<label>个人账号<span>*</span></label>
+							<div class="inline-item">
+								<input type="text" name="sysuserAccount" id="sysuserAccount" placeholder="请输入账号"/>
+							</div>
+						</td>
+						<td>
+							<label>个人密码<span>*</span></label>
+							<div class="inline-item">
+								<input type="password" name="sysuserPassword" id="sysuserPassword" placeholder="请输入密码"/>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label>姓名<span>*</span></label>
+							<div class="inline-item">
+								<input type="text" name="sysuserName" id="sysuserName" placeholder="请输入姓名"/>
+							</div>
+						</td>
+						<td>
+							<label>性别<span>*</span></label>
+							<div class="inline-item">
+								<select id="sysuserSex" name="sysuserSex" class="form-control">
+									<option value="">请选择</option>
+									<option value="1">男</option>
+									<option value="2">女</option>
+								</select>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label>身份证号<span>*</span></label>
+							<div class="inline-item">
+								<input type="text" name="sysuserIdCardNo" id="sysuserIdCardNo" placeholder="请输入身份证号"/>
+							</div>
+						</td>
+						<td>
+							<label>学历<span>*</span></label>
+							<div class="inline-item">
+								<select name="sysuserAcademicCareer" id="sysuserAcademicCareer" class="form-control">
+<!--									<option value="">请选择</option>
+									<option value="5">博士</option>
+									<option value="4">硕士</option>
+									<option value="3">本科</option>
+									<option value="2">大专</option>
+									<option value="1">中专及以下</option>-->
+								</select>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label>手机号码<span>*</span></label>
+							<div class="inline-item">
+								<input type="text" name="sysuserMobile" id="sysuserMobile" placeholder="请输入手机号码"/>
+							</div>
+						</td>
+						<td>
+							<label>验证码<span>*</span></label>
+							<div class="inline-item">
+								<div style="width: 177px;position: relative">
+									<input type="text" style="width: 177px" name="yzm" id="yzm" placeholder="请输入验证码"/>
+								</div>
+								<button type="button" class="yzm" onclick="getPhoneNum()">获取验证码</button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label>企业名称<span>*</span></label>
+							<div class="inline-item">
+								<input type="text" name="sysuserEnterpriseName" id="sysuserEnterpriseName" placeholder="请输入企业名称"/>
+							</div>
+						</td>
+						<td>
+							<label>社会统一信用代码<span>*</span></label>
+							<div class="inline-item">
+								<input type="text" name="creditCode" id="creditCode" placeholder="请输入社会统一信用代码"/>
+							</div>
+						</td>
+					</tr>
+
+
+				</table>
+			</form>
+			<form id="uploadtest" enctype="multipart/form-data" method="post" action="#">
+				<table style="margin: 0px auto">
+					<tr>
+						<td>
+							<label>身份证<span>*</span></label>
+							<input type="hidden" name="sfz" id="sfz_uploadtest">
+							<div class="inline-item">
+								<div class="upload-div">
+									<input type="file" id="uploadImg" name="file" accept="image/*"/>
+									<div class="img-show">
+										<img src="" id="imgs"/>
+										<p id="delImg">删除</p>
+									</div>
+									<button type="button" class="uploads" onclick="doupload('uploadtest')">上传图片</button>
+									<label id="uploadImg-error" style="display: none" class="error" for="uploadImg">请上传身份证</label>
+								</div>
+								<span class="tip">格式要求：jpeg或jpg，小于5M；正反面在一张图上传</span>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="td1">
+							<div class="sqs">
+								<input type="checkbox" class="mgc mgc-danger" id="agreeSqs"/> <a id="agree">我已阅读并同意《中华全国总工会入会申请书》</a>
+							</div>
+							<button type="button" class="tijiao" disabled id="tijiao" onclick="submitHandler()">提交注册信息</button>
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</div>
+</div>
+
+<footer class="bgf mt40">
+	<div th:replace="portal/theme/union/footer"></div>
+</footer>
+<script>
+    $(document).ready(function () {
+		$('.inline-item .form-control').each(function(){
+			$(this).select2({
+				placeholder: "请选择",
+				allowClear: true
+			});
+		});
+        jQuery.validator.addMethod("isIdCardNo", function (value, element) {
+            return this.optional(element) || isIdCardNo(value);
+        }, "请正确输入身份证号码");
+        jQuery.validator.addMethod("isRightOrNot", function (value, element) {
+            return this.optional(element) || isRightOrNot(value);
+        }, "请正确输入验证码");
+        jQuery.validator.addMethod("sysuserAccountIsCZ", function (value, element) {
+            return sysuserAccountIsCZ(value);
+        }, "用户名存在请重新输入");
+        jQuery.validator.addMethod("checkCardIdUnik", function (value, element) {
+            return checkCardIdUnik(value);
+        }, "你的身份证号码已经被注册使用");
+		jQuery.validator.addMethod("passWord", function (value, element) {
+			return this.optional(element) || /(?=.*\d)(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]).{6,20}/.test(value);
+		}, "请输入6-20位密码（包含大小写字母、符号和数字）");
+		jQuery.validator.addMethod("isPhone", function(value, element) {
+			return this.optional(element)
+					|| /^1[34589]\d{1}\d{4}\d{4}( x\d{1,6})?$/.test(value);
+		}, "手机号码格式不正确");
+
+        var JY= searchLable("education");
+        $("#sysuserAcademicCareer").append(JY);
+    });
+
+    function  doupload(id) {
+        //var formData = new FormData($( "#"+id )[0]);
+        var form = document.getElementById(id);
+        // 用表单来初始化
+        var formData = new FormData(form);
+        console.log(formData.get("file"));
+        $.ajax({
+            url: "/system/oss/upload",
+            type: 'POST',
+            data: formData,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                if(data.code==0){
+                    $("#sfz_uploadtest").val(JSON.stringify(data));
+                    layer.msg(data.msg);
+				}else{
+                    layer.msg(data.msg);
+				}
+            },
+            error: function (data) {
+                layer.msg(data.msg);;
+            }
+        });
+    }
+    //增加身份证验证
+    function isIdCardNo(num) {
+        var factorArr = new Array(7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2, 1);
+        var parityBit = new Array("1", "0", "X", "9", "8", "7", "6", "5", "4", "3", "2");
+        var varArray = new Array();
+        var intValue;
+        var lngProduct = 0;
+        var intCheckDigit;
+        var intStrLen = num.length;
+        var idNumber = num;
+        // initialize
+        if ((intStrLen != 15) && (intStrLen != 18)) {
+            return false;
+        }
+        // check and set value
+        for (i = 0; i < intStrLen; i++) {
+            varArray[i] = idNumber.charAt(i);
+            if ((varArray[i] < '0' || varArray[i] > '9') && (i != 17)) {
+                return false;
+            } else if (i < 17) {
+                varArray[i] = varArray[i] * factorArr[i];
+            }
+        }
+
+        if (intStrLen == 18) {
+            //check date
+            var date8 = idNumber.substring(6, 14);
+            if (isDate8(date8) == false) {
+                return false;
+            }
+            // calculate the sum of the products
+            for (i = 0; i < 17; i++) {
+                lngProduct = lngProduct + varArray[i];
+            }
+            // calculate the check digit
+            intCheckDigit = parityBit[lngProduct % 11];
+            // check last digit
+            if (varArray[17] != intCheckDigit) {
+                return false;
+            }
+        }
+        else {       //length is 15
+            //check date
+            var date6 = idNumber.substring(6, 12);
+            if (isDate6(date6) == false) {
+                return false;
+            }
+        }
+        return true;
+    }
+    //登录账户唯一性校验
+    function sysuserAccountIsCZ(vv){
+        var flg=true;
+        $.ajax({
+            type: "POST",
+            url: "/portal/platsystem/checkLoginNameUnique",
+            dataType: "json",
+            data: {
+                "loginName": function() {
+                    return $.common.trim(vv);
+                }
+            },
+            async:false,
+            success: function (result) {
+                flg = result;
+            }
+        });
+        return flg;
+	}
+//省份正唯一校验
+	function checkCardIdUnik() {
+        var flg=true;
+        $.ajax({
+            type: "POST",
+            url: "/portal/platsystem/checkCradUnique",
+            dataType: "json",
+            data: {
+                "loginName": function() {
+                    return $.common.trim(vv);
+                }
+            },
+            async:false,
+            success: function (result) {
+                flg = result;
+            }
+        });
+        return flg;
+    }
+/**
+ * 手机验证码生成
+ * */
+    function createCode(){
+        code = "";
+        var codeLength = 6;//验证码的长度
+        var random = new Array(0,1,2,3,4,5,6,7,8,9,'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R',
+            'S','T','U','V','W','X','Y','Z');//随机数
+        for(var i = 0; i < codeLength; i++) {//循环操作
+            var index = Math.floor(Math.random()*36);//取得随机数的索引（0~35）
+            code += random[index];//根据索引取得随机数加到code上
+        }
+       return code;//把code值赋给验证码
+    }
+    /**
+	 * 调用手机短信接口
+	 * */
+	function getPhoneNum(){
+	    var phone=$("#sysuserMobile").val();
+	    if(phone==""|| phone==null){
+	        layer.msg("请输入手机号");
+	        return;
+		}
+	    var code=createCode();
+	    var arr={"name":"phone","value":phone};
+		var arr1={"name":"prefix","value":""};
+        var arr2={"name":"content","value":code};//将要发送的验证码
+		var jsonarray=[];
+        jsonarray.push(arr);
+        jsonarray.push(arr1);
+        jsonarray.push(arr2);
+        $.operate.saveModal("/third/api/sendSms", jsonarray,function(res){
+			layer.msg(res.data);
+        });
+	}
+    /**
+	 * 手机验证码校验
+     * @param num
+     */
+    function isRightOrNot(num){
+        var flg=true;
+        //var num=$("#yzm").val();
+        var phone=$("#sysuserMobile").val();
+        if(phone=="" || phone==null){
+			layer.msg("请输入手机号");
+           return ;
+		}
+        $.ajax({
+            type: "POST",
+            url: "/portal/platsystem/checkPhoneNum",
+            dataType: "json",
+            data: {
+                yzm: num,
+				phone:phone
+			},
+			async:false,
+            success: function (result) {
+                if (result.code == web_status.SUCCESS) {
+                    flg= true;
+                } else if (result.code == web_status.WARNING) {
+                    flg= false;
+                }  else {
+                    flg= false;
+                }
+            }
+        });
+        return flg;
+	}
+    function isDate6(sDate) {
+        if (!/^[0-9]{6}$/.test(sDate)) {
+            return false;
+        }
+        var year, month, day;
+        year = sDate.substring(0, 4);
+        month = sDate.substring(4, 6);
+        if (year < 1700 || year > 2500) return false
+        if (month < 1 || month > 12) return false
+        return true
+    }
+
+    function isDate8(sDate) {
+        if (!/^[0-9]{8}$/.test(sDate)) {
+            return false;
+        }
+        var year, month, day;
+        year = sDate.substring(0, 4);
+        month = sDate.substring(4, 6);
+        day = sDate.substring(6, 8);
+        var iaMonthDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+        if (year < 1700 || year > 2500) return false
+        if (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0)) iaMonthDays[1] = 29;
+        if (month < 1 || month > 12) return false
+        if (day < 1 || day > iaMonthDays[month - 1]) return false
+        return true
+    }
+
+    $("#grregister").validate({
+        onkeyup: false,
+        rules:{
+            sysuserAccount:{
+                required: true,
+                maxlength: 20,
+                sysuserAccountIsCZ:true
+            },
+			sysuserPassword:{
+                required: true,
+				minlength: 5,
+				maxlength: 20,
+				passWord:'required'
+            },
+            sysuserName:{
+                required: true,
+                maxlength: 64
+            },
+            sysuserSex:{
+                required: true,
+                maxlength: 4
+            },
+            sysuserIdCardNo:{
+				required: true,
+				isIdCardNo : "required"
+            },
+            sysuserAcademicCareer:{
+                required: true,
+                maxlength: 108
+            },
+            sysuserMobile:{
+				required: true,
+                isPhone:true,
+                // remote: {
+                //     url:  "/platsystem/user/checkPhoneUnique",
+                //     type: "post",
+                //     dataType: "json",
+                //     data: {
+                //         "phonenumber": function () {
+                //             return $.common.trim($("#sysuserMobile").val());
+                //         }
+                //     },
+                //     dataFilter: function (data, type) {
+                //         return $.validate.unique(data);
+                //     }
+                // }
+            },
+            // yzm:{
+             //    required:true,
+             //    isRightOrNot:"required"
+			// },
+            sysuserEnterpriseName:{ //企业名称
+                required: true,
+                maxlength: 255
+            },
+            creditCode:{ //统一性用代码
+                required: true,
+                maxlength: 64
+            }
+        },
+        messages: {
+            "sysuserAccount": {
+                required: "请输入登录账户",
+                //remote: "账户已经存在"
+            },
+            "sysuserPassword": {
+                required: "请输入密码",
+                maxlength: "密码长度不能超过20"
+            },
+            "sysuserName": {
+                required: "请输入姓名",
+                maxlength: "姓名长度不能超过64"
+            },
+            "sysuserSex": {
+                required: "请选择性别",
+                maxlength: "姓别长度不能超过4"
+            },
+            "sysuserIdCardNo": {
+                required: "请输入身份证号"
+            },
+            "sysuserAcademicCareer": {
+                required: "请选择学历",
+                maxlength: "最大长度不超过108"
+            },
+            "sysuserMobile": {
+				required: "请输入手机号码",
+                //remote: "手机号码已经存在"
+            },
+            // "yzm":{
+            //     required:"请输入验证码"
+            // },
+            "sysuserEnterpriseName": {
+                required: "请输入企业名称",
+                maxlength: "最大长度不能超过255"
+            },
+            "creditCode":{
+                required: "请输入信用代码",
+                maxlength: "最大长度不能超过64"
+            }
+        },
+        focusCleanup: true
+    });
+    var token = getCookie("X-XSRF-TOKEN");
+    function getCookie(cname) {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i].trim();
+            if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+        }
+        return "";
+    }
+    function submitHandler() {
+		if($("#uploadImg").val()==""){
+			$("#uploadImg-error").show();
+		}
+		var t1=$("#sfz_uploadtest").val();
+		var tt1=t1==null?"":$.parseJSON(t1);//转json对象
+		var ttt1={};
+		if(tt1!="" && tt1!=null){
+			ttt1.dbfilepath=tt1.path;
+			ttt1.originalfilename=tt1.fileName;
+		}
+		var array=new Array();
+		array.push(ttt1);
+		if ($.validate.form()) {
+			var timestamp = Date.parse(new Date());
+			var data = $("#grregister").serializeArray();
+			var status = $("input[id='status']").is(':checked') == true ? 0 : 1;
+			// var roleIds = $.form.selectCheckeds("role");
+			// var postIds = $.form.selectSelects("post");
+			//data.push({"name": "sysuserStatus", "value": status});
+			data.push({"name": "sysuserCreatetime", "value": timestamp});
+			data.push({"name": "uploadImg", "value": JSON.stringify(array)});
+			// data.push({"name": "postIds", "value": postIds});
+			// $.operate.saveTab(prefix + "/add", data);
+			//var data = new FormData($("grregister")[0]);
+			// 获取页面已有的一个form表单
+			//var form = document.getElementById("grregister");
+			// 用表单来初始化
+			//var data = new FormData(form);
+			//console.log(data.get("sysuserAccount"));
+			//data.append("sysuserStatus",status);
+			// data.append("sysuserCreatetime",timestamp);
+			// data.delete("yzm");
+
+
+			$.ajax({
+				type: "POST",
+				url: "/portal/platsystem/add",
+				dataType: "json",
+				data: data ,
+				beforeSend: function (request) {
+					request.setRequestHeader("Authorization", "*");
+				},
+				success: function (result) {
+					if (result.code == web_status.SUCCESS) {
+						/*$.ml.close();*/
+						layer.msg(result.msg);
+					} else if (result.code == web_status.WARNING) {
+						layer.msg(result.msg);
+					} else {
+						layer.msg(result.msg);
+					}
+				}
+			});
+		}
+	}
+    /** 消息状态码 */
+    web_status = {
+        SUCCESS: 0,
+        FAIL: 500,
+        WARNING: 301
+    };
+
+    /** 弹窗状态码 */
+    modal_status = {
+        SUCCESS: "success",
+        FAIL: "error",
+        WARNING: "warning"
+    };
+    /**
+     * 下拉选
+     */
+    function searchLable(ty){
+        var str="";
+        var config = {
+            url: "/portal/tbenterpriseuser/searchLabelByType",
+            type: "post",
+            dataType: "json",
+            data: {
+                dicttype:ty
+            },
+            async:false,
+            success: function(result) {
+                for(var i=0;i<result.length;i++){
+                    var a1=result[i];
+                    str+="<option value=\'"+a1.dictValue+"\'>"+a1.dictLabel+"</option>";
+                }
+            }
+        };
+        $.ajax(config);
+        return str;
+    }
+</script>
+</body>
+</html>

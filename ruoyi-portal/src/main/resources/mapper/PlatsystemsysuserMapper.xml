@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.portal.mapper.PlatsystemsysuserMapper">
+  <resultMap id="BaseResultMap" type="com.ruoyi.portal.domain.Platsystemsysuser">
+    <id column="SYSUSER_ID" jdbcType="VARCHAR" property="sysuserId" />
+    <result column="SYSUSER_ACCOUNT" jdbcType="VARCHAR" property="sysuserAccount" />
+    <result column="SYSUSER_NAME" jdbcType="VARCHAR" property="sysuserName" />
+    <result column="SYSUSER_STATUS" jdbcType="DECIMAL" property="sysuserStatus" />
+    <result column="SYSUSER_CREATETIME" jdbcType="TIMESTAMP" property="sysuserCreatetime" />
+    <result column="SYSUSER_PASSWORD" jdbcType="VARCHAR" property="sysuserPassword" />
+    <result column="SYSUSER_SEX" jdbcType="VARCHAR" property="sysuserSex" />
+    <result column="SYSUSER_ACADEMIC_CAREER" jdbcType="VARCHAR" property="sysuserAcademicCareer" />
+    <result column="SYSUSER_MOBILE" jdbcType="VARCHAR" property="sysuserMobile" />
+    <result column="SYSUSER_COMPANYID" jdbcType="VARCHAR" property="sysuserCompanyid" />
+    <result column="SYSUSER_COMPANY_NAME" jdbcType="VARCHAR" property="sysuserCompanyName" />
+    <result column="SYSUSER_DEPARTID" jdbcType="VARCHAR" property="sysuserDepartid" />
+    <result column="SYSUSER_SIGN" jdbcType="VARCHAR" property="sysuserSign" />
+    <result column="SYSUSER_SN" jdbcType="DECIMAL" property="sysuserSn" />
+    <result column="SYSUSER_GROUPID" jdbcType="VARCHAR" property="sysuserGroupid" />
+    <result column="SYSUSER_THEMECOLOR" jdbcType="VARCHAR" property="sysuserThemecolor" />
+    <result column="SYSUSER_MENUTYPE" jdbcType="VARCHAR" property="sysuserMenutype" />
+    <result column="SYSUSER_ENTERPRISE_NAME" jdbcType="VARCHAR" property="sysuserEnterpriseName" />
+    <result column="CREDIT_CODE" jdbcType="VARCHAR" property="creditCode" />
+    <result column="SYSUSER_ID_CARD_NO" jdbcType="VARCHAR" property="sysuserIdCardNo" />
+    <result column="IS_TEMP" jdbcType="VARCHAR" property="isTemp" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.ruoyi.portal.domain.Platsystemsysuser">
+    <result column="SYSUSER_RIGHTJSON" jdbcType="LONGVARCHAR" property="sysuserRightjson" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    SYSUSER_ID, SYSUSER_ACCOUNT, SYSUSER_NAME, SYSUSER_STATUS, SYSUSER_CREATETIME, SYSUSER_PASSWORD, 
+    SYSUSER_SEX, SYSUSER_ACADEMIC_CAREER, SYSUSER_MOBILE, SYSUSER_COMPANYID, SYSUSER_COMPANY_NAME, 
+    SYSUSER_DEPARTID, SYSUSER_SIGN, SYSUSER_SN, SYSUSER_GROUPID, SYSUSER_THEMECOLOR, 
+    SYSUSER_MENUTYPE, SYSUSER_ENTERPRISE_NAME, CREDIT_CODE, SYSUSER_ID_CARD_NO, IS_TEMP
+  </sql>
+  <sql id="Blob_Column_List">
+    SYSUSER_RIGHTJSON
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from plat_system_sysuser
+    where SYSUSER_ID = #{sysuserId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from plat_system_sysuser
+    where SYSUSER_ID = #{sysuserId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ruoyi.portal.domain.Platsystemsysuser">
+    insert into plat_system_sysuser (SYSUSER_ID, SYSUSER_ACCOUNT, SYSUSER_NAME, 
+      SYSUSER_STATUS, SYSUSER_CREATETIME, SYSUSER_PASSWORD, 
+      SYSUSER_SEX, SYSUSER_ACADEMIC_CAREER, SYSUSER_MOBILE, 
+      SYSUSER_COMPANYID, SYSUSER_COMPANY_NAME, SYSUSER_DEPARTID, 
+      SYSUSER_SIGN, SYSUSER_SN, SYSUSER_GROUPID, 
+      SYSUSER_THEMECOLOR, SYSUSER_MENUTYPE, SYSUSER_ENTERPRISE_NAME, 
+      CREDIT_CODE, SYSUSER_ID_CARD_NO, IS_TEMP, 
+      SYSUSER_RIGHTJSON)
+    values (#{sysuserId,jdbcType=VARCHAR}, #{sysuserAccount,jdbcType=VARCHAR}, #{sysuserName,jdbcType=VARCHAR}, 
+      #{sysuserStatus,jdbcType=DECIMAL}, #{sysuserCreatetime,jdbcType=TIMESTAMP}, #{sysuserPassword,jdbcType=VARCHAR}, 
+      #{sysuserSex,jdbcType=VARCHAR}, #{sysuserAcademicCareer,jdbcType=VARCHAR}, #{sysuserMobile,jdbcType=VARCHAR}, 
+      #{sysuserCompanyid,jdbcType=VARCHAR}, #{sysuserCompanyName,jdbcType=VARCHAR}, #{sysuserDepartid,jdbcType=VARCHAR}, 
+      #{sysuserSign,jdbcType=VARCHAR}, #{sysuserSn,jdbcType=DECIMAL}, #{sysuserGroupid,jdbcType=VARCHAR}, 
+      #{sysuserThemecolor,jdbcType=VARCHAR}, #{sysuserMenutype,jdbcType=VARCHAR}, #{sysuserEnterpriseName,jdbcType=VARCHAR}, 
+      #{creditCode,jdbcType=VARCHAR}, #{sysuserIdCardNo,jdbcType=VARCHAR}, #{isTemp,jdbcType=VARCHAR}, 
+      #{sysuserRightjson,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ruoyi.portal.domain.Platsystemsysuser">
+    insert into plat_system_sysuser
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sysuserId != null">
+        SYSUSER_ID,
+      </if>
+      <if test="sysuserAccount != null">
+        SYSUSER_ACCOUNT,
+      </if>
+      <if test="sysuserName != null">
+        SYSUSER_NAME,
+      </if>
+      <if test="sysuserStatus != null">
+        SYSUSER_STATUS,
+      </if>
+      <if test="sysuserCreatetime != null">
+        SYSUSER_CREATETIME,
+      </if>
+      <if test="sysuserPassword != null">
+        SYSUSER_PASSWORD,
+      </if>
+      <if test="sysuserSex != null">
+        SYSUSER_SEX,
+      </if>
+      <if test="sysuserAcademicCareer != null">
+        SYSUSER_ACADEMIC_CAREER,
+      </if>
+      <if test="sysuserMobile != null">
+        SYSUSER_MOBILE,
+      </if>
+      <if test="sysuserCompanyid != null">
+        SYSUSER_COMPANYID,
+      </if>
+      <if test="sysuserCompanyName != null">
+        SYSUSER_COMPANY_NAME,
+      </if>
+      <if test="sysuserDepartid != null">
+        SYSUSER_DEPARTID,
+      </if>
+      <if test="sysuserSign != null">
+        SYSUSER_SIGN,
+      </if>
+      <if test="sysuserSn != null">
+        SYSUSER_SN,
+      </if>
+      <if test="sysuserGroupid != null">
+        SYSUSER_GROUPID,
+      </if>
+      <if test="sysuserThemecolor != null">
+        SYSUSER_THEMECOLOR,
+      </if>
+      <if test="sysuserMenutype != null">
+        SYSUSER_MENUTYPE,
+      </if>
+      <if test="sysuserEnterpriseName != null">
+        SYSUSER_ENTERPRISE_NAME,
+      </if>
+      <if test="creditCode != null">
+        CREDIT_CODE,
+      </if>
+      <if test="sysuserIdCardNo != null">
+        SYSUSER_ID_CARD_NO,
+      </if>
+      <if test="isTemp != null">
+        IS_TEMP,
+      </if>
+      <if test="sysuserRightjson != null">
+        SYSUSER_RIGHTJSON,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sysuserId != null">
+        #{sysuserId,jdbcType=VARCHAR},
+      </if>
+      <if test="sysuserAccount != null">
+        #{sysuserAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="sysuserName != null">
+        #{sysuserName,jdbcType=VARCHAR},
+      </if>
+      <if test="sysuserStatus != null">
+        #{sysuserStatus,jdbcType=DECIMAL},
+      </if>
+      <if test="sysuserCreatetime != null">
+        #{sysuserCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sysuserPassword != null">
+        #{sysuserPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="sysuserSex != null">
+        #{sysuserSex,jdbcType=VARCHAR},
+      </if>
+      <if test="sysuserAcademicCareer != null">
+        #{sysuserAcademicCareer,jdbcType=VARCHAR},
+      </if>
+      <if test="sysuserMobile != null">
+        #{sysuserMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="sysuserCompanyid != null">
+        #{sysuserCompanyid,jdbcType=VARCHAR},
+      </if>
+      <if test="sysuserCompanyName != null">
+        #{sysuserCompanyName,jdbcType=VARCHAR},
+      </if>
+      <if test="sysuserDepartid != null">
+        #{sysuserDepartid,jdbcType=VARCHAR},
+      </if>
+      <if test="sysuserSign != null">
+        #{sysuserSign,jdbcType=VARCHAR},
+      </if>
+      <if test="sysuserSn != null">
+        #{sysuserSn,jdbcType=DECIMAL},
+      </if>
+      <if test="sysuserGroupid != null">
+        #{sysuserGroupid,jdbcType=VARCHAR},
+      </if>
+      <if test="sysuserThemecolor != null">
+        #{sysuserThemecolor,jdbcType=VARCHAR},
+      </if>
+      <if test="sysuserMenutype != null">
+        #{sysuserMenutype,jdbcType=VARCHAR},
+      </if>
+      <if test="sysuserEnterpriseName != null">
+        #{sysuserEnterpriseName,jdbcType=VARCHAR},
+      </if>
+      <if test="creditCode != null">
+        #{creditCode,jdbcType=VARCHAR},
+      </if>
+      <if test="sysuserIdCardNo != null">
+        #{sysuserIdCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="isTemp != null">
+        #{isTemp,jdbcType=VARCHAR},
+      </if>
+      <if test="sysuserRightjson != null">
+        #{sysuserRightjson,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ruoyi.portal.domain.Platsystemsysuser">
+    update plat_system_sysuser
+    <set>
+      <if test="sysuserAccount != null">
+        SYSUSER_ACCOUNT = #{sysuserAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="sysuserName != null">
+        SYSUSER_NAME = #{sysuserName,jdbcType=VARCHAR},
+      </if>
+      <if test="sysuserStatus != null">
+        SYSUSER_STATUS = #{sysuserStatus,jdbcType=DECIMAL},
+      </if>
+      <if test="sysuserCreatetime != null">
+        SYSUSER_CREATETIME = #{sysuserCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sysuserPassword != null">
+        SYSUSER_PASSWORD = #{sysuserPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="sysuserSex != null">
+        SYSUSER_SEX = #{sysuserSex,jdbcType=VARCHAR},
+      </if>
+      <if test="sysuserAcademicCareer != null">
+        SYSUSER_ACADEMIC_CAREER = #{sysuserAcademicCareer,jdbcType=VARCHAR},
+      </if>
+      <if test="sysuserMobile != null">
+        SYSUSER_MOBILE = #{sysuserMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="sysuserCompanyid != null">
+        SYSUSER_COMPANYID = #{sysuserCompanyid,jdbcType=VARCHAR},
+      </if>
+      <if test="sysuserCompanyName != null">
+        SYSUSER_COMPANY_NAME = #{sysuserCompanyName,jdbcType=VARCHAR},
+      </if>
+      <if test="sysuserDepartid != null">
+        SYSUSER_DEPARTID = #{sysuserDepartid,jdbcType=VARCHAR},
+      </if>
+      <if test="sysuserSign != null">
+        SYSUSER_SIGN = #{sysuserSign,jdbcType=VARCHAR},
+      </if>
+      <if test="sysuserSn != null">
+        SYSUSER_SN = #{sysuserSn,jdbcType=DECIMAL},
+      </if>
+      <if test="sysuserGroupid != null">
+        SYSUSER_GROUPID = #{sysuserGroupid,jdbcType=VARCHAR},
+      </if>
+      <if test="sysuserThemecolor != null">
+        SYSUSER_THEMECOLOR = #{sysuserThemecolor,jdbcType=VARCHAR},
+      </if>
+      <if test="sysuserMenutype != null">
+        SYSUSER_MENUTYPE = #{sysuserMenutype,jdbcType=VARCHAR},
+      </if>
+      <if test="sysuserEnterpriseName != null">
+        SYSUSER_ENTERPRISE_NAME = #{sysuserEnterpriseName,jdbcType=VARCHAR},
+      </if>
+      <if test="creditCode != null">
+        CREDIT_CODE = #{creditCode,jdbcType=VARCHAR},
+      </if>
+      <if test="sysuserIdCardNo != null">
+        SYSUSER_ID_CARD_NO = #{sysuserIdCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="isTemp != null">
+        IS_TEMP = #{isTemp,jdbcType=VARCHAR},
+      </if>
+      <if test="sysuserRightjson != null">
+        SYSUSER_RIGHTJSON = #{sysuserRightjson,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where SYSUSER_ID = #{sysuserId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ruoyi.portal.domain.Platsystemsysuser">
+    update plat_system_sysuser
+    set SYSUSER_ACCOUNT = #{sysuserAccount,jdbcType=VARCHAR},
+      SYSUSER_NAME = #{sysuserName,jdbcType=VARCHAR},
+      SYSUSER_STATUS = #{sysuserStatus,jdbcType=DECIMAL},
+      SYSUSER_CREATETIME = #{sysuserCreatetime,jdbcType=TIMESTAMP},
+      SYSUSER_PASSWORD = #{sysuserPassword,jdbcType=VARCHAR},
+      SYSUSER_SEX = #{sysuserSex,jdbcType=VARCHAR},
+      SYSUSER_ACADEMIC_CAREER = #{sysuserAcademicCareer,jdbcType=VARCHAR},
+      SYSUSER_MOBILE = #{sysuserMobile,jdbcType=VARCHAR},
+      SYSUSER_COMPANYID = #{sysuserCompanyid,jdbcType=VARCHAR},
+      SYSUSER_COMPANY_NAME = #{sysuserCompanyName,jdbcType=VARCHAR},
+      SYSUSER_DEPARTID = #{sysuserDepartid,jdbcType=VARCHAR},
+      SYSUSER_SIGN = #{sysuserSign,jdbcType=VARCHAR},
+      SYSUSER_SN = #{sysuserSn,jdbcType=DECIMAL},
+      SYSUSER_GROUPID = #{sysuserGroupid,jdbcType=VARCHAR},
+      SYSUSER_THEMECOLOR = #{sysuserThemecolor,jdbcType=VARCHAR},
+      SYSUSER_MENUTYPE = #{sysuserMenutype,jdbcType=VARCHAR},
+      SYSUSER_ENTERPRISE_NAME = #{sysuserEnterpriseName,jdbcType=VARCHAR},
+      CREDIT_CODE = #{creditCode,jdbcType=VARCHAR},
+      SYSUSER_ID_CARD_NO = #{sysuserIdCardNo,jdbcType=VARCHAR},
+      IS_TEMP = #{isTemp,jdbcType=VARCHAR},
+      SYSUSER_RIGHTJSON = #{sysuserRightjson,jdbcType=LONGVARCHAR}
+    where SYSUSER_ID = #{sysuserId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ruoyi.portal.domain.Platsystemsysuser">
+    update plat_system_sysuser
+    set SYSUSER_ACCOUNT = #{sysuserAccount,jdbcType=VARCHAR},
+      SYSUSER_NAME = #{sysuserName,jdbcType=VARCHAR},
+      SYSUSER_STATUS = #{sysuserStatus,jdbcType=DECIMAL},
+      SYSUSER_CREATETIME = #{sysuserCreatetime,jdbcType=TIMESTAMP},
+      SYSUSER_PASSWORD = #{sysuserPassword,jdbcType=VARCHAR},
+      SYSUSER_SEX = #{sysuserSex,jdbcType=VARCHAR},
+      SYSUSER_ACADEMIC_CAREER = #{sysuserAcademicCareer,jdbcType=VARCHAR},
+      SYSUSER_MOBILE = #{sysuserMobile,jdbcType=VARCHAR},
+      SYSUSER_COMPANYID = #{sysuserCompanyid,jdbcType=VARCHAR},
+      SYSUSER_COMPANY_NAME = #{sysuserCompanyName,jdbcType=VARCHAR},
+      SYSUSER_DEPARTID = #{sysuserDepartid,jdbcType=VARCHAR},
+      SYSUSER_SIGN = #{sysuserSign,jdbcType=VARCHAR},
+      SYSUSER_SN = #{sysuserSn,jdbcType=DECIMAL},
+      SYSUSER_GROUPID = #{sysuserGroupid,jdbcType=VARCHAR},
+      SYSUSER_THEMECOLOR = #{sysuserThemecolor,jdbcType=VARCHAR},
+      SYSUSER_MENUTYPE = #{sysuserMenutype,jdbcType=VARCHAR},
+      SYSUSER_ENTERPRISE_NAME = #{sysuserEnterpriseName,jdbcType=VARCHAR},
+      CREDIT_CODE = #{creditCode,jdbcType=VARCHAR},
+      SYSUSER_ID_CARD_NO = #{sysuserIdCardNo,jdbcType=VARCHAR},
+      IS_TEMP = #{isTemp,jdbcType=VARCHAR}
+    where SYSUSER_ID = #{sysuserId,jdbcType=VARCHAR}
+  </update>
+  <select id="checkPlatSysNameUnique" parameterType="String" resultType="int">
+		select count(*) from plat_system_sysuser where SYSUSER_ACCOUNT=#{loginName}
+  </select>
+  <select id="checkPPhoneUnique" parameterType="String" resultMap="BaseResultMap">
+		select SYSUSER_ID, SYSUSER_MOBILE from plat_system_sysuser where SYSUSER_MOBILE=#{SYSUSER_MOBILE}
+	</select>
+  <select id="checkCardUnique" parameterType="String" resultType="int">
+		select count(1) from plat_system_sysuser where SYSUSER_ID_CARD_NO=#{sysuserIdCardNo}
+  </select>
+
+</mapper>

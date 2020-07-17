@@ -1,0 +1,76 @@
+<script th:src="@{/ruoyi/js/ry-ui.js?v=4.1.0}" xmlns:th="http://www.w3.org/1999/xhtml"></script>
+<script th:inline="javascript"> var ctx = [[@{/}]]; var captchaType = [[${captchaType}]];var captchaEnabled= [[${captchaEnabled}]]; </script>
+<script th:src="@{/ajax/libs/layer/layer.js}"></script>
+<script th:src="@{/portal/union/js/search.js}"></script>
+<div class="headGroup fixed" id="headGroup">
+    <div class="header">
+        <p>山西综合改革示范区总工会系统于2020年7月上线，开始试运行，各项功能及有关数据正在加紧调试！</p>
+        <div class="weixin">
+            <img th:src="@{/portal/union/images/weixin.png}"/><span>微信公众号</span>
+            <div class="ewm">
+                <img th:src="@{/portal/union/images/erweima.jpg}" style="width: 100px"/>
+            </div>
+        </div>
+    </div>
+    <div class="banner">
+        <div class="logo">
+            <img th:src="@{/portal/union/images/logo.png}" style="width: 82px;height: 82px"/>
+            <img th:src="@{/portal/union/images/xmName.png}"/>
+        </div>
+        <div class="sousuo">
+            <input type="text" placeholder="请输入关键字"/>
+            <img th:src="@{/portal/union/images/search.png}" title="搜索" onclick="quickSearch(this);"/>
+        </div>
+        <div class="login" onclick="logins()">登录</div>
+    </div>
+    <div class="menu">
+        <ul class="menus">
+            <li>
+                <a th:href="@{/portal/index}">网站首页</a>
+            </li>
+            <li>
+                <a th:href="@{/portal/situation}">工会概况</a>
+            </li>
+            <li>
+                <a th:href="@{/portal/more?type=1}">通知公告</a>
+            </li>
+            <li>
+                <a th:href="@{#zhgh}">智慧工会</a>
+                <ul>
+                    <li>
+                        <a th:href="@{/portal/corporate}">企业入会</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/portal/individual}">个人入会</a>
+                    </li>
+                    <li>
+                        <a >职工维权</a>
+                    </li>
+                    <li>
+                        <a>普惠服务</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a th:href="@{#ghdsj}">工会大数据</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="erweima">
+    <p>手机扫描访问</p>
+    <img th:src="@{/portal/union/images/erweima.jpg}" style="width: 120px"/>
+    <p>山西示范区总工会<br />微信平台</p>
+</div>
+<script>
+    function logins(){
+        layer.open({
+            type: 2,
+            title: false,
+            shade: false,
+            id:'aaa',
+            area: ['470px', '460px'],
+            content: '/portal/login'
+        });
+    }
+</script>

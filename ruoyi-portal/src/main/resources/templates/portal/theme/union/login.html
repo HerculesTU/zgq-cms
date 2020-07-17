@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/beans">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" th:content="${@config.getKey('portal.index.keywords')}">
+    <meta name="description" th:content="${@config.getKey('portal.index.description')}">
+    <title th:text="${@config.getKey('portal.index.title')}"></title>
+    <meta name="baidu-site-verification" content="dAEtGwEyN9" />
+    <link rel="stylesheet" th:href="@{/portal/union/css/style.css}"/>
+
+    <script th:src="@{/portal/union/js/jquery-1.8.3.js}"></script>
+    <script th:src="@{/portal/pnews/plugin/layer/layer.js}"></script>
+</head>
+<body>
+    <div class="login-con">
+        <h1>用户登录</h1>
+        <input type="hidden"  th:value="${test}">
+        <div class="login-form">
+            <input type="text" id="username" placeholder="用户名"/>
+        </div>
+        <div class="login-form">
+            <input type="password" id="psw" placeholder="密码"/>
+        </div>
+        <button type="button" class="btn" onclick="loginQD()">登录</button>
+        <div class="login-forms">
+            <a onclick="jump('/portal/individual')">个人注册</a>
+            <a onclick="jump('/portal/corporate')">企业注册</a>
+            <a onclick="editPassword()">忘记密码</a>
+        </div>
+        <p>登录过的用户请沿用之前的登录方式</p>
+    </div>
+    <script>
+        /** 消息状态码 */
+        web_status = {
+            SUCCESS: 0,
+            FAIL: 500,
+            WARNING: 301
+        };
+
+        /** 弹窗状态码 */
+        modal_status = {
+            SUCCESS: "success",
+            FAIL: "error",
+            WARNING: "warning"
+        };
+        function editPassword(){
+            parent.layer.open({
+                type: 2,
+                title: false,
+                shade: false,
+                area: ['470px', '580px'],
+                content: '/portal/editPassword'
+            });
+        }
+        function jump(url){
+            parent.location.href=url;
+        }
+        //前台登录
+        function loginQD(){
+            var username=$("#username").val();
+            var psw=$("#psw").val();
+            var config = {
+                url: "/portal/login/qtAjaxLogin",
+                type: "post",
+                dataType: "json",
+                data: {
+                    username:username,
+                    password:psw
+                },
+                async:false,
+                success: function(result) {
+                    if (result.code == web_status.SUCCESS) {
+                        layer.msg(result.msg);
+                        // var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                        // parent.layer.close(index); //再执行关闭
+                        parent.window.location.href='/portal/corporate';
+                    } else if (result.code == web_status.WARNING) {
+                        layer.msg(result.msg);
+                    } else {
+                        layer.msg(result.msg);
+                    }
+                }
+            };
+            $.ajax(config)
+        }
+    </script>
+</body>
+</html>
